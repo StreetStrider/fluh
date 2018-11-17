@@ -3,7 +3,11 @@
 
   "dependencies":
   {
-    "esm": "3"
+    "esm":
+      "3",
+
+    "def-prop":
+      "1"
   },
 
   "scripts":
