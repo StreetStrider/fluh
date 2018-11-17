@@ -1,0 +1,13 @@
+{
+  "name": "fluh",
+
+  "dependencies":
+  {
+    "esm": "3"
+  },
+
+  "scripts":
+  {
+    "start": "node -r esm lib/"
+  }
+}
