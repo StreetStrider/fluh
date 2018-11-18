@@ -1,6 +1,12 @@
 {
   "name": "fluh",
 
+  "scripts":
+  {
+    "start": "node -r esm lib/",
+    "test": "eslint lib/"
+  },
+
   "dependencies":
   {
     "esm":
@@ -10,8 +16,12 @@
       "1"
   },
 
-  "scripts":
+  "devDependencies":
   {
-    "start": "node -r esm lib/"
+    "eslint":
+      "5",
+
+    "js-outlander":
+      "StrangeTransistor/js-outlander#2.5.0"
   }
 }
