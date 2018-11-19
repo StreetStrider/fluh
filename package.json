@@ -4,7 +4,10 @@
   "scripts":
   {
     "start": "node -r esm lib/",
-    "test": "eslint lib/"
+
+    "st":   "eslint lib/ test/",
+    "unit": "mocha -r esm test/",
+    "test": "npm run st && npm run unit"
   },
 
   "dependencies":
@@ -22,6 +25,13 @@
       "5",
 
     "js-outlander":
-      "StrangeTransistor/js-outlander#2.5.0"
+      "StrangeTransistor/js-outlander#2.5.0",
+
+
+    "mocha":
+      "5",
+
+    "chai":
+      "4"
   }
 }
