@@ -21,6 +21,23 @@ describe('Bud', () =>
 
 		expect(bud.value).eq(Nothing)
 	})
+
+	it('emit', () =>
+	{
+		var bud = Bud(() => 1)
+
+		var r = bud.emit(1917)
+
+		expect_bud(bud)
+		expect(r).eq(bud)
+		expect(r.value).eq(1917)
+
+		var r = bud.emit(Nothing)
+
+		expect_bud(bud)
+		expect(r).eq(bud)
+		expect(r.value).eq(1917)
+	})
 })
 
 export default function expect_bud (bud)
@@ -34,7 +51,6 @@ export default function expect_bud (bud)
 	expect(bud.id).match(/^B\/\d+$/)
 
 	expect(bud).property('value')
-	expect(bud.value).eq(Nothing)
 
 	expect(bud.evaluate).a('function')
 	expect(bud.emit).a('function')
