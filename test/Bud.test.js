@@ -52,6 +52,6 @@ export default function expect_bud (bud)
 
 	expect(bud).property('value')
 
-	expect(bud.evaluate).a('function')
+	expect(bud.pull).a('function')
 	expect(bud.emit).a('function')
 }
