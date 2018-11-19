@@ -9,6 +9,8 @@ describe('Bud', () =>
 		var bud = Bud()
 
 		expect_bud(bud)
+
+		expect(bud.value).eq(Nothing)
 	})
 
 	it('Bud(fn)', () =>
@@ -16,6 +18,8 @@ describe('Bud', () =>
 		var bud = Bud(() => 1917)
 
 		expect_bud(bud)
+
+		expect(bud.value).eq(Nothing)
 	})
 })
 
