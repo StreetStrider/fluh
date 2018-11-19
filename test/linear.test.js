@@ -24,7 +24,15 @@ describe('linear', () =>
 		expect(b.value).eq(2)
 	})
 
-	it('A(v) → B')
+	it('A(v) → B', () =>
+	{
+		var a = Bud(() => 1)
+
+		var b = join([ a ], a => a + 1)
+
+		expect(a.value).eq(1)
+		expect(b.value).eq(2)
+	})
 
 	it('A → B → C', () =>
 	{
@@ -47,5 +55,15 @@ describe('linear', () =>
 		expect(c.value).eq(200)
 	})
 
-	it('A(v) → B → C')
+	it('A(v) → B → C', () =>
+	{
+		var a = Bud(() => 1)
+
+		var b = join([ a ], a => a + 1)
+		var c = join([ b ], b => b * 100)
+
+		expect(a.value).eq(1)
+		expect(b.value).eq(2)
+		expect(c.value).eq(200)
+	})
 })
