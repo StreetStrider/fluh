@@ -77,7 +77,7 @@ describe('Bud', () =>
 	})
 })
 
-export default function expect_bud (bud)
+export function expect_bud (bud)
 {
 	expect(bud).an('object')
 
