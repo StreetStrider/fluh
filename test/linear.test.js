@@ -86,6 +86,12 @@ describe('linear', () =>
 		expect(a.value).eq(1)
 		expect(b.value).eq(Nothing)
 		expect(c.value).eq(Nothing)
+
+		a.emit(2)
+
+		expect(a.value).eq(2)
+		expect(b.value).eq(Nothing)
+		expect(c.value).eq(Nothing)
 	})
 
 	it('A → B → C multiple emit', () =>

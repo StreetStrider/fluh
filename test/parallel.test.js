@@ -1,6 +1,7 @@
 
 import Bud from 'lib/Bud'
 import join from 'lib/join'
+import Nothing from 'lib/Nothing'
 
 import { expect_bud } from './Bud.test'
 
@@ -51,5 +52,21 @@ describe('parallel', () =>
 		{
 			return args.reduce((x, y) => x + y, 0)
 		}
+	})
+
+	it('A → B,C → D with skips', () =>
+	{
+		var a = Bud()
+
+		var b = join(a, a => (a % 2) && Nothing || (a / 2))
+		var c = join(a, a => a * 100)
+
+		var d = join(b, c, (b, c) => b + c)
+
+		a.emit(1)
+		expect(d.value).eq(Nothing)
+
+		a.emit(2)
+		expect(d.value).eq(201)
 	})
 })
