@@ -9,6 +9,7 @@ module.exports =
 	globals:
 	{
 		expect: true,
+		log: true,
 	},
 
 	rules:

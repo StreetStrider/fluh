@@ -1,8 +1,11 @@
 
 import { expect } from 'chai'
 
+import { log } from '../../lib/realm'
+
 {
 	global.expect = expect
+	global.log = log
 }
 
 {
