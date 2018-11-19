@@ -11,7 +11,7 @@ describe('linear', () =>
 	{
 		var a = Bud()
 
-		var b = join([ a ], a => a + 1)
+		var b = join(a, a => a + 1)
 
 		expect_bud(b)
 
@@ -28,7 +28,7 @@ describe('linear', () =>
 	{
 		var a = Bud(() => 1)
 
-		var b = join([ a ], a => a + 1)
+		var b = join(a, a => a + 1)
 
 		expect(a.value).eq(1)
 		expect(b.value).eq(2)
@@ -38,8 +38,8 @@ describe('linear', () =>
 	{
 		var a = Bud()
 
-		var b = join([ a ], a => a + 1)
-		var c = join([ b ], b => b * 100)
+		var b = join(a, a => a + 1)
+		var c = join(b, b => b * 100)
 
 		expect_bud(b)
 		expect_bud(c)
@@ -59,8 +59,8 @@ describe('linear', () =>
 	{
 		var a = Bud(() => 1)
 
-		var b = join([ a ], a => a + 1)
-		var c = join([ b ], b => b * 100)
+		var b = join(a, a => a + 1)
+		var c = join(b, b => b * 100)
 
 		expect(a.value).eq(1)
 		expect(b.value).eq(2)
@@ -71,8 +71,8 @@ describe('linear', () =>
 	{
 		var a = Bud()
 
-		var b = join([ a ], () => Nothing)
-		var c = join([ b ], b => b * 100)
+		var b = join(a, () => Nothing)
+		var c = join(b, b => b * 100)
 
 		expect_bud(b)
 		expect_bud(c)
@@ -92,8 +92,8 @@ describe('linear', () =>
 	{
 		var a = Bud()
 
-		var b = join([ a ], a => a + 1)
-		var c = join([ b ], b => b * 100)
+		var b = join(a, a => a + 1)
+		var c = join(b, b => b * 100)
 
 		expect_bud(b)
 		expect_bud(c)
