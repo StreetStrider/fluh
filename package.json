@@ -6,7 +6,7 @@
     "start": "node -r esm lib/",
 
     "st":   "eslint lib/ test/",
-    "unit": "mocha -r esm test/",
+    "unit": "mocha -r esm -r test/_/globals test/*.test.js",
     "test": "npm run st && npm run unit"
   },
 

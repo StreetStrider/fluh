@@ -1,5 +1,5 @@
 
-import Bud from '../lib/Bud'
+import Bud from 'lib/Bud'
 
 describe('Bud', () =>
 {
@@ -9,6 +9,6 @@ describe('Bud', () =>
 	{
 		var bud = Bud()
 
-		console.log(bud)
+		expect(bud).an('object')
 	})
 })
