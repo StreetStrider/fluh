@@ -85,7 +85,7 @@ export default function expect_bud (bud)
 
 	expect(bud).property('id')
 	expect(bud.id).a('string')
-	expect(bud.id).match(/^B\/\d+$/)
+	expect(bud.id).match(/^#\d+$/)
 
 	expect(bud).property('value')
 
