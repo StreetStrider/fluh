@@ -38,6 +38,38 @@ describe('Bud', () =>
 		expect(r).eq(bud)
 		expect(r.value).eq(1917)
 	})
+
+	it('emit Nothing')
+
+	it('pull', () =>
+	{
+		var c = Symbol('c')
+
+		var bud = Bud(() => c)
+
+		var r = bud.pull()
+
+		/* value changes */
+		expect(r).eq(c)
+		expect(bud.value).eq(c)
+	})
+
+	it('pull Nothing', () =>
+	{
+		var c = Symbol('c')
+
+		var bud = Bud(() => Nothing)
+
+		bud.emit(c)
+
+		expect(bud.value).eq(c)
+
+		var r = bud.pull()
+
+		/* value remains the same as before */
+		expect(r).eq(Nothing)
+		expect(bud.value).eq(c)
+	})
 })
 
 export default function expect_bud (bud)
