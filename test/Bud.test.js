@@ -19,33 +19,38 @@ describe('Bud', () =>
 
 		expect_bud(bud)
 
-		expect(bud.value).eq(Nothing)
+		expect(bud.value).eq(Nothing) /* < TODO */
 	})
 
 	it('emit', () =>
 	{
-		var bud = Bud(() => 1)
+		var bud = Bud()
 
 		var r = bud.emit(1917)
 
 		expect_bud(bud)
 		expect(r).eq(bud)
-		expect(r.value).eq(1917)
 
-		var r = bud.emit(Nothing)
-
-		expect_bud(bud)
-		expect(r).eq(bud)
-		expect(r.value).eq(1917)
+		expect(bud.value).eq(1917)
 	})
 
-	it('emit Nothing')
+	it('emit Nothing', () =>
+	{
+		var bud = Bud()
+
+		bud.emit(1917)
+		bud.emit(Nothing)
+
+		/* value remains the same as before */
+		expect(bud.value).eq(1917)
+	})
 
 	it('pull', () =>
 	{
 		var c = Symbol('c')
 
 		var bud = Bud(() => c)
+		expect(bud.value).eq(Nothing) /* < TODO */
 
 		var r = bud.pull()
 
@@ -60,14 +65,14 @@ describe('Bud', () =>
 
 		var bud = Bud(() => Nothing)
 
+		expect(bud.value).eq(Nothing)
 		bud.emit(c)
-
 		expect(bud.value).eq(c)
 
 		var r = bud.pull()
 
-		/* value remains the same as before */
 		expect(r).eq(Nothing)
+		/* value remains the same as before */
 		expect(bud.value).eq(c)
 	})
 })
