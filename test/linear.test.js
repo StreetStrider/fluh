@@ -66,4 +66,48 @@ describe('linear', () =>
 		expect(b.value).eq(2)
 		expect(c.value).eq(200)
 	})
+
+	it('A → B(Nothing) → C', () =>
+	{
+		var a = Bud()
+
+		var b = join([ a ], () => Nothing)
+		var c = join([ b ], b => b * 100)
+
+		expect_bud(b)
+		expect_bud(c)
+
+		expect(a.value).eq(Nothing)
+		expect(b.value).eq(Nothing)
+		expect(c.value).eq(Nothing)
+
+		a.emit(1)
+
+		expect(a.value).eq(1)
+		expect(b.value).eq(Nothing)
+		expect(c.value).eq(Nothing)
+	})
+
+	it('A → B → C multiple emit', () =>
+	{
+		var a = Bud()
+
+		var b = join([ a ], a => a + 1)
+		var c = join([ b ], b => b * 100)
+
+		expect_bud(b)
+		expect_bud(c)
+
+		expect(a.value).eq(Nothing)
+		expect(b.value).eq(Nothing)
+		expect(c.value).eq(Nothing)
+
+		a.emit(1)
+		a.emit(2)
+		a.emit(3)
+
+		expect(a.value).eq(3)
+		expect(b.value).eq(4)
+		expect(c.value).eq(400)
+	})
 })
