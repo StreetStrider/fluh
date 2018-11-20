@@ -124,5 +124,55 @@ describe('effects', () =>
 		])
 	})
 
-	it('order when additional emits')
+	xit('order when additional emits', () =>
+	{
+		log.enabled = true
+
+		var rs = []
+
+		var a = Bud()
+
+		var b = join(a, (value) =>
+		{
+			track('join-b1')(value)
+
+			b.emit(1917)
+
+			track('join-b2')(value)
+			return value
+		})
+		var c = join(b, track('join-c'))
+
+		a.on(track('a-1'))
+		a.on(track('a-2'))
+		b.on(track('b-1'))
+		b.on(track('b-2'))
+		c.on(track('c-1'))
+		c.on(track('c-2'))
+
+		function track (name)
+		{
+			return (value) =>
+			{
+				rs.push([ name, value ])
+
+				return value
+			}
+		}
+
+		a.emit(17)
+
+		expect(rs).deep.eq(
+		[
+			[ 'a-1', 17 ],
+			[ 'a-2', 17 ],
+			[ 'join-b1', 17 ],
+			[ 'join-b2', 17 ],
+			[ 'b-1', 17 ],
+			[ 'b-2', 17 ],
+			[ 'join-c', 17 ],
+			[ 'c-1', 17 ],
+			[ 'c-2', 17 ],
+		])
+	})
 })
