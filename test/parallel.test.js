@@ -46,6 +46,11 @@ describe('parallel', () =>
 
 		expect(as.callCount).eq(1)
 		expect(ds.callCount).eq(1)
+
+		a.emit(2)
+
+		expect(as.callCount).eq(2)
+		expect(ds.callCount).eq(2)
 	})
 
 	it('A → x3 → B', () =>
@@ -64,6 +69,11 @@ describe('parallel', () =>
 
 		expect(as.callCount).eq(1)
 		expect(bs.callCount).eq(1)
+
+		a.emit(2)
+
+		expect(as.callCount).eq(2)
+		expect(bs.callCount).eq(2)
 
 		function pow (n)
 		{
@@ -91,6 +101,9 @@ describe('parallel', () =>
 
 		a.emit(1)
 		expect(d.value).eq(Nothing)
+
+		expect(as.callCount).eq(1)
+		expect(ds.callCount).eq(0)
 
 		a.emit(2)
 		expect(d.value).eq(201)

@@ -18,6 +18,10 @@ describe('triangle', () =>
 		expect(c.value).eq(110)
 
 		expect(s.callCount).eq(1)
+
+		a.emit(2)
+
+		expect(s.callCount).eq(2)
 	})
 
 	it('triangle in triangle', () =>
@@ -37,5 +41,9 @@ describe('triangle', () =>
 		expect(c2.value).eq('A.B1.B2/A/A.B1.C1.C2')
 
 		expect(s.callCount).eq(1)
+
+		a.emit('B')
+
+		expect(s.callCount).eq(2)
 	})
 })
