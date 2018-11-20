@@ -1,10 +1,13 @@
 
 import { expect } from 'chai'
+import { spy } from 'sinon'
 
 import { log } from '../../lib/realm'
 
 {
 	global.expect = expect
+	global.spy = spy
+
 	global.log = log
 }
 
