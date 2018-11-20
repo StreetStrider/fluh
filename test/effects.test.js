@@ -1,5 +1,6 @@
 
 import Bud from 'lib/Bud'
+import Nothing from 'lib/Nothing'
 import join from 'lib/join'
 
 describe('effects', () =>
@@ -46,7 +47,9 @@ describe('effects', () =>
 		bud.on((value) => rs.push([ 2, value ]))
 
 		bud.emit(17)
+		bud.emit(Nothing)
 		bud.emit(1917)
+		bud.emit()
 
 		expect(rs).deep.eq(
 		[
@@ -68,7 +71,9 @@ describe('effects', () =>
 		b2.on((value) => rs.push([ 2, value ]))
 
 		b1.emit(17)
+		b1.emit(Nothing)
 		b1.emit(1917)
+		b1.emit()
 
 		expect(rs).deep.eq(
 		[
