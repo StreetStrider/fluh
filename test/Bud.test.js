@@ -44,6 +44,9 @@ describe('Bud', () =>
 		bud.emit(Nothing)
 		/* value remains the same as before */
 		expect(bud.value).eq(1917)
+
+		bud.emit() /* Nothing */
+		expect(bud.value).eq(1917)
 	})
 
 	it('pull', () =>
