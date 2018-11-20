@@ -3,9 +3,10 @@
 ## Bud
 
 * Bud is a push-strategy FRP unit for creating data (event) streams.
-* Bud can contain single value, similar to Behavior, but cannot change continuously, like real one.
-This is a simplification for practical needs.
+* Bud is a Stream, but can contain single value, similar to Behavior. It's not an actual Behavior, because it cannot change continuously, like real one.
+This design is a simplification for practical needs.
 See the [explanation concerning Behaviors and Streams](https://github.com/funkia/hareactive/tree/b7875b05d6f61089f1411bca882713a346ce41b0#conceptual-overview).
+Bud is a push, Behavior is a pull, this is distinction.
 * Initialized with `Nothing`.
 * Can be pure and impure, depending on usage.
 
@@ -42,10 +43,10 @@ var n = join(a, (a) => Nothing)
 
 ## effects
 
-* Attach effects to Buds by using `bud.on(fn)`.
+* Attach effects to Bud by using `bud.on(fn)`.
 * Effects are fired in straight order.
 * Effects run before propagating event to dependents and before effects of dependents.
-* In effect you can re-`emit` values on another bud, but watch out for order of events and infinite loops.
+* In effect you can re-`emit` values on another Bud, but watch out for order of events and infinite loops.
 
 ```js
 var a = Bud()
