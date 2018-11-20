@@ -11,8 +11,13 @@ describe('triangle', () =>
 		var b = join(a, a => a * 10)
 		var c = join(a, b, (a, b) => a * 100 + b)
 
+		var s = spy()
+		c.on(s)
+
 		expect(b.value).eq(10)
 		expect(c.value).eq(110)
+
+		expect(s.callCount).eq(1)
 	})
 
 	it('triangle in triangle', () =>
@@ -25,7 +30,12 @@ describe('triangle', () =>
 		var b2 = join(b1, b => b + '.B2')
 		var c2 = join(b2, c1, (b, c) => `${b}/${c}.C2`)
 
+		var s = spy()
+		c2.on(s)
+
 		expect(c1.value).eq('A/A.B1.C1')
 		expect(c2.value).eq('A.B1.B2/A/A.B1.C1.C2')
+
+		expect(s.callCount).eq(1)
 	})
 })
