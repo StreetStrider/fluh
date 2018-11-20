@@ -14,11 +14,16 @@ describe('parallel', () =>
 		var b = join(a, a => a * 10)
 		var c = join(a, a => a * 100)
 
+		var as = spy()
+		a.on(as)
+
 		expect_bud(b)
 		expect_bud(c)
 
 		expect(b.value).eq(10)
 		expect(c.value).eq(100)
+
+		expect(as.callCount).eq(1)
 	})
 
 	it('A → B,C → D', () =>
@@ -32,7 +37,15 @@ describe('parallel', () =>
 
 		expect_bud(d)
 
+		var as = spy()
+		a.on(as)
+		var ds = spy()
+		d.on(ds)
+
 		expect(d.value).eq(110)
+
+		expect(as.callCount).eq(1)
+		expect(ds.callCount).eq(1)
 	})
 
 	it('A → x3 → B', () =>
@@ -43,6 +56,14 @@ describe('parallel', () =>
 		var b = join(...x, sum)
 
 		expect(b.value).eq(1111)
+
+		var as = spy()
+		a.on(as)
+		var bs = spy()
+		b.on(bs)
+
+		expect(as.callCount).eq(1)
+		expect(bs.callCount).eq(1)
 
 		function pow (n)
 		{
@@ -63,10 +84,18 @@ describe('parallel', () =>
 
 		var d = join(b, c, (b, c) => b + c)
 
+		var as = spy()
+		a.on(as)
+		var ds = spy()
+		d.on(ds)
+
 		a.emit(1)
 		expect(d.value).eq(Nothing)
 
 		a.emit(2)
 		expect(d.value).eq(201)
+
+		expect(as.callCount).eq(2)
+		expect(ds.callCount).eq(1)
 	})
 })
