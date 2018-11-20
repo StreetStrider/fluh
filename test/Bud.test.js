@@ -93,6 +93,17 @@ describe('Bud', () =>
 		expect(ok).true
 	})
 
+	it('effects instant', () =>
+	{
+		var bud = Bud(() => 17)
+
+		var ok = false
+
+		bud.on((value) => { ok = (value === 17) })
+
+		expect(ok).true
+	})
+
 	it('effects multiple', () =>
 	{
 		var bud = Bud()
