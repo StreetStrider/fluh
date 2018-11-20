@@ -78,4 +78,40 @@ describe('effects', () =>
 			[ 2, 1917 ],
 		])
 	})
+
+	it('order', () =>
+	{
+		var rs = []
+
+		var a = Bud()
+		var b = join(a, track('join-b'))
+		var c = join(b, track('join-c'))
+
+		a.on(track('a'))
+		b.on(track('b'))
+		c.on(track('c'))
+
+		function track (name)
+		{
+			return (value) =>
+			{
+				rs.push([ name, value ])
+
+				return value
+			}
+		}
+
+		a.emit(17)
+
+		expect(rs).deep.eq(
+		[
+			[ 'a', 17 ],
+			[ 'join-b', 17 ],
+			[ 'b', 17 ],
+			[ 'join-c', 17 ],
+			[ 'c', 17 ],
+		])
+	})
+
+	it('order when additional emits')
 })
