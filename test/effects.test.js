@@ -87,9 +87,12 @@ describe('effects', () =>
 		var b = join(a, track('join-b'))
 		var c = join(b, track('join-c'))
 
-		a.on(track('a'))
-		b.on(track('b'))
-		c.on(track('c'))
+		a.on(track('a-1'))
+		a.on(track('a-2'))
+		b.on(track('b-1'))
+		b.on(track('b-2'))
+		c.on(track('c-1'))
+		c.on(track('c-2'))
 
 		function track (name)
 		{
@@ -105,11 +108,14 @@ describe('effects', () =>
 
 		expect(rs).deep.eq(
 		[
-			[ 'a', 17 ],
+			[ 'a-1', 17 ],
+			[ 'a-2', 17 ],
 			[ 'join-b', 17 ],
-			[ 'b', 17 ],
+			[ 'b-1', 17 ],
+			[ 'b-2', 17 ],
 			[ 'join-c', 17 ],
-			[ 'c', 17 ],
+			[ 'c-1', 17 ],
+			[ 'c-2', 17 ],
 		])
 	})
 
