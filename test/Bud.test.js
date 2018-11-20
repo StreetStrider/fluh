@@ -88,9 +88,13 @@ describe('Bud', () =>
 
 		bud.on((value) => { ok = (value === 17) })
 
+		var s = spy()
+		bud.on(s)
+
 		bud.emit(17)
 
 		expect(ok).true
+		expect(s.callCount).eq(1)
 	})
 
 	it('effects instant', () =>
@@ -101,7 +105,11 @@ describe('Bud', () =>
 
 		bud.on((value) => { ok = (value === 17) })
 
+		var s = spy()
+		bud.on(s)
+
 		expect(ok).true
+		expect(s.callCount).eq(1)
 	})
 
 	it('effects multiple', () =>
