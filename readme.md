@@ -27,6 +27,8 @@ for single `emit`.
 * `join(bud, fn)` is a `map`.
 * You can skip values, returning `Nothing`, works like `filter`. Further dependencies will
 not be touched.
+* It is better to not performing side-effects inside `join`'s transformer. It is possible but
+it's better to do it as effect.
 
 ```js
 var a = Bud()
@@ -46,7 +48,8 @@ var n = join(a, (a) => Nothing)
 * Attach effects to Bud by using `bud.on(fn)`.
 * Effects are fired in straight order.
 * Effects run before propagating event to dependents and before effects of dependents.
-* In effect you can re-`emit` values on another Bud, but watch out for order of events and infinite loops.
+* In effect you can re-`emit` values on another Bud (or even that), but watch out for order of events and infinite loops.
+* Re-emitting will happen after current emit is done.
 
 ```js
 var a = Bud()
