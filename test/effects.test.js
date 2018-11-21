@@ -138,7 +138,13 @@ describe('effects', () =>
 		b.on(track('b-1'))
 		b.on(track('b-2'))
 
-		b.on((value) => { if (value === 17) { b.emit(1917) } })
+		b.on((value) =>
+		{
+			if (value === 17)
+			{
+				b.emit(1917)
+			}
+		})
 
 		c.on(track('c-1'))
 		c.on(track('c-2'))
