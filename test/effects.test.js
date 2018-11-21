@@ -124,29 +124,22 @@ describe('effects', () =>
 		])
 	})
 
-	xit('order when additional emits', () =>
+	it('order when additional emits', () =>
 	{
-		log.enabled = true
-
 		var rs = []
 
 		var a = Bud()
 
-		var b = join(a, (value) =>
-		{
-			track('join-b1')(value)
-
-			b.emit(1917)
-
-			track('join-b2')(value)
-			return value
-		})
+		var b = join(a, track('join-b'))
 		var c = join(b, track('join-c'))
 
 		a.on(track('a-1'))
 		a.on(track('a-2'))
 		b.on(track('b-1'))
 		b.on(track('b-2'))
+
+		b.on((value) => { if (value === 17) { b.emit(1917) } })
+
 		c.on(track('c-1'))
 		c.on(track('c-2'))
 
@@ -166,13 +159,17 @@ describe('effects', () =>
 		[
 			[ 'a-1', 17 ],
 			[ 'a-2', 17 ],
-			[ 'join-b1', 17 ],
-			[ 'join-b2', 17 ],
+			[ 'join-b', 17 ],
 			[ 'b-1', 17 ],
 			[ 'b-2', 17 ],
 			[ 'join-c', 17 ],
 			[ 'c-1', 17 ],
 			[ 'c-2', 17 ],
+			[ 'b-1', 1917 ],
+			[ 'b-2', 1917 ],
+			[ 'join-c', 1917 ],
+			[ 'c-1', 1917 ],
+			[ 'c-2', 1917 ],
 		])
 	})
 })
