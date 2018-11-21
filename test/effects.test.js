@@ -224,4 +224,69 @@ describe('effects', () =>
 
 		expect(rs).deep.eq([ 1, 2, 3, 4, 5 ])
 	})
+
+	it('double in join (caution)', () =>
+	{
+		var order = []
+		var rs =
+		{
+			a: [],
+			b: [],
+			c: [],
+		}
+
+		var a = Bud()
+		var b = join(a, (value) =>
+		{
+			value = value * 2
+			b.emit(value + 1)
+			return value
+		})
+		var c = join(b, v => v)
+
+		a.on(track('a'))
+		b.on(track('b'))
+		c.on(track('c'))
+
+		a.emit(1)
+		a.emit(2)
+		a.emit(3)
+
+		expect(rs.a).deep.eq([ 1, 2, 3 ])
+		expect(rs.b).deep.eq([ 2, 3, 4, 5, 6, 7 ])
+		expect(rs.c).deep.eq([ 2, 3, 4, 5, 6, 7 ])
+
+		expect(order).deep.eq(
+		[
+			[ 'a', 1 ],
+			[ 'b', 2 ],
+			[ 'c', 2 ],
+
+			[ 'b', 3 ],
+			[ 'c', 3 ],
+
+			[ 'a', 2 ],
+			[ 'b', 4 ],
+			[ 'c', 4 ],
+
+			[ 'b', 5 ],
+			[ 'c', 5 ],
+
+			[ 'a', 3 ],
+			[ 'b', 6 ],
+			[ 'c', 6 ],
+
+			[ 'b', 7 ],
+			[ 'c', 7 ],
+		])
+
+		function track (name)
+		{
+			return (value) =>
+			{
+				rs[name].push(value)
+				order.push([ name, value ])
+			}
+		}
+	})
 })
