@@ -17,14 +17,17 @@ request-response systems, command-line applications and UIs. For that scope push
 
 The main unit is called `Bud`.
 * Bud is a push-strategy FRP unit for creating data (event) streams.
-* Bud is always active — it just emits values and push them to dependents, no backpressure, no cold streams or pulling-on-demand.
-* Bud is a Stream, but can contain single (current) value, similar to Behavior. It's not an actual Behavior,
+* Bud is always active — it just emits values and push them to dependents, no [backpressure](https://nodejs.org/en/docs/guides/backpressuring-in-streams/),
+no [cold streams](https://medium.com/@benlesh/hot-vs-cold-observables-f8094ed53339)
+or pulling-on-demand.
+* Bud is a Stream, but contain single (current) value, similar to Behavior. It's not an actual Behavior,
 because it cannot change continuously, like real one.
 This design is a simplification for my practical needs described above.
 See the [explanation concerning Behaviors and Streams](https://github.com/funkia/hareactive/tree/b7875b05d6f61089f1411bca882713a346ce41b0#conceptual-overview).
 Stream is a push, Behavior is a pull, there's a distinction.
-* Bud is initialized with `Nothing`, means no value.
-* When Bud acquire value it propagates it to effects and dependents. If Bud already has value, newly created effects
+* Bud is initialized with `Nothing` value, means no value. It is explicit value,
+so you are free to emit `null` or `undefined` if you really want to.
+* When Bud acquire value it propagates it to *effects* and *dependents*. If Bud already has value, newly created effects
 and dependents will be notified immediately with that value.
 * All schema is sync by default, but you are free to create async operators (defer, delay…).
 * Can be pure and impure, depending on usage.
@@ -35,7 +38,7 @@ different opinions. Check out at least theese great ones:
 [hareactive](https://github.com/funkia/hareactive),
 [flyd](https://github.com/paldepind/flyd),
 [xstream](https://github.com/staltz/xstream),
-(graflow)[https://github.com/pmros/graflow],
+[graflow](https://github.com/pmros/graflow),
 [RX](https://github.com/ReactiveX/rxjs),
 [pull-stream](https://github.com/pull-stream/pull-stream),
 [Highland](https://github.com/caolan/highland).
@@ -63,7 +66,7 @@ for single `emit`. See [diamond problem](https://github.com/paldepind/flyd#atomi
 * You can skip values, returning `Nothing`, works like `filter`. Further dependencies will
 not be touched.
 * It is better to not performing side-effects inside `join`'s transformer. It is possible but
-it's better to do it as effect.
+it's better to do it as an effect.
 
 ```js
 var a = Bud()
