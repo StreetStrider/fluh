@@ -178,4 +178,50 @@ describe('effects', () =>
 			[ 'c-2', 1917 ],
 		])
 	})
+
+	it('re-emit on self', () =>
+	{
+		var rs = []
+
+		var a = Bud()
+
+		a.on((value) =>
+		{
+			if (value < 5)
+			{
+				a.emit(value + 1)
+			}
+		})
+
+
+		var b = join(a, v => v)
+
+		b.on((value) => rs.push(value))
+
+		a.emit(1)
+
+		expect(rs).deep.eq([ 1, 2, 3, 4, 5 ])
+	})
+
+	it('circular re-emit', () =>
+	{
+		var rs = []
+
+		var a = Bud()
+		var b = join(a, v => v)
+
+		b.on((value) =>
+		{
+			if (value < 5)
+			{
+				a.emit(value + 1)
+			}
+
+			rs.push(value)
+		})
+
+		a.emit(1)
+
+		expect(rs).deep.eq([ 1, 2, 3, 4, 5 ])
+	})
 })
