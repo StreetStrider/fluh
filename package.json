@@ -1,6 +1,11 @@
 {
   "name": "fluh",
 
+  "engines":
+  {
+    "node": ">= 6"
+  },
+
   "scripts":
   {
     "start": "node -r esm lib/",
