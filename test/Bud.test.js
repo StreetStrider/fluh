@@ -49,7 +49,7 @@ describe('Bud', () =>
 		expect(bud.value).eq(1917)
 	})
 
-	it('pull', () =>
+	xit('pull', () =>
 	{
 		var L = [ 1, 2, 3 ]
 
@@ -65,7 +65,7 @@ describe('Bud', () =>
 		expect(bud.value).eq(3)
 	})
 
-	it('pull Nothing', () =>
+	xit('pull Nothing', () =>
 	{
 		var c = Symbol('c')
 
@@ -93,9 +93,11 @@ export function expect_bud (bud)
 	expect(bud.id).a('string')
 	expect(bud.id).match(/^#\d+$/)
 
+	expect(bud).property('efn')
+
 	expect(bud).property('value')
 
-	expect(bud.pull).a('function')
+	// expect(bud.pull).a('function')
 	expect(bud.emit).a('function')
 	expect(bud.on).a('function')
 }
