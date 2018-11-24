@@ -1,6 +1,7 @@
 
 import Bud from 'lib/Bud'
 import Nothing from 'lib/Nothing'
+import Many from 'lib/Many'
 
 describe('Bud', () =>
 {
@@ -34,6 +35,18 @@ describe('Bud', () =>
 		expect(bud.value).eq(1917)
 	})
 
+	it('emit multiple', () =>
+	{
+		var bud = Bud()
+
+		var r = bud.emit(17).emit(1917)
+
+		expect_bud(bud)
+		expect(r).eq(bud)
+
+		expect(bud.value).eq(1917)
+	})
+
 	it('emit Nothing', () =>
 	{
 		var bud = Bud()
@@ -46,6 +59,14 @@ describe('Bud', () =>
 		expect(bud.value).eq(1917)
 
 		bud.emit() /* Nothing */
+		expect(bud.value).eq(1917)
+	})
+
+	it('emit Many', () =>
+	{
+		var bud = Bud()
+
+		bud.emit(Many(17, 1917))
 		expect(bud.value).eq(1917)
 	})
 })
