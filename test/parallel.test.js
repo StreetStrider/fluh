@@ -111,4 +111,6 @@ describe('parallel', () =>
 		expect(as.callCount).eq(2)
 		expect(ds.callCount).eq(1)
 	})
+
+	xit('Many')
 })

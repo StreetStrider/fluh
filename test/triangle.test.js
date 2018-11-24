@@ -46,4 +46,6 @@ describe('triangle', () =>
 
 		expect(s.callCount).eq(2)
 	})
+
+	xit('Many')
 })
