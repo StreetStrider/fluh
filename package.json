@@ -14,7 +14,9 @@
 
     "st":   "eslint lib/ test/",
     "unit": "mocha -r esm -r test/globals test/*.test.js",
-    "test": "npm run st && npm run unit"
+    "test": "npm run st && npm run unit",
+
+    "perf": "node -r esm perf/graph.perf"
   },
 
   "dependencies":
@@ -42,6 +44,9 @@
       "4",
 
     "sinon":
-      "7"
+      "7",
+
+    "benchmark":
+      "2"
   }
 }
