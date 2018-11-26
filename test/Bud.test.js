@@ -69,6 +69,24 @@ describe('Bud', () =>
 		bud.emit(Many(17, 1917))
 		expect(bud.value).eq(1917)
 	})
+
+	it('emit Many with Nothing', () =>
+	{
+		var bud = Bud()
+
+		bud.emit(Many(Nothing, Nothing, Nothing))
+
+		expect(bud.value).eq(Nothing)
+	})
+
+	it('emit Many with leading Nothing', () =>
+	{
+		var bud = Bud()
+
+		bud.emit(Many(Nothing, 17, 1917))
+
+		expect(bud.value).eq(1917)
+	})
 })
 
 export function expect_bud (bud)

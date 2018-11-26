@@ -2,6 +2,7 @@
 import Bud from 'lib/Bud'
 import join from 'lib/join'
 import Nothing from 'lib/Nothing'
+import Many from 'lib/Many'
 
 import { expect_bud } from './Bud.test'
 
@@ -112,5 +113,29 @@ describe('parallel', () =>
 		expect(ds.callCount).eq(1)
 	})
 
-	xit('Many')
+	it('A → B,C → D Many', () =>
+	{
+		var a = Bud()
+
+		var b = join(a, a => a)
+		var c = join(a, a => a * 100)
+
+		var d = join(b, c, (b, c) => b + c)
+
+		var as = spy()
+		a.on(as)
+		var ds = spy()
+		d.on(ds)
+
+		a.emit(Many(1, 2))
+
+		expect(as.callCount).eq(2)
+		expect(ds.callCount).eq(2)
+
+		a.emit(Many(3, 4, 5))
+		expect(d.value).eq(505)
+
+		expect(as.callCount).eq(5)
+		expect(ds.callCount).eq(5)
+	})
 })
