@@ -41,6 +41,23 @@ Suite()
 		a.emit(17)
 	},
 })
+.add('          deep linear',
+{
+	setup ()
+	{
+		var a = Bud()
+
+		var b = a
+		for (let n = 0; n < 100; n++)
+		{
+			b = join(b, b => b + 1)
+		}
+	},
+	fn ()
+	{
+		a.emit(17)
+	},
+})
 .on('cycle', (event) =>
 {
 	console.log(String(event.target))
