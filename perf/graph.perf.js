@@ -3,11 +3,13 @@ import Benchmark from 'benchmark'
 import { Suite } from 'benchmark'
 
 
-import Bud from '../lib/Bud'
+import Bud  from '../lib/Bud'
 import join from '../lib/join'
+import Many from '../lib/Many'
 
 global.Bud  = Bud
 global.join = join
+global.Many = Many
 
 Suite()
 .add('              diamond',
@@ -56,6 +58,23 @@ Suite()
 	fn ()
 	{
 		a.emit(17)
+	},
+})
+.add('     deep linear Many',
+{
+	setup ()
+	{
+		var a = Bud()
+
+		var b = a
+		for (let n = 0; n < 100; n++)
+		{
+			b = join(b, b => b + 1)
+		}
+	},
+	fn ()
+	{
+		a.emit(Many(17, 1917))
 	},
 })
 .on('cycle', (event) =>
