@@ -15,8 +15,8 @@ Suite()
 	setup ()
 	{
 		var a = Bud()
-		var b = a.map(a => a + 1)
-		var c = b.map(b => b + 1)
+		var b = join(a, a => a + 1)
+		var c = join(b, b => b + 1)
 		var d = join(a, c, (a, c) => a + c + 1)
 	},
 	fn ()
