@@ -1,5 +1,6 @@
+/* global a */
 
-import Benchmark from 'benchmark'
+
 import { Suite } from 'benchmark'
 
 
@@ -20,6 +21,8 @@ Suite()
 		var b = join(a, a => a + 1)
 		var c = join(b, b => b + 1)
 		var d = join(a, c, (a, c) => a + c + 1)
+
+		d.on(() => void 0)
 	},
 	fn ()
 	{
@@ -37,6 +40,8 @@ Suite()
 
 		var b2 = join(b1, b => b + 1)
 		var c2 = join(b2, c1, (b, c) => b + c + 1)
+
+		c2.on(() => void 0)
 	},
 	fn ()
 	{
@@ -71,6 +76,7 @@ Suite()
 		{
 			b = join(b, b => b + 1)
 		}
+		b.on(() => void 0)
 	},
 	fn ()
 	{
