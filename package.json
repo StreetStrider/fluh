@@ -1,5 +1,6 @@
 {
-  "name": "fluh",
+     "name": "fluh",
+  "version": "0.0.0",
 
   "engines":
   {
@@ -18,6 +19,11 @@
 
     "perf": "node -r esm perf/graph.perf"
   },
+
+  "files":
+  [
+    "lib/"
+  ],
 
   "dependencies":
   {
