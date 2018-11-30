@@ -1,7 +1,7 @@
 
-import Bud  from './Bud'
-import join from './join'
-import { log } from './realm'
+import Bud  from './lib/Bud'
+import join from './lib/join'
+import { log } from './lib/realm'
 
 log.enabled = true
 

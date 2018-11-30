@@ -10,7 +10,7 @@
 
   "scripts":
   {
-    "start": "node -r esm lib/",
+    "start": "node -r esm start",
 
     "st":   "eslint lib/ test/ perf/",
     "unit": "mocha -r esm -r test/globals test/*.test.js",
