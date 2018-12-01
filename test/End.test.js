@@ -16,6 +16,9 @@ describe.only('End', () =>
 		var rs = []
 		b.on(value => rs.push(value))
 
+		var s = spy()
+		b.on(s)
+
 		a.emit(1)
 		a.emit(2)
 		a.emit(3)
@@ -25,5 +28,6 @@ describe.only('End', () =>
 		expect(b.value).eq(End)
 
 		expect(rs).deep.eq([ 1, 2, 3, End ])
+		expect(s.callCount).eq(4)
 	})
 })
