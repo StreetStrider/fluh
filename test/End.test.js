@@ -23,6 +23,7 @@ describe.only('End', () =>
 		a.emit(2)
 		a.emit(3)
 		a.emit(End)
+		a.emit(4)
 
 		expect(a.value).eq(End)
 		expect(b.value).eq(End)
