@@ -1,7 +1,7 @@
 
-import Bud  from './lib/Bud'
-import join from './lib/join'
-import End from './lib/End'
+import { Bud }  from './'
+import { join } from './'
+import { End }  from './'
 
 import { log } from './lib/realm'
 
