@@ -3,6 +3,8 @@ import { Bud }  from './'
 import { join } from './'
 import { End }  from './'
 
+import { when_data } from './map/when'
+
 import { log } from './lib/realm'
 
 log.enabled = true
@@ -28,21 +30,6 @@ hello_name_excl.on(value => console.log('*', value))
 name.emit('world')
 name.emit(End)
 
-
-function when_data (fn)
-{
-	return (value) =>
-	{
-		if (value !== End)
-		{
-			return fn(value)
-		}
-		else
-		{
-			return value
-		}
-	}
-}
 
 function when_data_all (fn)
 {
