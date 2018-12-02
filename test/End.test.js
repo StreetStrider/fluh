@@ -5,7 +5,7 @@ import Bud from 'lib/Bud'
 import Many from 'lib/Many'
 import End from 'lib/End'
 
-describe.only('End', () =>
+describe('End', () =>
 {
 	it('ends and ignores other', () =>
 	{
