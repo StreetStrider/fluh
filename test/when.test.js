@@ -1,5 +1,4 @@
 
-import Nothing from 'lib/Nothing'
 import End from 'lib/End'
 
 import when from 'map/when'
@@ -40,8 +39,8 @@ describe('when', () =>
 
 		expect(w(0)).eq(1)
 		expect(w(1)).eq(11)
-		expect(w(2)).eq(Nothing)
-		expect(w(3)).eq(Nothing)
+		expect(w(2)).eq(2)
+		expect(w(3)).eq(3)
 	})
 
 	it('when_data', () =>
@@ -50,15 +49,15 @@ describe('when', () =>
 
 		expect(w(0)).eq(1)
 		expect(w(1)).eq(11)
-		expect(w(End)).eq(Nothing)
+		expect(w(End)).eq(End)
 	})
 
 	it('when_end', () =>
 	{
 		var w = when_end(() => 'yes')
 
-		expect(w(0)).eq(Nothing)
-		expect(w(1)).eq(Nothing)
+		expect(w(0)).eq(0)
+		expect(w(1)).eq(1)
 		expect(w(End)).eq('yes')
 	})
 })

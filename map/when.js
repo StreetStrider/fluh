@@ -1,8 +1,8 @@
 
-import Noop from '../lib/Noop'
+import Same from '../lib/Same'
 
 
-function λwhen (pred, fn_true, fn_false = Noop)
+function λwhen (pred, fn_true, fn_false = Same)
 {
 	return (value) =>
 	{
@@ -20,7 +20,7 @@ function λwhen (pred, fn_true, fn_false = Noop)
 
 export default function when (pred)
 {
-	return (fn_true, fn_false = Noop) =>
+	return (fn_true, fn_false = Same) =>
 	{
 		return λwhen(pred, fn_true, fn_false)
 	}
