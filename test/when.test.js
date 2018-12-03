@@ -1,5 +1,8 @@
 
+import Nothing from 'lib/Nothing'
 import End from 'lib/End'
+
+import Noop from 'lib/Noop'
 
 import when from 'map/when'
 import { when_data } from 'map/when'
@@ -50,6 +53,12 @@ describe('when', () =>
 		expect(w(0)).eq(1)
 		expect(w(1)).eq(11)
 		expect(w(End)).eq(End)
+
+		var w = when_data(x => x, Noop)
+
+		expect(w(0)).eq(0)
+		expect(w(1)).eq(1)
+		expect(w(End)).eq(Nothing)
 	})
 
 	it('when_end', () =>
@@ -59,5 +68,11 @@ describe('when', () =>
 		expect(w(0)).eq(0)
 		expect(w(1)).eq(1)
 		expect(w(End)).eq('yes')
+
+		var w = when_end(x => x, Noop)
+
+		expect(w(0)).eq(Nothing)
+		expect(w(1)).eq(Nothing)
+		expect(w(End)).eq(End)
 	})
 })
