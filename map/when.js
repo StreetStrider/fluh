@@ -5,15 +5,15 @@ import Fin  from '../lib/Fin'
 
 function λwhen (pred, fn_true, fn_false = Same)
 {
-	return (value) =>
+	return (...args) =>
 	{
-		if (pred(value))
+		if (pred(...args))
 		{
-			return fn_true(value)
+			return fn_true(...args)
 		}
 		else
 		{
-			return fn_false(value)
+			return fn_false(...args)
 		}
 	}
 }

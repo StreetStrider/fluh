@@ -13,15 +13,15 @@ describe('when', () =>
 {
 	it('when(_)(_, _)', () =>
 	{
-		var W = when(x => x <= 1)
+		var W = when(x => (x <= 1))
 
 		expect(W).a('function')
 		expect(W.length).eq(1)
 
-		var w = W(x => x * 10 + 1, x => x * 100 + 1)
+		var w = W(x => (x * 10 + 1), x => (x * 100 + 1))
 
 		expect(w).a('function')
-		expect(w.length).eq(1)
+		expect(w.length).eq(0)
 
 		expect(w(0)).eq(1)
 		expect(w(1)).eq(11)
@@ -39,7 +39,7 @@ describe('when', () =>
 		var w = W(x => x * 10 + 1)
 
 		expect(w).a('function')
-		expect(w.length).eq(1)
+		expect(w.length).eq(0)
 
 		expect(w(0)).eq(1)
 		expect(w(1)).eq(11)
