@@ -30,25 +30,36 @@ export default function when (pred)
 
 import End  from '../lib/End'
 
-export var when_data = when(value => value !== End)
+export var when_data = when(is_not_end)
 
-export var when_end  = when(value => value === End)
+export var when_end  = when(is_end)
 
 
 // export var when_data_all = when((...values) =>
 // {
-// 	return values.some(value => value === End)
+// 	return values.some(is_end)
 // })
 
 export function when_data_all (fn_true, fn_false = Fin)
 {
 	return (...values) =>
 	{
-		if (values.some(value => value === End))
+		if (values.some(is_end))
 		{
 			return fn_false(...values)
 		}
 
 		return fn_true(...values)
 	}
+}
+
+
+function is_end (value)
+{
+	return value === End
+}
+
+function is_not_end (value)
+{
+	return value !== End
 }
