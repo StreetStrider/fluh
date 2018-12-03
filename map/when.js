@@ -1,5 +1,6 @@
 
 import Same from '../lib/Same'
+import Fin  from '../lib/Fin'
 
 
 function λwhen (pred, fn_true, fn_false = Same)
@@ -38,22 +39,16 @@ export var when_end  = when(value => value === End)
 // {
 // 	return values.some(value => value === End)
 // })
-// 
-// function when_data_all (fn_true, fn_false = Fin)
-// {
-// 	return (...values) =>
-// 	{
-// 		if (values.some(value => value === End))
-// 		{
-// 			return End
-// 		}
-// 
-// 		return fn(...values)
-// 	}
-// }
-// 
-// 
-// function Fin ()
-// {
-// 	return End
-// }
+
+export function when_data_all (fn_true, fn_false = Fin)
+{
+	return (...values) =>
+	{
+		if (values.some(value => value === End))
+		{
+			return fn_false(...values)
+		}
+
+		return fn_true(...values)
+	}
+}

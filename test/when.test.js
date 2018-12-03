@@ -7,6 +7,7 @@ import Noop from 'lib/Noop'
 import when from 'map/when'
 import { when_data } from 'map/when'
 import { when_end } from 'map/when'
+import { when_data_all } from 'map/when'
 
 describe('when', () =>
 {
@@ -74,5 +75,20 @@ describe('when', () =>
 		expect(w(0)).eq(Nothing)
 		expect(w(1)).eq(Nothing)
 		expect(w(End)).eq(End)
+	})
+
+	it('when_data_all', () =>
+	{
+		var w = when_data_all((...v) => v.join('/'))
+
+		expect(w(0, 1, 2)).eq('0/1/2')
+		expect(w(0, 1)).eq('0/1')
+		expect(w(0, End, 2)).eq(End)
+
+		var w = when_data_all((...v) => v.join('/'), () => 'N')
+
+		expect(w(0, 1, 2)).eq('0/1/2')
+		expect(w(0, 1)).eq('0/1')
+		expect(w(0, End, 2)).eq('N')
 	})
 })
