@@ -19,9 +19,9 @@ function λwhen (pred, fn_true, fn_false = Same)
 }
 
 
-export default function when (pred)
+export default function when (pred, fn_false_default = Same)
 {
-	return (fn_true, fn_false = Same) =>
+	return (fn_true, fn_false = fn_false_default) =>
 	{
 		return λwhen(pred, fn_true, fn_false)
 	}
@@ -35,23 +35,7 @@ export var when_data = when(is_not_end)
 export var when_end  = when(is_end)
 
 
-// export var when_data_all = when((...values) =>
-// {
-// 	return values.some(is_end)
-// })
-
-export function when_data_all (fn_true, fn_false = Fin)
-{
-	return (...values) =>
-	{
-		if (values.some(is_end))
-		{
-			return fn_false(...values)
-		}
-
-		return fn_true(...values)
-	}
-}
+export var when_data_all = when((...values) => (! values.some(is_end)), Fin)
 
 
 function is_end (value)
