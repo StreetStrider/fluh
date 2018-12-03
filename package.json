@@ -17,6 +17,8 @@
     "unit": "mocha -r esm -r test/globals test/*.test.js",
     "test": "npm run st && npm run unit",
 
+    "cover": "nyc -r text -r html npm run unit && xdg-open coverage/index.html",
+
     "perf": "node -r esm perf/graph.perf"
   },
 
@@ -51,6 +53,11 @@
 
     "sinon":
       "7",
+
+
+    "nyc":
+      "13",
+
 
     "benchmark":
       "2"
