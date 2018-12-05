@@ -3,7 +3,7 @@ import Same from '../lib/Same'
 import Fin  from '../lib/Fin'
 
 
-function λwhen (pred, fn_true, fn_false = Same)
+function λwhen (pred, fn_true, fn_false)
 {
 	return (...args) =>
 	{
