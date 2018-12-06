@@ -1,5 +1,8 @@
 
 import Bud from 'lib/Bud'
+import End from 'lib/End'
+
+import { when_data } from 'map/when'
 
 import filter from 'map/filter'
 
@@ -27,5 +30,28 @@ describe('filter', () =>
 
 		expect(rsb).deep.eq([ 1, 2, 5 ])
 		expect(rsc).deep.eq([ 1, 5 ])
+	})
+
+	it('no end', () =>
+	{
+		var rs1 = []
+		var rs2 = []
+
+		var a = Bud()
+
+		var b1 = a.map(filter(x => typeof x === 'number' && x > 1))
+		var b2 = a.map(when_data(filter(x => (x > 1))))
+
+		b1.on(v => rs1.push(v))
+		b2.on(v => rs2.push(v))
+
+		a
+		.emit(1)
+		.emit(2)
+		.emit(3)
+		.emit(End)
+
+		expect(rs1).deep.eq([ 2, 3 ])
+		expect(rs2).deep.eq([ 2, 3, End ])
 	})
 })
