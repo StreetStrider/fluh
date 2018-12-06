@@ -17,7 +17,7 @@
     "unit": "mocha -r esm -r test/globals test/*.test.js",
     "test": "npm run st && npm run unit",
 
-    "cover": "nyc -r text -r html npm run unit && xdg-open coverage/index.html",
+    "cover": "nyc -r text -r html npm run unit",
 
     "perf": "node -r esm perf/graph.perf"
   },
