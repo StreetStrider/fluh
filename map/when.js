@@ -1,5 +1,5 @@
 
-function λwhen (pred, fn_true, fn_false)
+export function base_when (pred, fn_true, fn_false)
 {
 	return (...args) =>
 	{
@@ -21,7 +21,7 @@ export default function when (pred, fn_false_default = Same)
 {
 	return (fn_true, fn_false = fn_false_default) =>
 	{
-		return λwhen(pred, fn_true, fn_false)
+		return base_when(pred, fn_true, fn_false)
 	}
 }
 
