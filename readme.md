@@ -66,7 +66,8 @@ for single `emit`. See [diamond problem](https://github.com/paldepind/flyd#atomi
 * You can skip values, returning `Nothing`, works like `filter`. Further dependencies will
 not be touched.
 * It is better to not performing side-effects inside `join`'s transformer. It is possible but
-it's better to do it as an effect.
+it's better to do it as an effect (`on`).
+* `map` is a shortcut for `join` deriving from a single Bud.
 
 ```js
 var a = Bud()
@@ -79,6 +80,21 @@ var c = join(a, b, (a, b) => a + b + 'c')
 
 /* skip (filter out, reject) values */
 var n = join(a, (a) => Nothing)
+
+/* derive from single Bud `a` */
+var b = a.map((a) => a + 'b')
+```
+
+## hi-order
+
+* Use `thru` for functions which accept Bud and return new Bud.
+* hi-order `thru` transformers good when you can't express transformation in terms of `map`.
+
+```js
+var a = Bud()
+
+/* delay must return function from Bud to Bud */
+var b = a.thru(delay(50))
 ```
 
 ## effects
@@ -86,7 +102,7 @@ var n = join(a, (a) => Nothing)
 * Attach effects to Bud by using `bud.on(fn)`.
 * Effects are fired in straight by attach order.
 * Effects run before propagating event to dependents and before effects of dependents.
-* In effect you can re-`emit` values on another Bud (or even that), but watch out for order of events and infinite loops.
+* In effect you can re-`emit` values on another Bud (or even that one), but watch out for order of events and infinite loops.
 * Re-emitting will happen after current emit is done for the whole dependent subtree.
 
 ```js
