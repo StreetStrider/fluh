@@ -3,6 +3,7 @@ import Bud from 'lib/Bud'
 import delay from 'thru/delay'
 
 import End from 'lib/End'
+import drain from 'lib/drain'
 
 
 describe('delay', () =>
@@ -21,16 +22,7 @@ describe('delay', () =>
 		.emit(3)
 		.emit(End)
 
-		await new Promise(rs =>
-		{
-			b.on(value =>
-			{
-				if (value === End)
-				{
-					rs()
-				}
-			})
-		})
+		await drain(b)
 
 		expect(rs).deep.eq([ 1, 2, 3, End ])
 	})
@@ -49,16 +41,7 @@ describe('delay', () =>
 		.emit(3)
 		.emit(End)
 
-		await new Promise(rs =>
-		{
-			b.on(value =>
-			{
-				if (value === End)
-				{
-					rs()
-				}
-			})
-		})
+		await drain(b)
 
 		expect(rs).deep.eq([ 1, 2, 3, End ])
 	})
