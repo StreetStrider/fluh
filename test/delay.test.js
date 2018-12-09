@@ -3,7 +3,7 @@ import Bud from 'lib/Bud'
 import delay from 'thru/delay'
 
 import End from 'lib/End'
-import drain from 'lib/drain'
+import concat from 'lib/concat'
 
 
 describe('delay', () =>
@@ -22,9 +22,7 @@ describe('delay', () =>
 		.emit(3)
 		.emit(End)
 
-		await drain(b)
-
-		expect(rs).deep.eq([ 1, 2, 3, End ])
+		expect(await concat(b)).deep.eq([ 1, 2, 3, End ])
 	})
 
 	it('works with default', async () =>
@@ -41,8 +39,6 @@ describe('delay', () =>
 		.emit(3)
 		.emit(End)
 
-		await drain(b)
-
-		expect(rs).deep.eq([ 1, 2, 3, End ])
+		expect(await concat(b)).deep.eq([ 1, 2, 3, End ])
 	})
 })
