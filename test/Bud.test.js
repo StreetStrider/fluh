@@ -103,7 +103,8 @@ export function expect_bud (bud)
 
 	expect(bud).property('value')
 
-	// expect(bud.pull).a('function')
 	expect(bud.emit).a('function')
 	expect(bud.on).a('function')
+	expect(bud.map).a('function')
+	expect(bud.thru).a('function')
 }
