@@ -28,7 +28,7 @@ export default function when (pred, fn_false_default = Same)
 
 import Fin  from '../lib/Fin'
 
-export var when_data = when(is_not_end)
+export var when_data = when(is_data)
 
 export var when_end  = when(is_end)
 
@@ -43,7 +43,9 @@ function is_end (value)
 	return value === End
 }
 
-function is_not_end (value)
+function is_data (value)
 {
-	return value !== End
+	if (value === End) { return false }
+	if (value instanceof Error) { return false }
+	return true
 }

@@ -49,17 +49,21 @@ describe('when', () =>
 
 	it('when_data', () =>
 	{
+		var e = new Error('x')
+
 		var w = when_data(x => (x * 10 + 1))
 
 		expect(w(0)).eq(1)
 		expect(w(1)).eq(11)
 		expect(w(End)).eq(End)
+		expect(w(e)).eq(e)
 
 		var w = when_data(x => x, Noop)
 
 		expect(w(0)).eq(0)
 		expect(w(1)).eq(1)
 		expect(w(End)).eq(Nothing)
+		expect(w(e)).eq(Nothing)
 	})
 
 	it('when_end', () =>
