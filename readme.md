@@ -113,4 +113,4 @@ a.on(() => { /* … */ })
 ```
 
 # license
-ISC, © Strider, 2018.
+ISC, © Strider, 2019.
