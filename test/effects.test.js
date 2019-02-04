@@ -5,6 +5,17 @@ import join from 'lib/join'
 
 describe('effects', () =>
 {
+	it('Effects', () =>
+	{
+		var bud = Bud()
+
+		expect(bud.on).a('function')
+		expect(bud.on.emit).a('function')
+
+		expect(bud.on(() => {})).eq(bud)
+		expect(bud.on.emit(1)).eq(bud)
+	})
+
 	it('on Bud', () =>
 	{
 		var bud = Bud()
