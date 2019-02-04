@@ -1,32 +1,25 @@
 
-import { Bud }  from './'
-import { join } from './'
-import { End }  from './'
+import { Bud }  from '.'
+import { End }  from '.'
 
-import capture from './lib/capture'
 import { when_data } from './map/when'
-
-import { log } from './lib/realm'
-
-// log.enabled = true
+import { when_end } from './map/when'
 
 var a = Bud()
 
-var b = a.map(capture(v =>
+a.on((x) => console.log('a', x))
+
+var b = a.map(when_data(x => x + 1))
+
+b.on((x) => console.log('b', x))
+
+turnoff(b, a)
+
+a.emit(1).emit(2)
+b.emit(400).emit(End)
+
+
+function turnoff (a, b)
 {
-	if (v === 0)
-	{
-		throw new TypeError('zero')
-	}
-
-	return (1 / v)
-}))
-
-b.on(v => console.log('v', v))
-b.on(when_data(v => console.log('d', v)))
-
-a
-.emit(0)
-.emit(1)
-.emit(2)
-.emit(3)
+	return a.on(when_end(b.emit))
+}
