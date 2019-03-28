@@ -19,7 +19,7 @@
 
     "cover": "nyc -r text -r html npm run unit",
 
-    "perf": "node -r esm perf/graph.perf"
+    "perf": "node -r esm perf/perf"
   },
 
   "files":
@@ -63,6 +63,10 @@
 
 
     "benchmark":
-      "2"
+      "2",
+
+
+    "flyd":
+      "0.2"
   }
 }

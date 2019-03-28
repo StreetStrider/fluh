@@ -1,8 +1,6 @@
 /* global a */
 
-
 import { Suite } from 'benchmark'
-
 
 import Bud  from '../lib/Bud'
 import join from '../lib/join'
@@ -11,6 +9,7 @@ import Many from '../lib/Many'
 global.Bud  = Bud
 global.join = join
 global.Many = Many
+
 
 Suite()
 .add('              diamond',
@@ -92,3 +91,4 @@ Suite()
 	console.error(event.target.error)
 })
 .run()
+
