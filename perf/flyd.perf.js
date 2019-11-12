@@ -1,4 +1,5 @@
 /* global A */
+/* global a */
 /* global Af */
 
 import Bud  from '../lib/Bud'
@@ -52,6 +53,27 @@ export default function (suite)
 		fn ()
 		{
 			Af(17)
+		},
+	})
+	.add('     deep linear flyd',
+	{
+		setup ()
+		{
+			var n = 1
+
+			var a = stream()
+
+			var b = a
+			for (let n = 0; n < 100; n++)
+			{
+				b = combine(b => b + 1, [ b ])
+			}
+
+			on(() => n++, b)
+		},
+		fn ()
+		{
+			a(17)
 		},
 	})
 }
