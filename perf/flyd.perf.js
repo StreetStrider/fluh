@@ -22,12 +22,14 @@ export default function (suite)
 	{
 		setup ()
 		{
+			var n = 1
+
 			var A = Bud()
 			var b = join(A, a => a + 1)
 			var c = join(b, b => b + 1)
 			var d = join(A, c, (a, c) => a + c + 1)
 
-			d.on(() => void 0)
+			d.on(() => n++)
 		},
 		fn ()
 		{
@@ -38,12 +40,14 @@ export default function (suite)
 	{
 		setup ()
 		{
+			var n = 1
+
 			var Af = stream()
 			var b = combine(a => a + 1, [ Af ])
 			var c = combine(b => b + 1, [ b ])
 			var d = combine((a, c) => a + c + 1, [ Af, c ])
 
-			on(() => void 0, d)
+			on(() => n++, d)
 		},
 		fn ()
 		{

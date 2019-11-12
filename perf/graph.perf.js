@@ -15,12 +15,14 @@ export default function (suite)
 	{
 		setup ()
 		{
+			var n = 1
+
 			var a = Bud()
 			var b = join(a, a => a + 1)
 			var c = join(b, b => b + 1)
 			var d = join(a, c, (a, c) => a + c + 1)
 
-			d.on(() => void 0)
+			d.on(() => n++)
 		},
 		fn ()
 		{
@@ -31,6 +33,8 @@ export default function (suite)
 	{
 		setup ()
 		{
+			var n = 1
+
 			var a = Bud()
 
 			var b1 = join(a, a => a + 1)
@@ -39,7 +43,7 @@ export default function (suite)
 			var b2 = join(b1, b => b + 1)
 			var c2 = join(b2, c1, (b, c) => b + c + 1)
 
-			c2.on(() => void 0)
+			c2.on(() => n++)
 		},
 		fn ()
 		{
@@ -50,6 +54,8 @@ export default function (suite)
 	{
 		setup ()
 		{
+			var n = 1
+
 			var a = Bud()
 
 			var b = a
@@ -57,6 +63,8 @@ export default function (suite)
 			{
 				b = join(b, b => b + 1)
 			}
+
+			b.on(() => n++)
 		},
 		fn ()
 		{
@@ -67,6 +75,8 @@ export default function (suite)
 	{
 		setup ()
 		{
+			var n = 1
+
 			var a = Bud()
 
 			var b = a
@@ -74,7 +84,7 @@ export default function (suite)
 			{
 				b = join(b, b => b + 1)
 			}
-			b.on(() => void 0)
+			b.on(() => n++)
 		},
 		fn ()
 		{
