@@ -24,4 +24,12 @@ describe('Many', () =>
 		expect(Many.is(fake)).false
 		expect(Array.isArray(fake)).true
 	})
+
+	it('sequence', () =>
+	{
+		var many = Many(1, 2, 3)
+
+		expect(Many.sequence(many)).eq(many)
+		expect(Many.sequence(1)).deep.eq(Many(1))
+	})
 })
