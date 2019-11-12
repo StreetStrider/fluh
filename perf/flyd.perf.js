@@ -18,7 +18,7 @@ global.on = on
 export default function (suite)
 {
 	return suite
-	.add('              diamond fluh',
+	.add('         diamond fluh',
 	{
 		setup ()
 		{
@@ -36,7 +36,7 @@ export default function (suite)
 			A.emit(17)
 		},
 	})
-	.add('              diamond flyd',
+	.add('         diamond flyd',
 	{
 		setup ()
 		{
