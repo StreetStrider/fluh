@@ -35,7 +35,7 @@ describe('effects', () =>
 
 	it('on Bud instant', () =>
 	{
-		var bud = Bud(() => 17)
+		var bud = Bud().emit(17)
 
 		var ok = false
 

@@ -14,14 +14,15 @@ describe('Bud', () =>
 		expect(bud.value).eq(Nothing)
 	})
 
-	it('Bud(fn)', () =>
+	// TODO: rm
+	/*xit('Bud(fn)', () =>
 	{
-		var bud = Bud(() => 1917)
+		var bud = Bud().emit(1917)
 
 		expect_bud(bud)
 
 		expect(bud.value).eq(1917)
-	})
+	})*/
 
 	it('emit', () =>
 	{

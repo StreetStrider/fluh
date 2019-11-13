@@ -43,7 +43,7 @@ describe('linear', () =>
 
 	it('A(v) → B', () =>
 	{
-		var a = Bud(() => 1)
+		var a = Bud().emit(1)
 
 		var b = join(a, a => a + 1)
 
@@ -86,7 +86,7 @@ describe('linear', () =>
 
 	it('A(v) → B → C', () =>
 	{
-		var a = Bud(() => 1)
+		var a = Bud().emit(1)
 
 		var b = join(a, a => a + 1)
 		var c = join(b, b => b * 100)

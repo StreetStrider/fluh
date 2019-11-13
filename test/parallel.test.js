@@ -10,7 +10,7 @@ describe('parallel', () =>
 {
 	it('A → B, A → C', () =>
 	{
-		var a = Bud(() => 1)
+		var a = Bud().emit(1)
 
 		var b = join(a, a => a * 10)
 		var c = join(a, a => a * 100)
@@ -29,7 +29,7 @@ describe('parallel', () =>
 
 	it('A → B,C → D', () =>
 	{
-		var a = Bud(() => 1)
+		var a = Bud().emit(1)
 
 		var b = join(a, a => a * 10)
 		var c = join(a, a => a * 100)
@@ -56,7 +56,7 @@ describe('parallel', () =>
 
 	it('A → x3 → B', () =>
 	{
-		var a = Bud(() => 1)
+		var a = Bud().emit(1)
 
 		var x = [0, 1, 2, 3].map(pow)
 		var b = join(...x, sum)
