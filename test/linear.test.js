@@ -221,7 +221,7 @@ describe('linear', () =>
 		var a = Bud()
 
 		var b = join(a, () => Nothing)
-		var c = join(b, b => b + 1)
+		var c = join(b, b => b * 10)
 
 		var bs = []
 		b.on(value => bs.push(value))
@@ -233,5 +233,28 @@ describe('linear', () =>
 
 		expect(bs).deep.eq([])
 		expect(cs).deep.eq([])
+	})
+
+	it('A → B(maybe Nothing) → C', () =>
+	{
+		var a = Bud()
+
+		var b = join(a, a =>
+		{
+			if (a > 1) { return Nothing }
+			return a
+		})
+		var c = join(b, b => b * 10)
+
+		var bs = []
+		b.on(value => bs.push(value))
+
+		var cs = []
+		c.on(value => cs.push(value))
+
+		a.emit(1).emit(2).emit(3)
+
+		expect(bs).deep.eq([ 1 ])
+		expect(cs).deep.eq([ 10 ])
 	})
 })
