@@ -32,7 +32,7 @@ describe('End', () =>
 		expect(s.callCount).eq(4)
 	})
 
-	it('End work in midlle of Many', () =>
+	it('End work in the middle of Many', () =>
 	{
 		var a = Bud()
 

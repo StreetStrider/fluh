@@ -86,7 +86,7 @@ describe('parallel', () =>
 		}
 	})
 
-	it('A → B,C → D with skips', () =>
+	it('A → B,C → D with Nothing', () =>
 	{
 		var a = Bud()
 
