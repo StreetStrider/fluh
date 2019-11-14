@@ -43,6 +43,28 @@ describe('linear', () =>
 
 	it('A(v) → B', () =>
 	{
+		var a = Bud(1)
+
+		var b = join(a, a => a + 1)
+
+		var as1 = spy()
+		var bs1 = spy()
+		a.on(as1)
+		a.on(bs1)
+
+		expect(a.value).eq(1)
+		expect(b.value).eq(2)
+		expect(as1.called).true
+		expect(bs1.called).true
+
+		a.emit(1)
+
+		expect(as1.callCount).eq(2)
+		expect(bs1.callCount).eq(2)
+	})
+
+	it('A(emit v) → B', () =>
+	{
 		var a = Bud().emit(1)
 
 		var b = join(a, a => a + 1)
