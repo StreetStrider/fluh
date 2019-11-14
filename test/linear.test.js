@@ -189,6 +189,10 @@ describe('linear', () =>
 
 		var order = []
 
+		var as = []
+		a.on(track('a'))
+		a.on(value => as.push(value))
+
 		var bs = []
 		b.on(track('b'))
 		b.on(value => bs.push(value))
@@ -209,18 +213,22 @@ describe('linear', () =>
 		expect(b.value).eq(70)
 		expect(c.value).eq(7000)
 
+		expect(as).deep.eq([ 5, 6, 7 ])
 		expect(bs).deep.eq([ 5, 50, 6, 60, 7, 70 ])
 		expect(cs).deep.eq([ 500, 5000, 600, 6000, 700, 7000 ])
 		expect(order).deep.eq(
 		[
+			[ 'a', 5 ],
 			[ 'b', 5 ],
 			[ 'c', 500 ],
 			[ 'b', 50 ],
 			[ 'c', 5000 ],
+			[ 'a', 6 ],
 			[ 'b', 6 ],
 			[ 'c', 600 ],
 			[ 'b', 60 ],
 			[ 'c', 6000 ],
+			[ 'a', 7 ],
 			[ 'b', 7 ],
 			[ 'c', 700 ],
 			[ 'b', 70 ],
