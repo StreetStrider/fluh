@@ -215,4 +215,23 @@ describe('linear', () =>
 			}
 		}
 	})
+
+	it('A → B(Nothing) → C', () =>
+	{
+		var a = Bud()
+
+		var b = join(a, () => Nothing)
+		var c = join(b, b => b + 1)
+
+		var bs = []
+		b.on(value => bs.push(value))
+
+		var cs = []
+		c.on(value => cs.push(value))
+
+		a.emit(1).emit(2).emit(3)
+
+		expect(bs).deep.eq([])
+		expect(cs).deep.eq([])
+	})
 })
