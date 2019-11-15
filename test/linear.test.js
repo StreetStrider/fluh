@@ -287,4 +287,17 @@ describe('linear', () =>
 		expect(bs).deep.eq([ 1 ])
 		expect(cs).deep.eq([ 10 ])
 	})
+
+	it('Zero, A → B', () =>
+	{
+		var a = Bud()
+		a.emit(1)
+
+		var Z = Bud()
+		Z.emit(1)
+
+		var b = a.map(x => x + 1)
+
+		expect(b.value).eq(2)
+	})
 })
