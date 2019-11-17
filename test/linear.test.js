@@ -258,6 +258,81 @@ describe('linear', () =>
 		}
 	})
 
+	it('A → B(Many) → C(Many)', () =>
+	{
+		var a = Bud()
+
+		var b = join(a, a => Many(a, (a + 1)))
+		var c = join(b, b => Many(b, (b + 2)))
+
+		var order = []
+
+		var as = []
+		a.on(track('a'))
+		a.on(value => as.push(value))
+
+		var bs = []
+		b.on(track('b'))
+		b.on(value => bs.push(value))
+
+		var cs = []
+		c.on(track('c'))
+		c.on(value => cs.push(value))
+
+		expect(a.value).eq(Nothing)
+		expect(b.value).eq(Nothing)
+		expect(c.value).eq(Nothing)
+
+		a.emit(1)
+		a.emit(5)
+		a.emit(9)
+
+		expect(a.value).eq(9)
+		expect(b.value).eq(10)
+		expect(c.value).eq(12)
+
+		expect(as).deep.eq([ 1, 5, 9 ])
+		expect(bs).deep.eq([ 1, 2, 5, 6, 9, 10 ])
+		expect(cs).deep.eq([ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ])
+
+		expect(order).deep.eq(
+		[
+			[ 'a', 1 ],
+			[ 'b', 1 ],
+			[ 'c', 1 ],
+				[ 'b', 2 ],
+				[ 'c', 2 ],
+					[ 'c', 3 ],
+					[ 'c', 4 ],
+
+			[ 'a', 5 ],
+			[ 'b', 5 ],
+			[ 'c', 5 ],
+				[ 'b', 6 ],
+				[ 'c', 6 ],
+					[ 'c', 7 ],
+					[ 'c', 8 ],
+
+			[ 'a', 9 ],
+			[ 'b', 9 ],
+			[ 'c', 9 ],
+				[ 'b', 10 ],
+				[ 'c', 10 ],
+					[ 'c', 11 ],
+					[ 'c', 12 ],
+			])
+
+		function track (name)
+		{
+			return (value) =>
+			{
+				order.push([ name, value ])
+
+				return value
+			}
+		}
+	})
+
 	it('A → B(Nothing) → C', () =>
 	{
 		var a = Bud()
