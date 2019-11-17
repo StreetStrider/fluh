@@ -108,6 +108,18 @@ describe('linear', () =>
 
 	it('A(v) → B → C', () =>
 	{
+		var a = Bud(1)
+
+		var b = join(a, a => a + 1)
+		var c = join(b, b => b * 100)
+
+		expect(a.value).eq(1)
+		expect(b.value).eq(2)
+		expect(c.value).eq(200)
+	})
+
+	it('A(emit v) → B → C', () =>
+	{
 		var a = Bud().emit(1)
 
 		var b = join(a, a => a + 1)
