@@ -8,6 +8,7 @@ global.Bud  = Bud
 global.join = join
 global.Many = Many
 
+
 export default function (suite)
 {
 	return suite

@@ -9,6 +9,7 @@ import { when_data } from 'map/when'
 import { when_end } from 'map/when'
 import { when_data_all } from 'map/when'
 
+
 describe('when', () =>
 {
 	it('when(_)(_, _)', () =>

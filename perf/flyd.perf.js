@@ -16,6 +16,7 @@ global.stream = stream
 global.combine = combine
 global.on = on
 
+
 export default function (suite)
 {
 	return suite

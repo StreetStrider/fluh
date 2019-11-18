@@ -6,6 +6,7 @@ import Many from 'lib/Many'
 
 import { expect_bud } from './Bud.test'
 
+
 describe('linear', () =>
 {
 	it('A → B', () =>

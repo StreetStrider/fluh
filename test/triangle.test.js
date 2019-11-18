@@ -4,6 +4,7 @@ import join from 'lib/join'
 import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
 
+
 describe('triangle', () =>
 {
 	it('A,B,C; B → C', () =>

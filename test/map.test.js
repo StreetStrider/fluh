@@ -3,6 +3,7 @@ import Bud from 'lib/Bud'
 import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
 
+
 describe('map', () =>
 {
 	it('like map', () =>

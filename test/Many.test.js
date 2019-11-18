@@ -1,6 +1,7 @@
 
 import Many from 'lib/Many'
 
+
 describe('Many', () =>
 {
 	it('Many()', () =>

@@ -1,9 +1,8 @@
 
 import Bud from 'lib/Bud'
-// import join from 'lib/join'
-// import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
 import End from 'lib/End'
+
 
 describe('End', () =>
 {
