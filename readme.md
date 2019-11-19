@@ -8,12 +8,13 @@ When thinking of reactive stuff there's a whole space of decisions you need to m
 * Is it sync or async?
 * How errors should be handled?
 * Does stream end?
+* Is data graph static or dynamic?
 
 Choosing some designs will lead to specific FRP system.
 Watch [this speech](https://www.youtube.com/watch?v=Agu6jipKfYw) about this decision space.
 
-**fluh** is inspired mainly by [flyd](https://github.com/paldepind/flyd). I want to use reactivity for
-request-response systems, command-line applications and UIs. For that scope push-strategy is good.
+**fluh** is inspired mainly by [flyd](https://github.com/paldepind/flyd). I want to use the reactivity for
+request-response systems, command-line applications and (especially) UIs. For that scope push strategy is good.
 
 The main unit is called `Bud`.
 * Bud is a push-strategy FRP unit for creating data (event) streams.
@@ -30,6 +31,7 @@ so you are free to emit `null` or `undefined` if you really want to.
 * When Bud acquire value it propagates it to *effects* and *dependents*. If Bud already has value, newly created effects
 and dependents will be notified immediately with that value.
 * All schema is sync by default, but you are free to create async operators (defer, delay…).
+* Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal is still a task to solve (`TODO`). In static graph disposal is not an issue at all.
 * Can be pure and impure, depending on usage.
 
 If you think some of the decisions are not good, there's a great family of
@@ -42,6 +44,7 @@ different opinions. Check out at least theese great ones:
 [RX](https://github.com/ReactiveX/rxjs),
 [pull-stream](https://github.com/pull-stream/pull-stream),
 [Highland](https://github.com/caolan/highland).
+[MobX](https://mobx.js.org/).
 
 # api
 ## Bud
@@ -52,8 +55,11 @@ Bud is a main FRP unit.
 /* empty Bud (Nothing) */
 Bud()
 
-/* emit new value */
-Bud.emit(value)
+/* Bud with value */
+Bud('value')
+
+/* emit new values */
+Bud.emit('value 1').emit('value 2')
 ```
 
 ## derivatives
@@ -65,6 +71,7 @@ for single `emit`. See [diamond problem](https://github.com/paldepind/flyd#atomi
 * `join(bud, fn)` is a `map`.
 * You can skip values, returning `Nothing`, works like `filter`. Further dependencies will
 not be touched.
+* You can pass more than one value using `Many(...values)`. Additional values will be handled one after another atomically (for the whole dependent subtree) and synchronously.
 * It is better to not performing side-effects inside `join`'s transformer. It is possible but
 it's better to do it as an effect (`on`).
 * `map` is a shortcut for `join` deriving from a single Bud.
@@ -81,14 +88,17 @@ var c = join(a, b, (a, b) => a + b + 'c')
 /* skip (filter out, reject) values */
 var n = join(a, (a) => Nothing)
 
+/* return two values for each input (like transducer) */
+var n = join(a, (a) => Many(a, a + 'x'))
+
 /* derive from single Bud `a` */
 var b = a.map((a) => a + 'b')
 ```
 
-## hi-order
+## high-order
 
 * Use `thru` for functions which accept Bud and return new Bud.
-* hi-order `thru` transformers good when you can't express transformation in terms of `map`.
+* high-order `thru` transformers good when you can't express transformation in terms of `map`.
 
 ```js
 var a = Bud()
@@ -100,7 +110,7 @@ var b = a.thru(delay(50))
 ## effects
 
 * Attach effects to Bud by using `bud.on(fn)`.
-* Effects are fired in straight by attach order.
+* Effects are fired in straight-by-attach order.
 * Effects run before propagating event to dependents and before effects of dependents.
 * In effect you can re-`emit` values on another Bud (or even that one), but watch out for order of events and infinite loops.
 * Re-emitting will happen after current emit is done for the whole dependent subtree.
@@ -108,8 +118,8 @@ var b = a.thru(delay(50))
 ```js
 var a = Bud()
 
-/* subscribe on changes */
-a.on(() => { /* … */ })
+/* subscribe to changes */
+a.on((value) => console.log('a:', value))
 ```
 
 # license
