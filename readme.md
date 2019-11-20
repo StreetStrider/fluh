@@ -129,17 +129,17 @@ To do this, fluh recursively collects all dependencies of any `A` and orders the
 
 `order` is used as a basis for cycle, so all dependencies will be updated in single pass, without using recursion.
 
-See also [flyd's atomic updates](https://github.com/paldepind/flyd#atomic-updates)
+See also [flyd's atomic updates](https://github.com/paldepind/flyd#atomic-updates).
 
 ## `map` with Nothing and Many
-fluh's `.map` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to adress more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
+fluh's `bud.map` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to adress more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
 
 fluh's `map` works in three ways:
 1. Ordinary map (return any values).
 2. Skip values. Return special symbol `Nothing` and current value will be skipped. This means no updates on dependencies, value would be just eliminated from flow.
 3. Return multiple values with `Many(...values)`. `Many`, just like `Nothing` is a special type, so no collisions with arrays or other objects. If instance of `Many` is returned from `map` it will propagate further first value from it and, after graph is updated atomically, emit following values as additional usual emits.
 
-So `map` covers all cases for `map`, `filter` and `flatMap` in common manner.
+So `map` covers all cases for `map`, `filter` and `flatMap` in a common manner.
 
 ## high-order transformations
 
