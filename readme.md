@@ -73,7 +73,7 @@ not be touched.
 * You can pass more than one value using `Many(...values)`. Additional values will be handled one after another atomically (for the whole dependent subtree) and synchronously.
 * It is better to not performing side-effects inside `join`'s transformer. It is possible but
 it's better to do it as an effect (`on`).
-* `map` is a shortcut for `join` deriving from a single Bud.
+* `bud.map(fn)` is a shortcut for `join` deriving from a single Bud.
 
 ```js
 var a = Bud()
@@ -132,7 +132,7 @@ To do this, fluh recursively collects all dependencies of any `A` and orders the
 See also [flyd's atomic updates](https://github.com/paldepind/flyd#atomic-updates).
 
 ## `map` with Nothing and Many
-fluh's `bud.map` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to adress more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
+fluh's `bud.map(fn)` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to adress more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
 
 fluh's `map` works in three ways:
 1. Ordinary map (return any values).
@@ -142,11 +142,11 @@ fluh's `map` works in three ways:
 So `map` covers all cases for `map`, `filter` and `flatMap` in a common manner.
 
 ## high-order transformations
-In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a bud, transform it (for instance, involving state) and return modified bud: `b = transform(a)`.
+In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `b = transform(a)`.
 
-In order to do this, fluh has `bud.thru` which accepts function from one bud to another and returns result of invocation that function on this particular bud.
+In order to do this, fluh has `bud.thru(fn)` which accepts function from one Bud to another and returns result of invocation that function on this particular Bud.
 
-Here's the example of how it can be used to make bud async by default (by creating new dependent bud which receives updates asynchronously):
+Here's the example of how it can be used to make Bud async by default (by creating new dependent Bud which receives updates asynchronously):
 
 ```js
 function defer (bud)
