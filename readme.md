@@ -122,5 +122,10 @@ var a = Bud()
 a.on((value) => console.log('a:', value))
 ```
 
+# interesting details
+## atomic updates
+## map with Nothing and Many
+## high-order transformations
+
 # license
 ISC, © Strider, 2019.
