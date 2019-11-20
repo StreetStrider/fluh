@@ -66,8 +66,7 @@ Bud.emit('value 1').emit('value 2')
 
 * Create derived streams by using `var new_bud = join(...buds, (...bud_values) => new_value)`.
 * `emit`'s are propagated through the dependents.
-* By using `join` we guarantee that every dependency changes at most once time
-for single `emit`. See [atomic updates](#atomic-updates).
+* By using `join` we guarantee that every dependency changes at most once for single `emit`. See [atomic updates](#atomic-updates).
 * `join(bud, fn)` is a `map`.
 * You can skip values, returning `Nothing`, works like `filter`. Further dependencies will
 not be touched.
@@ -130,7 +129,7 @@ To do this, fluh recursively collects all dependencies of any `A` and orders the
 
 `order` is used as a basis for cycle, so all dependencies will be updated in single pass, without using recursion.
 
-See also [flyd atomic updates](https://github.com/paldepind/flyd#atomic-updates)
+See also [flyd's atomic updates](https://github.com/paldepind/flyd#atomic-updates)
 
 ## map with Nothing and Many
 ## high-order transformations
