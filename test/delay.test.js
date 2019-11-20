@@ -46,7 +46,7 @@ describe('delay / defer', () =>
 	it('defer', async () =>
 	{
 		var a = Bud()
-		var b = a.thru(defer())
+		var b = a.thru(defer)
 
 		var rs = []
 		b.on(value => rs.push(value))

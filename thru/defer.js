@@ -2,17 +2,14 @@
 import asap from '../lib/asap'
 
 
-export default function defer ()
+export default function defer (bud)
 {
-	return (bud) =>
+	var deferred = bud.constructor()
+
+	bud.on(value =>
 	{
-		var deferred = bud.constructor()
+		asap(() => deferred.emit(value))
+	})
 
-		bud.on(value =>
-		{
-			asap(() => deferred.emit(value))
-		})
-
-		return deferred
-	}
+	return deferred
 }
