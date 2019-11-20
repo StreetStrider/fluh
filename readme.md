@@ -142,14 +142,14 @@ fluh's `map` works in three ways:
 So `map` covers all cases for `map`, `filter` and `flatMap` in a common manner.
 
 ## high-order transformations
-In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a bud transform it (for instance, involving state) and return modified bud `b = transform(a)`.
+In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a bud, transform it (for instance, involving state) and return modified bud: `b = transform(a)`.
 
 In order to do this, fluh has `bud.thru` which accepts function from one bud to another and returns result of invocation that function on this particular bud.
 
 Here's the example of how it can be used to make bud async by default (by creating new dependent bud which receives updates asynchronously):
 
 ```js
-return function defer (bud)
+function defer (bud)
 {
 	var deferred = bud.constructor()
 
