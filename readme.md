@@ -67,7 +67,7 @@ Bud.emit('value 1').emit('value 2')
 * Create derived streams by using `var new_bud = join(...buds, (...bud_values) => new_value)`.
 * `emit`'s are propagated through the dependents.
 * By using `join` we guarantee that every dependency changes at most once time
-for single `emit`. See [diamond problem](https://github.com/paldepind/flyd#atomic-updates).
+for single `emit`. See [atomic updates](#atomic-updates).
 * `join(bud, fn)` is a `map`.
 * You can skip values, returning `Nothing`, works like `filter`. Further dependencies will
 not be touched.
@@ -122,8 +122,16 @@ var a = Bud()
 a.on((value) => console.log('a:', value))
 ```
 
-# interesting details
+# interesting reading
 ## atomic updates
+fluh just like flyd solves atomic updates problem. This means that in case of graph `A → B, A → C, B & C → D` stream `D` indirectly depends twice on `A`, via `B` and `C`. fluh guarantees that in case of emit on `A` dependent `D` would recieve update only once, with two updated values from `B` and `C`.
+
+To do this, fluh recursively collects all dependencies of any `A` and orders them topologically. That `order` is lazily cached and in use until graph changes. This gives excellent results for static graphs and optimal reordering when graph changes rarely.
+
+`order` is used as a basis for cycle, so all dependencies will be updated in single pass, without using recursion.
+
+See also [flyd atomic updates](https://github.com/paldepind/flyd#atomic-updates)
+
 ## map with Nothing and Many
 ## high-order transformations
 
