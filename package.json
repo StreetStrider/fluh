@@ -19,7 +19,9 @@
 
     "cover": "nyc -r text -r html npm run unit",
 
-    "perf": "node -r esm perf/perf"
+    "perf": "node -r esm perf/perf",
+
+    "build": "gulp --final"
   },
 
   "files":
@@ -32,15 +34,26 @@
 
   "dependencies":
   {
-    "esm":
-      "3",
-
     "def-prop":
       "1"
   },
 
   "devDependencies":
   {
+    "esm":
+      "^3.2",
+
+
+    "gulp":
+      "4",
+ 
+    "rollup":
+      "^1.27",
+ 
+    "metalpipe":
+      "1",
+
+
     "eslint":
       "6",
 
