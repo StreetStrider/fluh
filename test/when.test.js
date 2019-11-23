@@ -4,7 +4,7 @@ import End from 'lib/End'
 
 import Noop from 'lib/Noop'
 
-import when from 'map/when'
+import { when } from 'map/when'
 import { when_data } from 'map/when'
 import { when_end } from 'map/when'
 import { when_data_all } from 'map/when'

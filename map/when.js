@@ -18,7 +18,7 @@ export function base_when (pred, fn_true, fn_false)
 
 import Same from '../lib/Same'
 
-export default function when (pred, fn_false_default = Same)
+export function when (pred, fn_false_default = Same)
 {
 	return (fn_true, fn_false = fn_false_default) =>
 	{
