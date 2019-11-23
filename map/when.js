@@ -18,7 +18,7 @@ export function base_when (pred, fn_true, fn_false)
 
 import Same from '../lib/Same'
 
-export function when (pred, fn_false_default = Same)
+export function When (pred, fn_false_default = Same)
 {
 	return (fn_true, fn_false = fn_false_default) =>
 	{
@@ -29,12 +29,12 @@ export function when (pred, fn_false_default = Same)
 
 import Fin  from '../lib/Fin'
 
-export var when_data = when(is_data)
+export var when_data = When(is_data)
 
-export var when_end  = when(is_end)
+export var when_end  = When(is_end)
 
 
-export var when_data_all = when((...values) => (! values.some(is_end)), Fin)
+export var when_data_all = When((...values) => (! values.some(is_end)), Fin)
 
 
 import End  from '../lib/End'

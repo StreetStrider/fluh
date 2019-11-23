@@ -4,7 +4,7 @@ import End from 'lib/End'
 
 import Noop from 'lib/Noop'
 
-import { when } from 'map/when'
+import { When } from 'map/when'
 import { when_data } from 'map/when'
 import { when_end } from 'map/when'
 import { when_data_all } from 'map/when'
@@ -14,7 +14,7 @@ describe('when', () =>
 {
 	it('when(_)(_, _)', () =>
 	{
-		var W = when(x => (x <= 1))
+		var W = When(x => (x <= 1))
 
 		expect(W).a('function')
 		expect(W.length).eq(1)
@@ -32,7 +32,7 @@ describe('when', () =>
 
 	it('when(_)(_)', () =>
 	{
-		var W = when(x => (x <= 1))
+		var W = When(x => (x <= 1))
 
 		expect(W).a('function')
 		expect(W.length).eq(1)
