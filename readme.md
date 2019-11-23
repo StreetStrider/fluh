@@ -129,7 +129,7 @@ To do this, fluh recursively collects all dependencies of any `A` and orders the
 
 `order` is used as a basis for cycle, so all dependencies will be updated in single pass, without using recursion.
 
-See also [flyd's atomic updates](https://github.com/paldepind/flyd#atomic-updates).
+See also [flyd's atomic updates](https://github.com/paldepind/flyd/tree/180e8f5b859ac9ae388a193d334e94f03e02feef#atomic-updates).
 
 ## `map` with Nothing and Many
 fluh's `bud.map(fn)` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to adress more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
