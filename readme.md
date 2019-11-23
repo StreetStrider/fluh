@@ -26,7 +26,7 @@ because it cannot change continuously, like real one.
 This design is a simplification for my practical needs described above.
 See the [explanation concerning Behaviors and Streams](https://github.com/funkia/hareactive/tree/e40dddd1b6d55e59a9d9bf319b7d426566cbfd8d#conceptual-overview).
 Stream is a push, Behavior is a pull, there's a distinction.
-* Bud is initialized with `Nothing` value, means no value. It is explicit value,
+* Bud is initialized with special `Nothing` value, means no value. It is explicit value,
 so you are free to emit `null` or `undefined` if you really want to.
 * When Bud acquire value it propagates it to *effects* and *dependents*. If Bud already has value, newly created effects
 and dependents will be notified immediately with that value.
