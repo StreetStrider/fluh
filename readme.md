@@ -24,7 +24,7 @@ or pulling-on-demand.
 * Bud is a Stream, but contain single (current) value, similar to Behavior. It's not an actual Behavior,
 because it cannot change continuously, like real one.
 This design is a simplification for my practical needs described above.
-See the [explanation concerning Behaviors and Streams](https://github.com/funkia/hareactive/tree/b7875b05d6f61089f1411bca882713a346ce41b0#conceptual-overview).
+See the [explanation concerning Behaviors and Streams](https://github.com/funkia/hareactive/tree/e40dddd1b6d55e59a9d9bf319b7d426566cbfd8d#conceptual-overview).
 Stream is a push, Behavior is a pull, there's a distinction.
 * Bud is initialized with `Nothing` value, means no value. It is explicit value,
 so you are free to emit `null` or `undefined` if you really want to.
