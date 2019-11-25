@@ -17,7 +17,7 @@
     "unit": "mocha -r esm -r console-ultimate -r test/globals test/*.test.js",
     "test": "npm run st && npm run unit",
 
-    "cover": "nyc -r text -r html npm run unit",
+    "cover": "gulp --once && cd release/dev && nyc -r text -r html npm run unit",
 
     "perf": "node -r esm perf/perf",
 
