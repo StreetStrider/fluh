@@ -2,20 +2,24 @@
 import graph from './graph.perf'
 import flyd  from './flyd.perf'
 
-import { Suite } from 'benchmark'
+import { suite } from 'benny'
+import { cycle, complete, save } from 'benny'
 
 
-var suite = Suite()
+suite(
+	'fluh',
 
-graph(suite)
-flyd(suite)
+	...graph,
+	...flyd,
 
-suite.on('cycle', (event) =>
-{
-	console.log(String(event.target))
-})
-.on('error', (event) =>
-{
-	console.error(event.target.error)
-})
-.run()
+	cycle(),
+
+	complete(),
+
+	save(
+	{
+		file: '3',
+		folder: '.',
+		format: 'chart.html',
+	}),
+)
