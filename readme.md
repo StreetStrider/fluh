@@ -30,6 +30,7 @@ Stream is a push, Behavior is a pull, there's a distinction.
 so you are free to emit `null` or `undefined` if you really want to.
 * When Bud acquire value it propagates it to *effects* and *dependents*. If Bud already has value, newly created effects
 and dependents will be notified immediately with that value.
+* Effects run after all dependents had been updated, so, from effects' perspective the graph's all current values change atomically and are always in a consistent state.
 * All schema is sync by default, but you are free to create async operators (defer, delay…).
 * Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal is still a task to solve (`TODO`). In static graph disposal is not an issue at all.
 * Can be pure and impure, depending on usage.
@@ -73,6 +74,7 @@ not be touched.
 * You can pass more than one value using `Many(...values)`. Additional values will be handled one after another atomically (for the whole dependent subtree) and synchronously.
 * It is better to not performing side-effects inside `join`'s transformer. It is possible but
 it's better to do it as an effect (`on`).
+* All effects run after all propagations. From effects' perspective graph is always in a consistent state, corresponding to the most recently propagated value. Graph always changes atomically.
 * `bud.map(fn)` is a shortcut for `join` deriving from a single Bud.
 
 ```js
@@ -110,8 +112,8 @@ var b = a.thru(delay(50))
 
 * Attach effects to Bud by using `bud.on(fn)`.
 * Effects are fired in straight-by-attach order.
-* Effects run before propagating event to dependents and before effects of dependents.
-* In effect you can re-`emit` values on another Bud (or even that one), but watch out for order of events and infinite loops.
+* Effects on certain Bud run after propagating event to all dependents and before effects on that dependents.
+* In effect you can re-`emit` values on another Bud (or even that one), but taking care of order of emits and infinite loops are on your own.
 * Re-emitting will happen after current emit is done for the whole dependent subtree.
 
 ```js
