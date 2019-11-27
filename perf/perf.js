@@ -18,7 +18,7 @@ suite(
 
 	save(
 	{
-		file: '3',
+		file: 'perf',
 		folder: '.',
 		format: 'chart.html',
 	}),
