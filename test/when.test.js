@@ -90,12 +90,18 @@ describe('when', () =>
 		expect(w(0, 1)).eq('0/1')
 		expect(w(0, End, 2)).eq(End)
 
-		/*
-		var w = when_data_all((...v) => v.join('/'), () => 'N')
+		var w = when_data_all((...v) => v.join('/'))
+
+		var E1 = new Error('E1')
+		var E2 = new Error('E2')
 
 		expect(w(0, 1, 2)).eq('0/1/2')
-		expect(w(0, 1)).eq('0/1')
-		expect(w(0, End, 2)).eq('N')
-		*/
+		expect(w(0, E1)).eq(E1)
+
+		expect(w(0, End, E1)).eq(End)
+		expect(w(0, E1, End)).eq(End)
+
+		expect(w(0, E1, E2)).eq(E1)
+		expect(w(End, E1, E2)).eq(End)
 	})
 })
