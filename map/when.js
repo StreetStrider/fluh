@@ -32,10 +32,6 @@ export var when_data = When(is_data)
 export var when_end  = When(is_end)
 
 
-import Fin  from '../lib/Fin'
-
-// export var when_data_all = When((...values) => (! values.some(is_end)), Fin)
-// export var when_data_all = base_when((...values) => (! values.some(is_end)), Fin)
 export function when_data_all (fn_true)
 {
 	return (...args) =>
