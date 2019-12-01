@@ -23,6 +23,9 @@ describe('End', () =>
 		a.emit(3)
 		a.emit(End)
 		a.emit(4)
+		a.emit(End)
+		a.emit(5)
+		a.emit(End)
 
 		expect(a.value).eq(End)
 		expect(b.value).eq(End)
@@ -46,6 +49,7 @@ describe('End', () =>
 		a.emit(1)
 		a.emit(Many(2, 3, End))
 		a.emit(4)
+		a.emit(End)
 		a.emit(Many(5, 6))
 
 		expect(a.value).eq(End)

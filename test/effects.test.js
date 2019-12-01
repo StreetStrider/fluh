@@ -1,6 +1,9 @@
 
 import Bud from 'lib/Bud'
+
 import Nothing from 'lib/Nothing'
+import End from 'lib/End'
+
 import join from 'lib/join'
 
 
@@ -43,6 +46,21 @@ describe('effects', () =>
 		var ok = false
 
 		bud.on((value) => { ok = (value === 17) })
+
+		var s = spy()
+		bud.on(s)
+
+		expect(ok).true
+		expect(s.callCount).eq(1)
+	})
+
+	it('on Bud ended', () =>
+	{
+		var bud = Bud(End)
+
+		var ok = false
+
+		bud.on((value) => { ok = (value === End) })
 
 		var s = spy()
 		bud.on(s)
