@@ -27,21 +27,46 @@ export function When (pred, fn_false_default = Same)
 }
 
 
-import Fin  from '../lib/Fin'
-
 export var when_data = When(is_data)
 
 export var when_end  = When(is_end)
 
 
-export var when_data_all = When((...values) => (! values.some(is_end)), Fin)
+import Fin  from '../lib/Fin'
+
+// export var when_data_all = When((...values) => (! values.some(is_end)), Fin)
+// export var when_data_all = base_when((...values) => (! values.some(is_end)), Fin)
+export function when_data_all (fn_true)
+{
+	return (...args) =>
+	{
+		if (args.some(is_end))
+		{
+			return End
+		}
+
+		var error = args.find(is_error)
+
+		if (error)
+		{
+			return error
+		}
+
+		return fn_true(...args)
+	}
+}
 
 
 import End  from '../lib/End'
 
 function is_end (value)
 {
-	return value === End
+	return (value === End)
+}
+
+function is_error (value)
+{
+	return (value instanceof Error)
 }
 
 function is_data (value)

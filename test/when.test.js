@@ -90,10 +90,12 @@ describe('when', () =>
 		expect(w(0, 1)).eq('0/1')
 		expect(w(0, End, 2)).eq(End)
 
+		/*
 		var w = when_data_all((...v) => v.join('/'), () => 'N')
 
 		expect(w(0, 1, 2)).eq('0/1/2')
 		expect(w(0, 1)).eq('0/1')
 		expect(w(0, End, 2)).eq('N')
+		*/
 	})
 })
