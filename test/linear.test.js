@@ -1,8 +1,11 @@
 
 import Bud from 'lib/Bud'
-import join from 'lib/join'
+
 import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
+import End from 'lib/End'
+
+import join from 'lib/join'
 
 import { expect_bud } from './Bud.test'
 
@@ -84,6 +87,28 @@ describe('linear', () =>
 
 		expect(as1.callCount).eq(2)
 		expect(bs1.callCount).eq(2)
+	})
+
+	it('A(End) → B', () =>
+	{
+		var a = Bud(End)
+
+		var b = join(a, a => a)
+
+		var as1 = spy()
+		var bs1 = spy()
+		a.on(as1)
+		a.on(bs1)
+
+		expect(a.value).eq(End)
+		expect(b.value).eq(End)
+		expect(as1.called).true
+		expect(bs1.called).true
+
+		a.emit(1)
+
+		expect(as1.callCount).eq(1)
+		expect(bs1.callCount).eq(1)
 	})
 
 	it('A → B → C', () =>
