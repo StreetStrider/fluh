@@ -1,5 +1,8 @@
 
 import Bud from 'lib/Bud'
+
+import End from 'lib/End'
+
 import join from 'lib/join'
 
 
@@ -51,5 +54,46 @@ describe('cache', () =>
 		expect(bs.callCount).eq(3)
 		expect(cs.callCount).eq(3)
 		expect(ds.callCount).eq(2)
+	})
+
+	it('behavior on End', () =>
+	{
+		var a = Bud()
+
+		expect(a.order).deep.eq([])
+
+		var b = join(a, a => a)
+
+		expect(a.order).deep.eq([ b ])
+		expect(b.order).deep.eq([])
+
+		var bs = spy()
+		b.on(bs)
+
+		a.emit(1)
+		expect(bs.callCount).eq(1)
+
+		var c = join(b, b => b)
+
+		expect(a.order).deep.eq([ b, c ])
+		expect(b.order).deep.eq([ c ])
+		expect(c.order).deep.eq([])
+
+		var cs = spy()
+		c.on(cs)
+
+		a.emit(1)
+
+		expect(bs.callCount).eq(2)
+		expect(cs.callCount).eq(2)
+
+		b.emit(End)
+
+		expect(bs.callCount).eq(3)
+		expect(cs.callCount).eq(3)
+
+		expect(a.order).deep.eq([ b, c ])
+		expect(b.order).deep.eq([ c ])
+		expect(c.order).deep.eq([])
 	})
 })
