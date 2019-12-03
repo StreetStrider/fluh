@@ -1,8 +1,11 @@
 
 import Bud from 'lib/Bud'
-import join from 'lib/join'
+
 import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
+import End from 'lib/End'
+
+import join from 'lib/join'
 
 
 describe('triangle', () =>
@@ -68,5 +71,47 @@ describe('triangle', () =>
 		a.emit('B')
 
 		expect(s.callCount).eq(2)
+	})
+
+	it('A,B(End),C; B → C', () =>
+	{
+		var a = Bud(1)
+
+		var b = join(a, a =>
+		{
+			if (a === 3)
+			{
+				return End
+			}
+
+			return a
+		})
+
+		var c = join(a, b, (a, b) => (b, a))
+
+		var s = spy()
+		c.on(s)
+
+		expect(b.value).eq(1)
+		expect(c.value).eq(1)
+		expect(s.callCount).eq(1)
+
+		a.emit(2)
+
+		expect(b.value).eq(2)
+		expect(c.value).eq(2)
+		expect(s.callCount).eq(2)
+
+		a.emit(3)
+
+		expect(b.value).eq(End)
+		expect(c.value).eq(3)
+		expect(s.callCount).eq(3)
+
+		a.emit(4)
+
+		expect(b.value).eq(End)
+		expect(c.value).eq(4)
+		expect(s.callCount).eq(4)
 	})
 })
