@@ -32,7 +32,8 @@ so you are free to emit `null` or `undefined` if you really want to.
 and dependents will be notified immediately with that value.
 * Effects run after all dependents had been updated, so, from effects' perspective the graph's all current values change atomically and are always in a consistent state.
 * All schema is sync by default, but you are free to create async operators (defer, delay…).
-* Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal is still a task to solve (`TODO`). In static graph disposal is not an issue at all.
+* Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal triggered by emitting `End` on a stream. If `End` is received, ordering is cleaned from terminated stream as well as certain streams' cross-references, which opens a way for a garbage collection. Streams that are both terminated and non-referenced by user become able to be garbage collected. In static graph memory consumption would remain on the stable level.
+
 * Can be pure and impure, depending on usage.
 
 If you think some of the decisions are not good, there's a great family of
