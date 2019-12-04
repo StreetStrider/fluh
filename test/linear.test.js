@@ -124,12 +124,18 @@ describe('linear', () =>
 		var bs1 = spy()
 		b.on(bs1)
 
+		expect(a.order).deep.eq([])
+		expect(b.order).deep.eq([])
+
 		expect(a.value).eq(1)
 		expect(b.value).eq(End)
 		expect(as1.called).true
 		expect(bs1.called).true
 
 		a.emit(2)
+
+		expect(a.order).deep.eq([])
+		expect(b.order).deep.eq([])
 
 		expect(a.value).eq(2)
 		expect(b.value).eq(End)
