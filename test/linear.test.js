@@ -106,8 +106,19 @@ describe('linear', () =>
 		expect(as1.called).true
 		expect(bs1.called).true
 
+		/* - */
 		a.emit(1)
 
+		expect(a.value).eq(End)
+		expect(b.value).eq(End)
+		expect(as1.callCount).eq(1)
+		expect(bs1.callCount).eq(1)
+
+		/* - */
+		a.emit(End)
+
+		expect(a.value).eq(End)
+		expect(b.value).eq(End)
 		expect(as1.callCount).eq(1)
 		expect(bs1.callCount).eq(1)
 	})
@@ -132,6 +143,7 @@ describe('linear', () =>
 		expect(as1.called).true
 		expect(bs1.called).true
 
+		/* - */
 		a.emit(2)
 
 		expect(a.order).deep.eq([])
@@ -140,6 +152,17 @@ describe('linear', () =>
 		expect(a.value).eq(2)
 		expect(b.value).eq(End)
 		expect(as1.callCount).eq(2)
+		expect(bs1.callCount).eq(1)
+
+		/* - */
+		a.emit(End)
+
+		expect(a.order).deep.eq([])
+		expect(b.order).deep.eq([])
+
+		expect(a.value).eq(End)
+		expect(b.value).eq(End)
+		expect(as1.callCount).eq(3)
 		expect(bs1.callCount).eq(1)
 	})
 
