@@ -96,9 +96,10 @@ describe('linear', () =>
 		var b = join(a, a => a)
 
 		var as1 = spy()
-		var bs1 = spy()
 		a.on(as1)
-		a.on(bs1)
+
+		var bs1 = spy()
+		b.on(bs1)
 
 		expect(a.value).eq(End)
 		expect(b.value).eq(End)
@@ -108,6 +109,31 @@ describe('linear', () =>
 		a.emit(1)
 
 		expect(as1.callCount).eq(1)
+		expect(bs1.callCount).eq(1)
+	})
+
+	it('A → B(End)', () =>
+	{
+		var a = Bud(1)
+
+		var b = join(a, a => (a, End))
+
+		var as1 = spy()
+		a.on(as1)
+
+		var bs1 = spy()
+		b.on(bs1)
+
+		expect(a.value).eq(1)
+		expect(b.value).eq(End)
+		expect(as1.called).true
+		expect(bs1.called).true
+
+		a.emit(2)
+
+		expect(a.value).eq(2)
+		expect(b.value).eq(End)
+		expect(as1.callCount).eq(2)
 		expect(bs1.callCount).eq(1)
 	})
 
