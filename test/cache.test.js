@@ -92,7 +92,7 @@ describe('cache', () =>
 		expect(bs.callCount).eq(3)
 		expect(cs.callCount).eq(3)
 
-		expect(a.order).deep.eq([ b ])
+		expect(a.order).deep.eq([])
 		expect(b.order).deep.eq([])
 		expect(c.order).deep.eq([])
 	})

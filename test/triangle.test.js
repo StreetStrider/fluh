@@ -110,7 +110,7 @@ describe('triangle', () =>
 		/* - */
 		a.emit(3)
 
-		expect(a.order).deep.eq([ b, c ])
+		expect(a.order).deep.eq([ c ])
 		expect(b.order).deep.eq([])
 		expect(c.order).deep.eq([])
 
@@ -121,7 +121,7 @@ describe('triangle', () =>
 		/* - */
 		a.emit(4)
 
-		expect(a.order).deep.eq([ b, c ])
+		expect(a.order).deep.eq([ c ])
 		expect(b.order).deep.eq([])
 		expect(c.order).deep.eq([])
 
