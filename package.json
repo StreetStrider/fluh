@@ -11,7 +11,7 @@
 
   "scripts":
   {
-    "start": "node -r esm start",
+    "start": "node -r esm -r console-ultimate start",
 
     "st":   "eslint .",
     "unit": "mocha -r esm -r console-ultimate -r test/globals test/*.test.js",
