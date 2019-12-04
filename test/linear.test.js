@@ -123,6 +123,60 @@ describe('linear', () =>
 		expect(bs1.callCount).eq(1)
 	})
 
+	it('A(End) → B(Live)', () =>
+	{
+		var a = Bud()
+
+		var b = join(a, a => (a, 0))
+
+		var as1 = spy()
+		a.on(as1)
+
+		var bs1 = spy()
+		b.on(bs1)
+
+		expect(a.order).deep.eq([ b ])
+		expect(b.order).deep.eq([])
+
+		expect(a.value).eq(Nothing)
+		expect(b.value).eq(Nothing)
+		expect(as1.called).false
+		expect(bs1.called).false
+
+		/* - */
+		a.emit(1)
+
+		expect(a.order).deep.eq([ b ])
+		expect(b.order).deep.eq([])
+
+		expect(a.value).eq(1)
+		expect(b.value).eq(0)
+		expect(as1.callCount).eq(1)
+		expect(bs1.callCount).eq(1)
+
+		/* - */
+		a.emit(End)
+
+		expect(a.order).deep.eq([])
+		expect(b.order).deep.eq([])
+
+		expect(a.value).eq(End)
+		expect(b.value).eq(0)
+		expect(as1.callCount).eq(2)
+		expect(bs1.callCount).eq(2)
+
+		/* - */
+		a.emit(End)
+
+		expect(a.order).deep.eq([])
+		expect(b.order).deep.eq([])
+
+		expect(a.value).eq(End)
+		expect(b.value).eq(0)
+		expect(as1.callCount).eq(2)
+		expect(bs1.callCount).eq(2)
+	})
+
 	it('A → B(End)', () =>
 	{
 		var a = Bud(1)
