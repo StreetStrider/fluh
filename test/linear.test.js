@@ -123,6 +123,16 @@ describe('linear', () =>
 		expect(bs1.callCount).eq(1)
 	})
 
+	it('A(Many) → B', () =>
+	{
+		var a = Bud(Many(17, 1917))
+
+		var b = join(a, a => a)
+
+		expect(a.value).eq(1917)
+		expect(b.value).eq(1917)
+	})
+
 	it('A(End) → B(Live)', () =>
 	{
 		var a = Bud()

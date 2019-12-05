@@ -25,8 +25,4 @@ describe('Many', () =>
 		expect(Many.is(fake)).false
 		expect(Array.isArray(fake)).true
 	})
-
-	// TODO:
-	// Many init
-	// Many join
 })

@@ -15,9 +15,27 @@ describe('Bud', () =>
 		expect(bud.value).eq(Nothing)
 	})
 
+	it('Bud(Nothing)', () =>
+	{
+		var bud = Bud(Nothing)
+
+		expect_bud(bud)
+
+		expect(bud.value).eq(Nothing)
+	})
+
 	it('Bud(value)', () =>
 	{
 		var bud = Bud(1917)
+
+		expect_bud(bud)
+
+		expect(bud.value).eq(1917)
+	})
+
+	it('Bud(Many)', () =>
+	{
+		var bud = Bud(Many(17, 1917))
 
 		expect_bud(bud)
 
