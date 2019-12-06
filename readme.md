@@ -55,13 +55,13 @@ Bud is a main FRP unit.
 
 ```js
 /* empty Bud (Nothing) */
-Bud()
+var bud = Bud()
 
 /* Bud with value */
-Bud('value')
+var bud = Bud('value')
 
 /* emit new values */
-Bud.emit('value 1').emit('value 2')
+bud.emit('value 1').emit('value 2')
 ```
 
 ## derivatives
