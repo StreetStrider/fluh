@@ -3,16 +3,22 @@
 import { Bud }  from '.'
 import { End }  from '.'
 
+import { join } from '.'
+
 import { when_data } from './map/when'
 // import { when_end }  from './map/when'
 
 var a = Bud()
 .on(tap('a'))
 
-/* var b = */
-a.map(when_data(hundred))
+var b = a.map(when_data(hundred))
 .on(tap('b'))
 
+join(b, when_data(b => b))
+// join(a, b, (a, b) => (a, b))
+
+console.log('deps',  a.deps)
+console.log('order', a.order)
 
 // turnoff(b, a)
 
