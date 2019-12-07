@@ -23,36 +23,28 @@ describe('Bud', () =>
 	{
 		var bud = Bud()
 
-		expect_bud(bud)
-
-		expect(bud.value).eq(Nothing)
+		state(bud)
 	})
 
 	it('Bud(Nothing)', () =>
 	{
 		var bud = Bud(Nothing)
 
-		expect_bud(bud)
-
-		expect(bud.value).eq(Nothing)
+		state(bud)
 	})
 
 	it('Bud(value)', () =>
 	{
 		var bud = Bud(1917)
 
-		expect_bud(bud)
-
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
 	})
 
 	it('Bud(Many)', () =>
 	{
 		var bud = Bud(Many(17, 1917))
 
-		expect_bud(bud)
-
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
 	})
 
 	it('emit', () =>
@@ -62,62 +54,87 @@ describe('Bud', () =>
 		var r = bud.emit(1917)
 
 		expect_bud(bud)
+		expect_bud(r)
+
 		expect(r).eq(bud)
 
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
 	})
 
 	it('emit multiple', () =>
 	{
 		var bud = Bud()
 
-		var r = bud.emit(17).emit(1917)
+		var s = spy()
+		bud.on(s)
 
-		expect_bud(bud)
-		expect(r).eq(bud)
+		bud.emit(17).emit(1917)
 
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
+		expect(s.callCount).eq(2)
 	})
 
 	it('emit Nothing', () =>
 	{
 		var bud = Bud()
 
+		var s = spy()
+		bud.on(s)
+
 		bud.emit(1917)
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
 
 		bud.emit(Nothing)
 		/* value remains the same as before */
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
+
+		expect(s.callCount).eq(1)
 
 		bud.emit() /* Nothing */
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
+
+		expect(s.callCount).eq(1)
+
+		// TODO: emit undefined
 	})
 
 	it('emit Many', () =>
 	{
 		var bud = Bud()
 
+		var s = spy()
+		bud.on(s)
+
 		bud.emit(Many(17, 1917))
-		expect(bud.value).eq(1917)
+
+		state(bud, { value: 1917 })
+		expect(s.callCount).eq(2)
 	})
 
 	it('emit Many with Nothing', () =>
 	{
 		var bud = Bud()
 
+		var s = spy()
+		bud.on(s)
+
 		bud.emit(Many(Nothing, Nothing, Nothing))
 
-		expect(bud.value).eq(Nothing)
+		state(bud)
+		expect(s.callCount).eq(0)
 	})
 
 	it('emit Many with leading Nothing', () =>
 	{
 		var bud = Bud()
 
+		var s = spy()
+		bud.on(s)
+
 		bud.emit(Many(Nothing, 17, 1917))
 
-		expect(bud.value).eq(1917)
+		state(bud, { value: 1917 })
+		expect(s.callCount).eq(2)
 	})
 })
 
@@ -138,4 +155,13 @@ export function expect_bud (bud)
 	expect(bud.on).a('function')
 	expect(bud.map).a('function')
 	expect(bud.thru).a('function')
+}
+
+export function state (bud, descr = {})
+{
+	expect_bud(bud)
+
+	var { value = Nothing } = descr
+
+	expect(bud.value).deep.eq(value)
 }
