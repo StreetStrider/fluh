@@ -40,6 +40,14 @@ describe('Bud', () =>
 		state(bud, { value: 1917 })
 	})
 
+	it('Bud(undefined)', () =>
+	{
+		var bud = Bud(void 0)
+
+		/* state(bud, { value: void 0 }) */
+		expect(bud.value).eq(void 0)
+	})
+
 	it('Bud(Many)', () =>
 	{
 		var bud = Bud(Many(17, 1917))
@@ -94,8 +102,24 @@ describe('Bud', () =>
 		state(bud, { value: 1917 })
 
 		expect(s.callCount).eq(1)
+	})
 
-		// TODO: emit undefined
+	it('emit undefined', () =>
+	{
+		var bud = Bud()
+
+		var s = spy()
+		bud.on(s)
+
+		bud.emit(void 0)
+		/* state(bud, { value: void 0 }) */
+		expect(bud.value).eq(void 0)
+
+		bud.emit(void 0)
+		/* state(bud, { value: void 0 }) */
+		expect(bud.value).eq(void 0)
+
+		expect(s.callCount).eq(2)
 	})
 
 	it('emit Many', () =>
