@@ -58,4 +58,31 @@ describe('End', () =>
 		expect(rs).deep.eq([ 1, 2, 3, End ])
 		expect(s.callCount).eq(4)
 	})
+
+	it('initially ended', () =>
+	{
+		var a = Bud(End)
+
+		var b = a.map(v => v)
+
+		var rs = []
+		b.on(value => rs.push(value))
+
+		var s = spy()
+		b.on(s)
+
+		a.emit(1)
+		a.emit(2)
+		a.emit(3)
+		a.emit(4)
+		a.emit(End)
+		a.emit(5)
+		a.emit(End)
+
+		expect(a.value).eq(End)
+		expect(b.value).eq(End)
+
+		expect(rs).deep.eq([ End ])
+		expect(s.callCount).eq(1)
+	})
 })
