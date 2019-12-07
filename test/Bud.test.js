@@ -6,6 +6,19 @@ import Many from 'lib/Many'
 
 describe('Bud', () =>
 {
+	it('Bud.is', () =>
+	{
+		expect(Bud.is(Bud())).true
+		expect(Bud.is(Bud(false))).true
+
+		expect(Bud.is(17)).false
+		expect(Bud.is({})).false
+		expect(Bud.is({ x: 1 })).false
+		expect(Bud.is({ constructor: Bud })).false
+		expect(Bud.is(true)).false
+		expect(Bud.is([ 1, 2, 3 ])).false
+	})
+
 	it('Bud()', () =>
 	{
 		var bud = Bud()
@@ -107,6 +120,7 @@ describe('Bud', () =>
 		expect(bud.value).eq(1917)
 	})
 })
+
 
 export function expect_bud (bud)
 {
