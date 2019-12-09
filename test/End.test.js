@@ -22,7 +22,8 @@ describe('End', () =>
 
 		state(a,
 		{
-			deps: [ b ]
+			deps:  [ b ],
+			order: [ b ],
 		})
 		state(b,
 		{
@@ -36,7 +37,8 @@ describe('End', () =>
 		state(a,
 		{
 			value: 3,
-			deps: [ b ]
+			deps:  [ b ],
+			order: [ b ],
 		})
 		state(b,
 		{

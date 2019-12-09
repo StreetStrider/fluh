@@ -191,9 +191,11 @@ export function state (bud, descr = {})
 
 	var { deps = [] } = descr
 	var { inv  = void 0 } = descr
+	var { order = [] } = descr
 
 	expect(bud.value).deep.eq(value)
 
 	expect(bud.deps, 'deps').deep.eq(deps)
 	expect(deps_inv.get(bud), 'deps_inv').deep.eq(inv)
+	expect(bud.order).deep.eq(order)
 }
