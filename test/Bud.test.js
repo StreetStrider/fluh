@@ -3,6 +3,8 @@ import Bud from 'lib/Bud'
 import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
 
+import { deps_inv } from 'lib/realm'
+
 
 describe('Bud', () =>
 {
@@ -187,5 +189,11 @@ export function state (bud, descr = {})
 
 	var { value = Nothing } = descr
 
+	var { deps = [] } = descr
+	var { inv  = void 0 } = descr
+
 	expect(bud.value).deep.eq(value)
+
+	expect(bud.deps, 'deps').deep.eq(deps)
+	expect(deps_inv.get(bud), 'deps_inv').deep.eq(inv)
 }
