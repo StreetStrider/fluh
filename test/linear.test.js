@@ -7,7 +7,7 @@ import End from 'lib/End'
 
 import join from 'lib/join'
 
-import { expect_bud } from './Bud.test'
+import { state } from './Bud.test'
 
 
 describe('linear', () =>
@@ -16,17 +16,26 @@ describe('linear', () =>
 	{
 		var a = Bud()
 
+		state(a)
+
 		var b = join(a, a => a + 1)
 
-		expect_bud(b)
+		state(a,
+		{
+			deps:  [ b ],
+			order: [ b ],
+		})
+
+		state(b,
+		{
+			inv: [ a ],
+		})
 
 		var as1 = spy()
-		var bs1 = spy()
 		a.on(as1)
-		a.on(bs1)
 
-		expect(a.value).eq(Nothing)
-		expect(b.value).eq(Nothing)
+		var bs1 = spy()
+		a.on(bs1)
 
 		expect(as1.called).false
 		expect(bs1.called).false
@@ -38,8 +47,18 @@ describe('linear', () =>
 		a.on(as2)
 		a.on(bs2)
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(2)
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b ],
+		})
+
+		state(b,
+		{
+			value: 2,
+			inv: [ a ],
+		})
 
 		expect(as2.callCount).eq(1)
 		expect(as2.callCount).eq(1)
@@ -49,19 +68,49 @@ describe('linear', () =>
 	{
 		var a = Bud(1)
 
+		state(a,
+		{
+			value: 1,
+		})
+
 		var b = join(a, a => a + 1)
 
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b ],
+		})
+
+		state(b,
+		{
+			value: 2,
+			inv: [ a ],
+		})
+
 		var as1 = spy()
-		var bs1 = spy()
 		a.on(as1)
+
+		var bs1 = spy()
 		a.on(bs1)
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(2)
 		expect(as1.called).true
 		expect(bs1.called).true
 
-		a.emit(1)
+		a.emit(2)
+
+		state(a,
+		{
+			value: 2,
+			deps:  [ b ],
+			order: [ b ],
+		})
+
+		state(b,
+		{
+			value: 3,
+			inv: [ a ],
+		})
 
 		expect(as1.callCount).eq(2)
 		expect(bs1.callCount).eq(2)
@@ -71,19 +120,49 @@ describe('linear', () =>
 	{
 		var a = Bud().emit(1)
 
+		state(a,
+		{
+			value: 1,
+		})
+
 		var b = join(a, a => a + 1)
 
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b ],
+		})
+
+		state(b,
+		{
+			value: 2,
+			inv: [ a ],
+		})
+
 		var as1 = spy()
-		var bs1 = spy()
 		a.on(as1)
+
+		var bs1 = spy()
 		a.on(bs1)
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(2)
 		expect(as1.called).true
 		expect(bs1.called).true
 
-		a.emit(1)
+		a.emit(2)
+
+		state(a,
+		{
+			value: 2,
+			deps:  [ b ],
+			order: [ b ],
+		})
+
+		state(b,
+		{
+			value: 3,
+			inv: [ a ],
+		})
 
 		expect(as1.callCount).eq(2)
 		expect(bs1.callCount).eq(2)
@@ -93,7 +172,22 @@ describe('linear', () =>
 	{
 		var a = Bud(End)
 
+		state(a,
+		{
+			value: End,
+		})
+
 		var b = join(a, a => a)
+
+		state(a,
+		{
+			value: End,
+		})
+
+		state(b,
+		{
+			value: End,
+		})
 
 		var as1 = spy()
 		a.on(as1)
@@ -101,24 +195,38 @@ describe('linear', () =>
 		var bs1 = spy()
 		b.on(bs1)
 
-		expect(a.value).eq(End)
-		expect(b.value).eq(End)
 		expect(as1.called).true
 		expect(bs1.called).true
 
 		/* - */
 		a.emit(1)
 
-		expect(a.value).eq(End)
-		expect(b.value).eq(End)
+		state(a,
+		{
+			value: End,
+		})
+
+		state(b,
+		{
+			value: End,
+		})
+
 		expect(as1.callCount).eq(1)
 		expect(bs1.callCount).eq(1)
 
 		/* - */
 		a.emit(End)
 
-		expect(a.value).eq(End)
-		expect(b.value).eq(End)
+		state(a,
+		{
+			value: End,
+		})
+
+		state(b,
+		{
+			value: End,
+		})
+
 		expect(as1.callCount).eq(1)
 		expect(bs1.callCount).eq(1)
 	})
@@ -127,15 +235,32 @@ describe('linear', () =>
 	{
 		var a = Bud(Many(17, 1917))
 
+		state(a,
+		{
+			value: 1917,
+		})
+
 		var b = join(a, a => a)
 
-		expect(a.value).eq(1917)
-		expect(b.value).eq(1917)
+		state(a,
+		{
+			value: 1917,
+			deps:  [ b ],
+			order: [ b ],
+		})
+
+		state(b,
+		{
+			value: 1917,
+			inv: [ a ],
+		})
 	})
 
 	it('A(End) → B(Live)', () =>
 	{
 		var a = Bud()
+
+		state(a)
 
 		var b = join(a, a => (a, 0))
 
@@ -145,44 +270,70 @@ describe('linear', () =>
 		var bs1 = spy()
 		b.on(bs1)
 
-		expect(a.order).deep.eq([ b ])
-		expect(b.order).deep.eq([])
+		state(a,
+		{
+			deps:  [ b ],
+			order: [ b ],
+		})
 
-		expect(a.value).eq(Nothing)
-		expect(b.value).eq(Nothing)
+		state(b,
+		{
+			inv: [ a ],
+		})
+
 		expect(as1.called).false
 		expect(bs1.called).false
 
 		/* - */
 		a.emit(1)
 
-		expect(a.order).deep.eq([ b ])
-		expect(b.order).deep.eq([])
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b ],
+		})
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(0)
+		state(b,
+		{
+			value: 0,
+			inv: [ a ],
+		})
+
 		expect(as1.callCount).eq(1)
 		expect(bs1.callCount).eq(1)
 
 		/* - */
 		a.emit(End)
 
-		expect(a.order).deep.eq([])
-		expect(b.order).deep.eq([])
+		state(a,
+		{
+			value: End,
+		})
 
-		expect(a.value).eq(End)
-		expect(b.value).eq(0)
+		state(b,
+		{
+			value: 0,
+			inv: [ a ],
+		})
+
 		expect(as1.callCount).eq(2)
 		expect(bs1.callCount).eq(2)
 
 		/* - */
 		a.emit(End)
 
-		expect(a.order).deep.eq([])
-		expect(b.order).deep.eq([])
+		state(a,
+		{
+			value: End,
+		})
 
-		expect(a.value).eq(End)
-		expect(b.value).eq(0)
+		state(b,
+		{
+			value: 0,
+			inv: [ a ],
+		})
+
 		expect(as1.callCount).eq(2)
 		expect(bs1.callCount).eq(2)
 	})
@@ -190,6 +341,8 @@ describe('linear', () =>
 	it('A → B(End)', () =>
 	{
 		var a = Bud(1)
+
+		state(a, { value: 1 })
 
 		var b = join(a, a => (a, End))
 
@@ -199,33 +352,45 @@ describe('linear', () =>
 		var bs1 = spy()
 		b.on(bs1)
 
-		expect(a.order).deep.eq([])
-		expect(b.order).deep.eq([])
+		state(a,
+		{
+			value: 1,
+		})
+		state(b,
+		{
+			value: End,
+		})
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(End)
 		expect(as1.called).true
 		expect(bs1.called).true
 
 		/* - */
 		a.emit(2)
 
-		expect(a.order).deep.eq([])
-		expect(b.order).deep.eq([])
+		state(a,
+		{
+			value: 2,
+		})
+		state(b,
+		{
+			value: End,
+		})
 
-		expect(a.value).eq(2)
-		expect(b.value).eq(End)
 		expect(as1.callCount).eq(2)
 		expect(bs1.callCount).eq(1)
 
 		/* - */
 		a.emit(End)
 
-		expect(a.order).deep.eq([])
-		expect(b.order).deep.eq([])
+		state(a,
+		{
+			value: End,
+		})
+		state(b,
+		{
+			value: End,
+		})
 
-		expect(a.value).eq(End)
-		expect(b.value).eq(End)
 		expect(as1.callCount).eq(3)
 		expect(bs1.callCount).eq(1)
 	})
@@ -237,18 +402,46 @@ describe('linear', () =>
 		var b = join(a, a => a + 1)
 		var c = join(b, b => b * 100)
 
-		expect_bud(b)
-		expect_bud(c)
+		state(a,
+		{
+			deps:  [ b ],
+			order: [ b, c ],
+		})
 
-		expect(a.value).eq(Nothing)
-		expect(b.value).eq(Nothing)
-		expect(c.value).eq(Nothing)
+		state(b,
+		{
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			inv: [ b ],
+		})
 
 		a.emit(1)
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(2)
-		expect(c.value).eq(200)
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: 2,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: 200,
+			inv: [ b ],
+		})
 	})
 
 	it('A(v) → B → C', () =>
@@ -258,9 +451,26 @@ describe('linear', () =>
 		var b = join(a, a => a + 1)
 		var c = join(b, b => b * 100)
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(2)
-		expect(c.value).eq(200)
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: 2,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: 200,
+			inv: [ b ],
+		})
 	})
 
 	it('A(emit v) → B → C', () =>
@@ -270,9 +480,26 @@ describe('linear', () =>
 		var b = join(a, a => a + 1)
 		var c = join(b, b => b * 100)
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(2)
-		expect(c.value).eq(200)
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: 2,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: 200,
+			inv: [ b ],
+		})
 	})
 
 	it('A → B(Nothing) → C', () =>
@@ -282,29 +509,78 @@ describe('linear', () =>
 		var b = join(a, () => Nothing)
 		var c = join(b, b => b * 100)
 
-		expect_bud(b)
-		expect_bud(c)
-
 		var bs = spy()
-		var cs = spy()
 		b.on(bs)
+
+		var cs = spy()
 		c.on(cs)
 
-		expect(a.value).eq(Nothing)
-		expect(b.value).eq(Nothing)
-		expect(c.value).eq(Nothing)
+		state(a,
+		{
+			value: Nothing,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: Nothing,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: Nothing,
+			inv: [ b ],
+		})
 
 		a.emit(1)
 
-		expect(a.value).eq(1)
-		expect(b.value).eq(Nothing)
-		expect(c.value).eq(Nothing)
+		state(a,
+		{
+			value: 1,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: Nothing,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: Nothing,
+			inv: [ b ],
+		})
 
 		a.emit(2)
 
-		expect(a.value).eq(2)
-		expect(b.value).eq(Nothing)
-		expect(c.value).eq(Nothing)
+		state(a,
+		{
+			value: 2,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: Nothing,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: Nothing,
+			inv: [ b ],
+		})
 
 		expect(bs.called).false
 		expect(cs.called).false
@@ -320,9 +596,26 @@ describe('linear', () =>
 		var cs = spy()
 		c.on(cs)
 
-		expect(a.value).eq(Nothing)
-		expect(b.value).eq(Nothing)
-		expect(c.value).eq(Nothing)
+		state(a,
+		{
+			value: Nothing,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: Nothing,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: Nothing,
+			inv: [ b ],
+		})
 
 		expect(cs.callCount).eq(0)
 
@@ -330,9 +623,26 @@ describe('linear', () =>
 		a.emit(2)
 		a.emit(3)
 
-		expect(a.value).eq(3)
-		expect(b.value).eq(4)
-		expect(c.value).eq(400)
+		state(a,
+		{
+			value: 3,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: 4,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: 400,
+			inv: [ b ],
+		})
 
 		expect(cs.callCount).eq(3)
 	})
@@ -358,17 +668,51 @@ describe('linear', () =>
 		c.on(track('c'))
 		c.on(value => cs.push(value))
 
-		expect(a.value).eq(Nothing)
-		expect(b.value).eq(Nothing)
-		expect(c.value).eq(Nothing)
+		state(a,
+		{
+			value: Nothing,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: Nothing,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: Nothing,
+			inv: [ b ],
+		})
 
 		a.emit(5)
 		a.emit(6)
 		a.emit(7)
 
-		expect(a.value).eq(7)
-		expect(b.value).eq(70)
-		expect(c.value).eq(7000)
+		state(a,
+		{
+			value: 7,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: 70,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: 7000,
+			inv: [ b ],
+		})
 
 		expect(as).deep.eq([ 5, 6, 7 ])
 		expect(bs).deep.eq([ 5, 50, 6, 60, 7, 70 ])
@@ -535,12 +879,27 @@ describe('linear', () =>
 		var cs1 = spy()
 		c.on(cs1)
 
-		expect(a.order).deep.eq([ b, c ])
-		expect(b.order).deep.eq([ c ])
+		state(a,
+		{
+			value: Nothing,
+			deps:  [ b ],
+			order: [ b, c ],
+		})
 
-		expect(a.value).eq(Nothing)
-		expect(b.value).eq(Nothing)
-		expect(c.value).eq(Nothing)
+		state(b,
+		{
+			value: Nothing,
+			deps:  [ c ],
+			order: [ c ],
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: Nothing,
+			inv: [ b ],
+		})
+
 		expect(as1.called).false
 		expect(bs1.called).false
 		expect(cs1.called).false
@@ -548,14 +907,21 @@ describe('linear', () =>
 		/* - */
 		a.emit(End)
 
-		expect(a.order).deep.eq([])
-		expect(b.order).deep.eq([])
-		expect(a.deps).deep.eq([])
-		expect(b.deps).deep.eq([])
+		state(a,
+		{
+			value: End,
+		})
 
-		expect(a.value).eq(End)
-		expect(b.value).eq(End)
-		expect(c.value).eq(End)
+		state(b,
+		{
+			value: End,
+		})
+
+		state(c,
+		{
+			value: End,
+		})
+
 		expect(as1.callCount).eq(1)
 		expect(bs1.callCount).eq(1)
 		expect(cs1.callCount).eq(1)
@@ -566,10 +932,20 @@ describe('linear', () =>
 		var a = Bud()
 		a.emit(1)
 
+		state(a, { value: 1 })
+
 		var Z = Bud()
 		Z.emit(1)
 
+		state(Z, { value: 1 })
+
 		var b = a.map(x => x + 1)
+
+		state(b,
+		{
+			value: 2,
+			inv: [ a ],
+		})
 
 		expect(b.value).eq(2)
 	})
