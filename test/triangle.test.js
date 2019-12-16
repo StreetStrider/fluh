@@ -7,6 +7,8 @@ import End from 'lib/End'
 
 import join from 'lib/join'
 
+import { state } from './Bud.test'
+
 
 describe('triangle', () =>
 {
@@ -20,8 +22,26 @@ describe('triangle', () =>
 		var s = spy()
 		c.on(s)
 
-		expect(b.value).eq(10)
-		expect(c.value).eq(110)
+		state(a,
+		{
+			value: 1,
+			deps: [ b, c ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: 10,
+			inv: [ a ],
+			deps: [ c ],
+			order: [ c ],
+		})
+
+		state(c,
+		{
+			value: 110,
+			inv: [ a, b ],
+		})
 
 		expect(s.callCount).eq(1)
 
@@ -63,8 +83,42 @@ describe('triangle', () =>
 		var s = spy()
 		c2.on(s)
 
-		expect(c1.value).eq('A/A.B1.C1')
-		expect(c2.value).eq('A.B1.B2/A/A.B1.C1.C2')
+		state(a,
+		{
+			value: 'A',
+			deps: [ b1, c1 ],
+			order: [ b1, b2, c1, c2 ],
+		})
+
+		state(b1,
+		{
+			value: 'A.B1',
+			inv: [ a ],
+			deps: [ c1, b2 ],
+			order: [ c1, b2, c2 ],
+		})
+
+		state(c1,
+		{
+			value: 'A/A.B1.C1',
+			inv: [ a, b1 ],
+			deps: [ c2 ],
+			order: [ c2 ],
+		})
+
+		state(b2,
+		{
+			value: 'A.B1.B2',
+			inv: [ b1 ],
+			deps: [ c2 ],
+			order: [ c2 ],
+		})
+
+		state(c2,
+		{
+			value: 'A.B1.B2/A/A.B1.C1.C2',
+			inv: [ b2, c1 ],
+		})
 
 		expect(s.callCount).eq(1)
 
@@ -92,41 +146,99 @@ describe('triangle', () =>
 		var s = spy()
 		c.on(s)
 
-		expect(a.order).deep.eq([ b, c ])
-		expect(b.order).deep.eq([ c ])
-		expect(c.order).deep.eq([])
+		state(a,
+		{
+			value: 1,
+			deps: [ b, c ],
+			order: [ b, c ],
+		})
 
-		expect(b.value).eq(1)
-		expect(c.value).eq(1)
+		state(b,
+		{
+			value: 1,
+			inv: [ a ],
+			deps: [ c ],
+			order: [ c ],
+		})
+
+		state(c,
+		{
+			value: 1,
+			inv: [ a, b ],
+		})
+
 		expect(s.callCount).eq(1)
 
 		/* - */
 		a.emit(2)
 
-		expect(b.value).eq(2)
-		expect(c.value).eq(2)
+		state(a,
+		{
+			value: 2,
+			deps: [ b, c ],
+			order: [ b, c ],
+		})
+
+		state(b,
+		{
+			value: 2,
+			inv: [ a ],
+			deps: [ c ],
+			order: [ c ],
+		})
+
+		state(c,
+		{
+			value: 2,
+			inv: [ a, b ],
+		})
+
 		expect(s.callCount).eq(2)
 
 		/* - */
 		a.emit(3)
 
-		expect(a.order).deep.eq([ c ])
-		expect(b.order).deep.eq([])
-		expect(c.order).deep.eq([])
+		state(a,
+		{
+			value: 3,
+			deps: [ c ],
+			order: [ c ],
+		})
 
-		expect(b.value).eq(End)
-		expect(c.value).eq(3)
+		state(b,
+		{
+			value: End,
+		})
+
+		state(c,
+		{
+			value: 3,
+			inv: [ a, b ],
+		})
+
 		expect(s.callCount).eq(3)
 
 		/* - */
 		a.emit(4)
 
-		expect(a.order).deep.eq([ c ])
-		expect(b.order).deep.eq([])
-		expect(c.order).deep.eq([])
+		state(a,
+		{
+			value: 4,
+			deps: [ c ],
+			order: [ c ],
+		})
 
-		expect(b.value).eq(End)
-		expect(c.value).eq(4)
+		state(b,
+		{
+			value: End,
+		})
+
+		state(c,
+		{
+			value: 4,
+			inv: [ a, b ],
+		})
+
 		expect(s.callCount).eq(4)
 	})
 })
