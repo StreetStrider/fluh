@@ -176,5 +176,33 @@ var b = a.thru(defer)
 a.emit(2)
 ```
 
+## handling errors
+fluh does not capture throws by default, but you can make any function to do that, by decorating it with `capture`:
+```js
+var a = Bud()
+
+import { capture } from 'fluh'
+
+var b = a.map(capture(x =>
+{
+	/* throws in this function will be captured: */
+	/* … throw e … */
+
+	return x + 1
+}))
+```
+From now, any throws will return raised error as normal returns instead.
+
+Note that such function will return mixed data/error content. There's no special values aside from `Nothing`, `Many` and `End`. fluh treats Error objects as normal data, so you'll need additional steps to handle them.
+
+```js
+import { when_data } from './map/when'
+
+/* `when_data` allows to work with data in pure manner, */
+/* passing past any `Error` instances and `End` */
+/* only real data passed to target function */
+var c = b.map(when_data(b => b + 1))
+```
+
 # license
 ISC, © Strider, 2019.
