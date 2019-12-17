@@ -1,10 +1,13 @@
 
 import Bud from 'lib/Bud'
-import join from 'lib/join'
+
 import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
+import End from 'lib/End'
 
-import { expect_bud } from './Bud.test'
+import join from 'lib/join'
+
+import { state } from './Bud.test'
 
 
 describe('parallel', () =>
@@ -19,11 +22,24 @@ describe('parallel', () =>
 		var as = spy()
 		a.on(as)
 
-		expect_bud(b)
-		expect_bud(c)
+		state(a,
+		{
+			value: 1,
+			deps: [ b, c ],
+			order: [ b, c ],
+		})
 
-		expect(b.value).eq(10)
-		expect(c.value).eq(100)
+		state(b,
+		{
+			value: 10,
+			inv: [ a ],
+		})
+
+		state(c,
+		{
+			value: 100,
+			inv: [ a ],
+		})
 
 		expect(as.callCount).eq(1)
 	})
@@ -37,14 +53,39 @@ describe('parallel', () =>
 
 		var d = join(b, c, (b, c) => b + c)
 
-		expect_bud(d)
-
 		var as = spy()
 		a.on(as)
 		var ds = spy()
 		d.on(ds)
 
-		expect(d.value).eq(110)
+		state(a,
+		{
+			value: 1,
+			deps: [ b, c ],
+			order: [ b, c, d ],
+		})
+
+		state(b,
+		{
+			value: 10,
+			inv: [ a ],
+			deps: [ d ],
+			order: [ d ],
+		})
+
+		state(c,
+		{
+			value: 100,
+			inv: [ a ],
+			deps: [ d ],
+			order: [ d ],
+		})
+
+		state(d,
+		{
+			value: 110,
+			inv: [ b, c ],
+		})
 
 		expect(as.callCount).eq(1)
 		expect(ds.callCount).eq(1)
@@ -138,5 +179,127 @@ describe('parallel', () =>
 
 		expect(as.callCount).eq(5)
 		expect(ds.callCount).eq(5)
+	})
+
+	it('A → B(End),C → D', () =>
+	{
+		var a = Bud()
+
+		var b = join(a, a =>
+		{
+			if (a === 3)
+			{
+				return End
+			}
+
+			return (a * 10)
+		})
+		var c = join(a, a => a * 100)
+
+		var d = join(b, c, (b, c) => (b, c))
+
+		var as = spy()
+		a.on(as)
+		var ds = spy()
+		d.on(ds)
+
+		a.emit(1)
+
+		state(a,
+		{
+			value: 1,
+			deps: [ b, c ],
+			order: [ b, c, d ],
+		})
+
+		state(b,
+		{
+			value: 10,
+			inv: [ a ],
+			deps: [ d ],
+			order: [ d ],
+		})
+
+		state(c,
+		{
+			value: 100,
+			inv: [ a ],
+			deps: [ d ],
+			order: [ d ],
+		})
+
+		state(d,
+		{
+			value: 100,
+			inv: [ b, c ],
+		})
+
+		expect(as.callCount).eq(1)
+		expect(ds.callCount).eq(1)
+
+		a.emit(2)
+
+		state(a,
+		{
+			value: 2,
+			deps: [ b, c ],
+			order: [ b, c, d ],
+		})
+
+		state(b,
+		{
+			value: 20,
+			inv: [ a ],
+			deps: [ d ],
+			order: [ d ],
+		})
+
+		state(c,
+		{
+			value: 200,
+			inv: [ a ],
+			deps: [ d ],
+			order: [ d ],
+		})
+
+		state(d,
+		{
+			value: 200,
+			inv: [ b, c ],
+		})
+
+		expect(as.callCount).eq(2)
+		expect(ds.callCount).eq(2)
+
+		a.emit(3)
+
+		state(a,
+		{
+			value: 3,
+			deps: [ c ],
+			order: [ c, d ],
+		})
+
+		state(b,
+		{
+			value: End,
+		})
+
+		state(c,
+		{
+			value: 300,
+			inv: [ a ],
+			deps: [ d ],
+			order: [ d ],
+		})
+
+		state(d,
+		{
+			value: 300,
+			inv: [ b, c ],
+		})
+
+		expect(as.callCount).eq(3)
+		expect(ds.callCount).eq(3)
 	})
 })
