@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [the idea](#the-idea)
+- [api](#api)
+  - [Bud](#bud)
+  - [derivatives](#derivatives)
+  - [high-order](#high-order)
+  - [effects](#effects)
+- [interesting reading](#interesting-reading)
+  - [atomic updates](#atomic-updates)
+  - [`map` with Nothing and Many](#map-with-nothing-and-many)
+  - [high-order transformations](#high-order-transformations)
+  - [handling errors](#handling-errors)
+- [license](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # the idea
 
 When thinking of reactive stuff there's a whole space of decisions you need to make.
