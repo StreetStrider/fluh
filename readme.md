@@ -1,23 +1,20 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [the idea](#the-idea)
-- [api](#api)
+- [The idea](#the-idea)
+- [API](#api)
   - [Bud](#bud)
   - [derivatives](#derivatives)
   - [high-order](#high-order)
   - [effects](#effects)
-- [interesting reading](#interesting-reading)
+- [Interesting reading](#interesting-reading)
   - [atomic updates](#atomic-updates)
   - [`map` with Nothing and Many](#map-with-nothing-and-many)
   - [high-order transformations](#high-order-transformations)
   - [handling errors](#handling-errors)
-- [license](#license)
-
+- [License](#license)
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# the idea
+# The idea
 
 When thinking of reactive stuff there's a whole space of decisions you need to make.
 
@@ -67,7 +64,7 @@ different opinions. Check out at least theese great ones:
 [Highland](https://github.com/caolan/highland).
 [MobX](https://mobx.js.org/).
 
-# api
+# API
 ## Bud
 
 Bud is a main FRP unit.
@@ -143,7 +140,7 @@ var a = Bud()
 a.on((value) => console.log('a:', value))
 ```
 
-# interesting reading
+# Interesting reading
 ## atomic updates
 fluh just like flyd solves atomic updates problem. This means that in case of graph `A → B, A → C, B & C → D` stream `D` indirectly depends twice on `A`, via `B` and `C`. fluh guarantees that in case of emit on `A` dependent `D` would recieve update only once, with two updated values from `B` and `C`.
 
@@ -223,5 +220,5 @@ import { when_data } from './map/when'
 var c = b.map(when_data(b => b + 1))
 ```
 
-# license
+# License
 ISC, © Strider, 2019.
