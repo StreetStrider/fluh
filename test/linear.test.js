@@ -946,7 +946,15 @@ describe('linear', () =>
 			value: 2,
 			inv: [ a ],
 		})
+	})
 
-		expect(b.value).eq(2)
+	it('pass undefined', () =>
+	{
+		var a = Bud()
+		var b = join(a, a => void a)
+
+		a.emit(1)
+
+		expect(b.value).eq(void 0)
 	})
 })
