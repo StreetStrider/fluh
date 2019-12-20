@@ -31,6 +31,8 @@ export var when_data = When(is_data)
 
 export var when_end  = When(is_end)
 
+export var when_error = When(is_error)
+
 
 export function when_data_all (fn_true)
 {

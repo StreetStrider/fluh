@@ -3,10 +3,12 @@ import Nothing from 'lib/Nothing'
 import End from 'lib/End'
 
 import Noop from 'lib/Noop'
+import Fin from 'lib/Fin'
 
 import { When } from 'map/when'
 import { when_data } from 'map/when'
 import { when_end } from 'map/when'
+import { when_error } from 'map/when'
 import { when_data_all } from 'map/when'
 
 
@@ -65,6 +67,13 @@ describe('when', () =>
 		expect(w(1)).eq(1)
 		expect(w(End)).eq(Nothing)
 		expect(w(e)).eq(Nothing)
+
+		var w = when_data(x => x, Noop)
+
+		expect(w(0)).eq(0)
+		expect(w(1)).eq(1)
+		expect(w(End)).eq(Nothing)
+		expect(w(e)).eq(Nothing)
 	})
 
 	it('when_end', () =>
@@ -84,6 +93,25 @@ describe('when', () =>
 		expect(w(1)).eq(Nothing)
 		expect(w(End)).eq(End)
 		expect(w(e)).eq(Nothing)
+	})
+
+	it('when_error', () =>
+	{
+		var e = new Error('x')
+
+		var w = when_error(() => 'yes')
+
+		expect(w(0)).eq(0)
+		expect(w(1)).eq(1)
+		expect(w(End)).eq(End)
+		expect(w(e)).eq('yes')
+
+		var w = when_error(Fin)
+
+		expect(w(0)).eq(0)
+		expect(w(1)).eq(1)
+		expect(w(End)).eq(End)
+		expect(w(e)).eq(End)
 	})
 
 	it('when_data_all', () =>

@@ -1,6 +1,7 @@
 * **Breaking change**: `when_data_all` now handles errors like `Promise.all`.
 * Fixed not being possible to pass `undefined` as value to Bud, while readme allows that.
 * Better cleanup on `End` to allow gc at early stages.
+* Added `when_error`.
 
 ## `0.2.0` — 2019-11-30
 * **Breaking change**: now all effects run after all propagations, which means effects see all tip values in consistent state. Previously, effects run before propagating data further.
