@@ -69,17 +69,21 @@ describe('when', () =>
 
 	it('when_end', () =>
 	{
+		var e = new Error('x')
+
 		var w = when_end(() => 'yes')
 
 		expect(w(0)).eq(0)
 		expect(w(1)).eq(1)
 		expect(w(End)).eq('yes')
+		expect(w(e)).eq(e)
 
 		var w = when_end(x => x, Noop)
 
 		expect(w(0)).eq(Nothing)
 		expect(w(1)).eq(Nothing)
 		expect(w(End)).eq(End)
+		expect(w(e)).eq(Nothing)
 	})
 
 	it('when_data_all', () =>
