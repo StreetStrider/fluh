@@ -1,19 +1,19 @@
 // TODO: turnoff
-// TODO: tap
 
 import { Bud }  from '.'
 import { End }  from '.'
 
 import { join } from '.'
+import { tap }  from '.'
 
 import { when_data } from './map/when'
 // import { when_end }  from './map/when'
 
 var a = Bud()
-.on(tap('a'))
+.on(label('a'))
 
 var b = a.map(when_data(hundred))
-.on(tap('b'))
+.on(label('b'))
 
 join(b, when_data(b => b))
 // join(a, b, (a, b) => (a, b))
@@ -44,7 +44,7 @@ function turnoff (a, b)
 }
 */
 
-function tap (label)
+function label (label)
 {
-	return (x) => (console.log(label, x), x)
+	return tap(v => console.log(label, v))
 }
