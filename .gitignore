@@ -2,3 +2,5 @@
 node_modules/
 release/
 perf.chart.html
+graph.dot
+graph.png
