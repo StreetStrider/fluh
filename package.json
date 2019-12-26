@@ -2,6 +2,22 @@
      "name": "fluh",
   "version": "0.3.0",
 
+  "description": "simple functional reactive library with atomic push strategy",
+
+  "author":  "Strider <strange.transistor@gmail.com>",
+  "license": "ISC",
+
+  "keywords":
+  [
+    "frp", "reactive", "functional-programming", "streams",
+    "flyd",
+    "node", "browser"
+  ],
+
+  "homepage":            "https://github.com/StreetStrider/fluh",
+  "repository": { "url": "https://github.com/StreetStrider/fluh.git", "type": "git" },
+  "bugs":       { "url": "https://github.com/StreetStrider/fluh/issues" },
+
   "engines":
   {
     "node": ">= 6"
