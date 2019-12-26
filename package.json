@@ -62,7 +62,11 @@
       "6",
 
     "js-outlander":
-      "StrangeTransistor/js-outlander#2.5.1",
+      "StrangeTransistor/js-outlander#2.6.0",
+
+    "eslint-plugin-node":
+      "11",
+
 
     "console-ultimate":
       "3",

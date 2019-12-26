@@ -1,2 +1,2 @@
 
-exports.default = require('metalpipe/prefab')('library', require('gulp'))
+module.exports.default = require('metalpipe/prefab')('library', require('gulp'))
