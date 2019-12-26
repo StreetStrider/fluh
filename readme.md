@@ -1,3 +1,6 @@
+# fluh
+> Simple functional reactive library with atomic push strategy.
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 - [The idea](#the-idea)
@@ -14,7 +17,7 @@
 - [License](#license)
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# The idea
+## The idea
 
 When thinking of reactive stuff there's a whole space of decisions you need to make.
 
@@ -64,8 +67,8 @@ different opinions. Check out at least theese great ones:
 [Highland](https://github.com/caolan/highland).
 [MobX](https://mobx.js.org/).
 
-# API
-## Bud
+## API
+### Bud
 
 Bud is a main FRP unit.
 
@@ -80,7 +83,7 @@ var bud = Bud('value')
 bud.emit('value 1').emit('value 2')
 ```
 
-## derivatives
+### derivatives
 
 * Create derived streams by using `var new_bud = join(...buds, (...bud_values) => new_value)`.
 * `emit`'s are propagated through the dependents.
@@ -113,7 +116,7 @@ var n = join(a, (a) => Many(a, a + 'x'))
 var b = a.map((a) => a + 'b')
 ```
 
-## high-order
+### high-order
 
 * Use `thru` for functions which accept Bud and return new Bud.
 * high-order `thru` transformers good when you can't express transformation in terms of `map`.
@@ -125,7 +128,7 @@ var a = Bud()
 var b = a.thru(delay(50))
 ```
 
-## effects
+### effects
 
 * Attach effects to Bud by using `bud.on(fn)`.
 * Effects are fired in straight-by-attach order.
@@ -140,8 +143,8 @@ var a = Bud()
 a.on((value) => console.log('a:', value))
 ```
 
-# Interesting reading
-## atomic updates
+## Interesting reading
+### atomic updates
 fluh just like flyd solves atomic updates problem. This means that in case of graph `A → B, A → C, B & C → D` stream `D` indirectly depends twice on `A`, via `B` and `C`. fluh guarantees that in case of emit on `A` dependent `D` would recieve update only once, with two updated values from `B` and `C`.
 
 To do this, fluh recursively collects all dependencies of any `A` and orders them topologically. That `order` is lazily cached and in use until graph changes. This gives excellent results for static graphs and optimal reordering when graph changes rarely.
@@ -150,7 +153,7 @@ To do this, fluh recursively collects all dependencies of any `A` and orders the
 
 See also [flyd's atomic updates](https://github.com/paldepind/flyd/tree/180e8f5b859ac9ae388a193d334e94f03e02feef#atomic-updates).
 
-## `map` with Nothing and Many
+### `map` with Nothing and Many
 fluh's `bud.map(fn)` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to adress more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
 
 fluh's `map` works in three ways:
@@ -160,7 +163,7 @@ fluh's `map` works in three ways:
 
 So `map` covers all cases for `map`, `filter` and `flatMap` in a common manner.
 
-## high-order transformations
+### high-order transformations
 In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `b = transform(a)`.
 
 In order to do this, fluh has `bud.thru(fn)` which accepts function from one Bud to another and returns result of invocation that function on this particular Bud.
@@ -192,7 +195,7 @@ var b = a.thru(defer)
 a.emit(2)
 ```
 
-## handling errors
+### handling errors
 fluh does not capture throws by default, but you can make any function to do that, by decorating it with `capture`:
 ```js
 var a = Bud()
@@ -220,5 +223,5 @@ import { when_data } from './map/when'
 var c = b.map(when_data(b => b + 1))
 ```
 
-# License
+## License
 ISC, © Strider, 2019.
