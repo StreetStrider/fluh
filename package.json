@@ -7,8 +7,6 @@
     "node": ">= 6"
   },
 
-  "esm": true,
-
   "scripts":
   {
     "start": "node -r esm -r console-ultimate start",
