@@ -95,9 +95,9 @@
 
 
     "dependency-cruiser":
-      "*",
+      "6",
 
     "diagrams":
-      "*"
+      "0.10"
   }
 }
