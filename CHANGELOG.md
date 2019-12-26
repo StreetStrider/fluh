@@ -1,3 +1,4 @@
+## `0.3.0` — 2019-12-26
 * **Breaking change**: `when_data_all` now handles errors like `Promise.all`.
 * Fixed not being possible to pass `undefined` as value to Bud, while readme allows that.
 * Better cleanup on `End` to allow gc at early stages.
