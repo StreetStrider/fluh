@@ -1,3 +1,5 @@
+* Added `sample`.
+
 ## `0.3.0` — 2019-12-26
 * **Breaking change**: `when_data_all` now handles errors like `Promise.all`.
 * Fixed not being possible to pass `undefined` as value to Bud, while readme allows that.

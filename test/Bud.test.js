@@ -177,6 +177,7 @@ export function expect_bud (bud)
 
 	expect(bud).property('value')
 
+	expect(bud.sample).a('function')
 	expect(bud.emit).a('function')
 	expect(bud.on).a('function')
 	expect(bud.map).a('function')
@@ -194,6 +195,7 @@ export function state (bud, descr = {})
 	var { order = [] } = descr
 
 	expect(bud.value).deep.eq(value)
+	expect(bud.sample()).deep.eq(value)
 
 	expect(bud.deps, 'deps').deep.eq(deps)
 	expect(deps_inv.get(bud), 'deps_inv').deep.eq(inv)
