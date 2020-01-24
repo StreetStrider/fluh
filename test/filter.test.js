@@ -5,6 +5,7 @@ import End from 'lib/End'
 import { when_data } from 'map/when'
 
 import filter from 'map/filter'
+import { filter_by } from 'map/filter'
 
 
 describe('filter', () =>
@@ -53,5 +54,24 @@ describe('filter', () =>
 
 		expect(rs1).deep.eq([ 2, 3 ])
 		expect(rs2).deep.eq([ 2, 3, End ])
+	})
+
+	it('filter_by', () =>
+	{
+		var a = Bud()
+		var signal = a.map(v => (v > 2))
+		var b = a.map(filter_by(signal))
+
+		var rs = []
+		b.on(v => rs.push(v))
+
+		a
+		.emit(1)
+		.emit(2)
+		.emit(3)
+		.emit(4)
+		.emit(5)
+
+		expect(rs).deep.eq([ 3, 4, 5 ])
 	})
 })
