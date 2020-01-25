@@ -16,11 +16,12 @@ describe('index', () =>
 		expect(index.Same).a('function')
 		expect(index.Fin).a('function')
 
+		expect(index.join).a('function')
+		expect(index.turnoff).a('function')
+
 		expect(index.asap).a('function')
 		expect(index.capture).a('function')
 		expect(index.concat).a('function')
 		expect(index.drain).a('function')
-
-		expect(index.join).a('function')
 	})
 })

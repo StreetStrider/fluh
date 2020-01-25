@@ -3,11 +3,10 @@
 import { Bud }  from '.'
 import { End }  from '.'
 
-import { join } from '.'
 import { tap }  from '.'
+import { turnoff } from '.'
 
 import { when_data } from './map/when'
-// import { when_end }  from './map/when'
 
 var a = Bud()
 .on(label('a'))
@@ -15,34 +14,23 @@ var a = Bud()
 var b = a.map(when_data(hundred))
 .on(label('b'))
 
-join(b, when_data(b => b))
-// join(a, b, (a, b) => (a, b))
+turnoff(b, a)
 
-console.log('deps',  a.deps)
-console.log('order', a.order)
-
-// turnoff(b, a)
+b
+.emit(100)
+.emit(End)
 
 a
 .emit(1)
 .emit(2)
 .emit(3)
-.emit(End)
-
-// b.emit(100).emit(End)
+// .emit(End)
 
 
 function hundred (x)
 {
 	return (x + 100)
 }
-
-/*
-function turnoff (a, b)
-{
-	return a.on(when_end(b.emit))
-}
-*/
 
 function label (label)
 {

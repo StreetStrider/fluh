@@ -1,5 +1,6 @@
 * Added `sample`.
 * Added `filter_by`.
+* Added `turnoff`.
 
 ## `0.3.0` — 2019-12-26
 * **Breaking change**: `when_data_all` now handles errors like `Promise.all`.

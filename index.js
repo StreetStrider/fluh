@@ -10,6 +10,7 @@ export { default as Same } from './lib/Same'
 export { default as Fin }  from './lib/Fin'
 
 export { default as join } from './lib/join'
+export { default as turnoff } from './lib/turnoff'
 
 export { default as asap } from './lib/asap'
 export { default as capture } from './lib/capture'
