@@ -35,7 +35,7 @@
 
     "perf": "node -r esm perf/perf",
 
-    "build": "gulp --final",
+    "build": "gulp --final --to npm",
 
     "depcruise": "depcruise --exclude '^(node_modules|release|test|perf)' --output-type dot . > graph.dot",
     "diagrams":  "diagrams dot graph.dot graph.png",
