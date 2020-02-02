@@ -1,8 +1,12 @@
 
+var noop = () => void 0
+
 import resource from 'lib/resource'
 
 import End from 'lib/End'
 import concat from 'lib/concat'
+
+import { expect_bud } from './Bud.test'
 
 
 describe('resource', () =>
@@ -37,5 +41,17 @@ describe('resource', () =>
 		.on(v => (v === 5) && t.emit(End))
 
 		expect(await concat(t)).deep.eq([ 1, 2, 3, 4, 5, End ])
+	})
+
+	it('passes args', () =>
+	{
+		resource((emit, bud) =>
+		{
+			expect(emit).a('function')
+			expect_bud(bud)
+
+			return noop
+		})
+		.emit(End)
 	})
 })
