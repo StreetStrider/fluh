@@ -1,20 +1,22 @@
 
+import tap from '../lib/tap'
+
 
 export default function delay (ms = 0)
 {
-	return (bud) =>
+	return (bud_source) =>
 	{
-		var delayed = bud.constructor()
-
-		bud.on(value =>
+		return bud_source.constructor()
+		.thru(tap(bud_delayed =>
 		{
-			setTimeout(() =>
+			bud_source.on(value =>
 			{
-				delayed.emit(value)
-			}
-			, ms)
-		})
-
-		return delayed
+				setTimeout(() =>
+				{
+					bud_delayed.emit(value)
+				}
+				, ms)
+			})
+		}))
 	}
 }

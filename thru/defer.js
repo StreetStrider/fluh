@@ -1,15 +1,16 @@
 
+import tap  from '../lib/tap'
 import asap from '../lib/asap'
 
 
-export default function defer (bud)
+export default function defer (bud_source)
 {
-	var deferred = bud.constructor()
-
-	bud.on(value =>
+	return bud_source.constructor()
+	.thru(tap(bud_deferred =>
 	{
-		asap(() => deferred.emit(value))
-	})
-
-	return deferred
+		bud_source.on(value =>
+		{
+			asap(() => bud_deferred.emit(value))
+		})
+	}))
 }
