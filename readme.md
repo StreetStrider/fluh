@@ -224,4 +224,4 @@ var c = b.map(when_data(b => b + 1))
 ```
 
 ## License
-ISC, © Strider, 2019.
+ISC, © Strider, 2020.
