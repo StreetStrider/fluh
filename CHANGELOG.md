@@ -1,3 +1,4 @@
+## `0.4.0` — 2020-02-08
 * Added `sample`.
 * Added `filter_by`.
 * Added `turnoff`.
