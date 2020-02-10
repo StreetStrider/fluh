@@ -31,7 +31,7 @@
     "unit": "mocha -r esm -r console-ultimate -r test/globals test/*.test.js",
     "test": "npm run st && npm run unit",
 
-    "cover": "c8 -r text -r html npm run unit",
+    "cover": "c8 -r text -r html --all -n lib/ -n map/ -n thru/ -n index.js npm run unit",
 
     "perf": "node -r esm perf/perf",
 
