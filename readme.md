@@ -50,7 +50,7 @@ so you are free to emit `null` or `undefined` if you really want to.
 * When Bud acquire value it propagates it to *effects* and *dependents*. If Bud already has value, newly created effects
 and dependents will be notified immediately with that value.
 * Effects run after all dependents had been updated, so, from effects' perspective the graph's all current values change atomically and are always in a consistent state.
-* All schema is sync by default, but you are free to create async operators (defer, delay…).
+* All schema is sync by default, but you are free to create async operators (defer, delay, throttle, nextTick, raf…).
 * Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal triggered by emitting `End` on a stream. If `End` is received, ordering is cleaned from terminated stream as well as certain streams' cross-references, which opens a way for a garbage collection. Streams that are both terminated and non-referenced by user become able to be garbage collected. In static graph memory consumption would remain on the stable level.
 
 * Can be pure and impure, depending on usage.
