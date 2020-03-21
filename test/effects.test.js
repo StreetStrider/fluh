@@ -121,6 +121,29 @@ describe('effects', () =>
 		])
 	})
 
+	it('after disposal', () =>
+	{
+		var bud = Bud()
+
+		var rs = []
+		var ds1 = bud.on((value) => rs.push(value))
+
+		var s = spy()
+		var ds2 = bud.on(s)
+
+		bud.emit(17)
+		bud.emit(18)
+
+		ds1()
+		ds2()
+
+		bud.emit(19)
+		bud.emit(20)
+
+		expect(rs).deep.eq([ 17, 18 ])
+		expect(s.callCount).eq(2)
+	})
+
 	it('order', () =>
 	{
 		var rs = []
