@@ -15,8 +15,16 @@ describe('effects', () =>
 
 		expect(bud.on).a('function')
 		expect(bud.on.emit).a('function')
+	})
 
-		expect(bud.on(() => {})).eq(bud)
+	it('disposer', () =>
+	{
+		var bud = Bud()
+
+		var ds = bud.on(() => {})
+
+		expect(typeof ds).eq('function')
+		expect(ds.name).eq('ds')
 	})
 
 	it('on Bud', () =>

@@ -1,4 +1,5 @@
 * Added `uniq`.
+* **Breaking change**: `on` now returns disposer, not bud itself.
 
 ## `0.4.0` — 2020-02-08
 * Added `sample`.

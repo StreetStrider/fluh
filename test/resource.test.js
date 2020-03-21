@@ -38,7 +38,8 @@ describe('resource', () =>
 	it('works', async () =>
 	{
 		var t = Timer(50)
-		.on(v => (v === 5) && t.emit(End))
+
+		t.on(v => (v === 5) && t.emit(End))
 
 		expect(await concat(t)).deep.eq([ 1, 2, 3, 4, 5, End ])
 	})
@@ -60,7 +61,8 @@ describe('resource', () =>
 		var t = Timer(50)
 
 		var t2 = t.map(when_data(v => (v * 2)))
-		.on(v => (v === 10) && t.emit(End))
+
+		t2.on(v => (v === 10) && t.emit(End))
 
 		turnoff(t2, t)
 

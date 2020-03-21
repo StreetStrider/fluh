@@ -1,17 +1,21 @@
 
 import { Bud }  from '.'
-import { End }  from '.'
+// import { End }  from '.'
 
 import { tap }  from '.'
-import { turnoff } from '.'
+// import { turnoff } from '.'
 
-import { when_data } from './map/when'
+// import { when_data } from './map/when'
 
 var a = Bud()
-.on(label('a'))
+var ds = a.on(label('a'))
 
-var b = a.map(when_data(hundred))
-.on(label('b'))
+console.log(ds)
+
+/*
+var
+b = a.map(when_data(hundred))
+b.on(label('b'))
 
 turnoff(b, a)
 
@@ -30,6 +34,7 @@ function hundred (x)
 {
 	return (x + 100)
 }
+*/
 
 function label (label)
 {
