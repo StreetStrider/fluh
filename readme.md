@@ -164,9 +164,9 @@ fluh's `map` works in three ways:
 So `map` covers all cases for `map`, `filter` and `flatMap` in a common manner.
 
 ### high-order transformations
-In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `b = transform(a)`.
+In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `var new_bud = transform(bud)`.
 
-In order to do this, fluh has `bud.thru(fn)` which accepts function from one Bud to another and returns result of invocation that function on this particular Bud.
+In order to do this, fluh has `bud.thru(transform)` which accepts function from one Bud to another and returns result of invocation that function on this particular Bud.
 
 Here's the example of how it can be used to make Bud async by default (by creating new dependent Bud which receives updates asynchronously):
 
