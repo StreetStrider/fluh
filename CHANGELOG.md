@@ -1,3 +1,4 @@
+## `0.5.0` — 2020-05-13
 * Added `uniq`.
 * **Breaking change**: `on` now returns disposer, not the bud itself.
 
