@@ -11,6 +11,7 @@ export { default as Fin }  from './lib/Fin'
 
 export { default as join } from './lib/join'
 export { default as turnoff } from './lib/turnoff'
+export { default as resource } from './lib/resource'
 
 export { default as asap } from './lib/asap'
 export { default as capture } from './lib/capture'

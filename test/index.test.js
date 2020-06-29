@@ -18,6 +18,7 @@ describe('index', () =>
 
 		expect(index.join).a('function')
 		expect(index.turnoff).a('function')
+		expect(index.resource).a('function')
 
 		expect(index.asap).a('function')
 		expect(index.capture).a('function')
