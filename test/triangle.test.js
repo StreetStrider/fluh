@@ -1,3 +1,4 @@
+/* eslint-disable template-curly-spacing */
 
 import Bud from 'lib/Bud'
 
