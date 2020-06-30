@@ -37,7 +37,7 @@
 
     "build": "gulp --final --to npm",
 
-    "depcruise": "depcruise --exclude '^(node_modules|release|test|perf)' --output-type dot . > graph.dot",
+    "depcruise": "depcruise --exclude '^(node_modules|release|test|perf|coverage)' --output-type dot . > graph.dot",
     "diagrams":  "diagrams dot graph.dot graph.png",
     "graph": "npm run depcruise && npm run diagrams ##### < http://viz-js.com/ >"
   },
@@ -112,9 +112,9 @@
 
 
     "dependency-cruiser":
-      "6",
+      "9",
 
     "diagrams":
-      "0.10"
+      "0.11"
   }
 }
