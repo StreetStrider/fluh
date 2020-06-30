@@ -2,6 +2,9 @@
 import { expect } from 'chai'
 import { spy } from 'sinon'
 
+import { polyfill as raf } from 'raf'
+raf(global)
+
 // import { log } from '../lib/realm'
 
 {

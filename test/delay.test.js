@@ -1,13 +1,15 @@
 
 import Bud from 'lib/Bud'
+
 import delay from 'thru/delay'
 import defer from 'thru/defer'
+import raf   from 'thru/raf'
 
 import End from 'lib/End'
 import concat from 'lib/concat'
 
 
-describe('delay / defer', () =>
+describe('delay / defer / raf', () =>
 {
 	it('delay', async () =>
 	{
@@ -47,6 +49,23 @@ describe('delay / defer', () =>
 	{
 		var a = Bud()
 		var b = a.thru(defer)
+
+		var rs = []
+		b.on(value => rs.push(value))
+
+		a
+		.emit(1)
+		.emit(2)
+		.emit(3)
+		.emit(End)
+
+		expect(await concat(b)).deep.eq([ 1, 2, 3, End ])
+	})
+
+	it('raf', async () =>
+	{
+		var a = Bud()
+		var b = a.thru(raf)
 
 		var rs = []
 		b.on(value => rs.push(value))
