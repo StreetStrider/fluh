@@ -19,7 +19,7 @@
 
 ## The idea
 
-When thinking of reactive stuff there's a whole space of decisions you need to make.
+When thinking of reactive stuff there're multiple spaces of decisions in which you have to make a choice.
 
 * Is it push or pull?
 * Is it always live or depends on subscribers' presense?
@@ -29,7 +29,7 @@ When thinking of reactive stuff there's a whole space of decisions you need to m
 * Does stream end?
 * Is data graph static or dynamic?
 
-Choosing some designs will lead to specific FRP system.
+Choosing some decisions will lead to a specific FRP system.
 Watch [this speech](https://www.youtube.com/watch?v=Agu6jipKfYw) about this decision space.
 
 **fluh** is inspired mainly by [flyd](https://github.com/paldepind/flyd). I want to use the reactivity for
@@ -37,7 +37,7 @@ request-response systems, command-line applications and (especially) UIs. For th
 
 The main unit is called `Bud`.
 * Bud is a push-strategy FRP unit for creating data (event) streams.
-* Bud is always active — it just emits values and push them to dependents, no [backpressure](https://nodejs.org/en/docs/guides/backpressuring-in-streams/),
+* Bud is always active — it just emits values and pushes them to the dependents, no [backpressure](https://nodejs.org/en/docs/guides/backpressuring-in-streams/),
 no [cold streams](https://medium.com/@benlesh/hot-vs-cold-observables-f8094ed53339)
 or pulling-on-demand.
 * Bud is a Stream, but contain single (current) value, similar to Behavior. It's not an actual Behavior,
@@ -50,13 +50,11 @@ so you are free to emit `null` or `undefined` if you really want to.
 * When Bud acquire value it propagates it to *effects* and *dependents*. If Bud already has value, newly created effects
 and dependents will be notified immediately with that value.
 * Effects run after all dependents had been updated, so, from effects' perspective the graph's all current values change atomically and are always in a consistent state.
-* All schema is sync by default, but you are free to create async operators (defer, delay, throttle, nextTick, raf…).
-* Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal triggered by emitting `End` on a stream. If `End` is received, ordering is cleaned from terminated stream as well as certain streams' cross-references, which opens a way for a garbage collection. Streams that are both terminated and non-referenced by user become able to be garbage collected. In static graph memory consumption would remain on the stable level.
+* All schema is sync by default, but you are free to use async operators (defer, delay, raf) or create your own (like throttle, debounce, nextTick…).
+* Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal triggered by emitting `End` on a stream. If `End` is received, ordering is cleaned from terminated stream as well as certain streams' cross-references, which opens a way for a garbage collection. Streams that are both terminated and non-referenced by user become able to be garbage collected. In static graph memory consumption would remain on a stable level.
+* Can be pure or impure, depending on the usage.
 
-* Can be pure and impure, depending on usage.
-
-If you think some of the decisions are not good, there's a great family of
-different opinions. Check out at least theese great ones:
+If you think some of that decisions are not good, there's a great family of different opinions. Check out at least theese great ones:
 [most.js](https://github.com/cujojs/most),
 [hareactive](https://github.com/funkia/hareactive),
 [flyd](https://github.com/paldepind/flyd),
@@ -64,7 +62,7 @@ different opinions. Check out at least theese great ones:
 [graflow](https://github.com/pmros/graflow),
 [RX](https://github.com/ReactiveX/rxjs),
 [pull-stream](https://github.com/pull-stream/pull-stream),
-[Highland](https://github.com/caolan/highland).
+[Highland](https://github.com/caolan/highland),
 [MobX](https://mobx.js.org/).
 
 ## API
@@ -135,12 +133,16 @@ var b = a.thru(delay(50))
 * Effects on certain Bud run after propagating event to all dependents and before effects on that dependents.
 * In effect you can re-`emit` values on another Bud (or even that one), but taking care of order of emits and infinite loops are on your own.
 * Re-emitting will happen after current emit is done for the whole dependent subtree.
+* `bud.on(fn)` returns disposer function.
 
 ```js
 var a = Bud()
 
 /* subscribe to changes */
-a.on((value) => console.log('a:', value))
+var ds = a.on((value) => console.log('a:', value))
+
+/* disposing of the effect */
+ds()
 ```
 
 ## Interesting reading
