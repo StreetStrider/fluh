@@ -9,6 +9,7 @@
   - [derivatives](#derivatives)
   - [high-order](#high-order)
   - [effects](#effects)
+  - [resources](#resources)
 - [Interesting reading](#interesting-reading)
   - [atomic updates](#atomic-updates)
   - [`map` with Nothing and Many](#map-with-nothing-and-many)
@@ -143,6 +144,53 @@ var ds = a.on((value) => console.log('a:', value))
 
 /* disposing of the effect */
 ds()
+```
+
+### resources
+
+* If you want to create a Bud binded to some disposable event source, use `resource`.
+* Such Bud will dispose underlying resource when it receives `End`.
+* Provide to `resource` a function which initiates resource and returns disposer function. Function itself will be provided with emit function (as a first argument) and a newly created Bud (as a second).
+
+```js
+/* create Bud from DOM Event */
+function dom_event (element, eventname)
+{
+	return resource(emit =>
+	{
+		element.addEventListener(eventname, emit)
+
+		return function disposer ()
+		{
+			if (! element) return
+
+			element.removeEventListener(eventname, emit)
+
+			/* allow gc to release Bud and target element earlier */
+			element = null
+			emit = null
+		}
+	})
+}
+
+/* create Bud from interval timer */
+function interval (ms)
+{
+	return resource(emit =>
+	{
+		var t = setInterval(emit, ms)
+
+		return function disposer ()
+		{
+			if (! t) return
+
+			clearInterval(t)
+
+			t = null
+			emit = null
+		}
+	})
+}
 ```
 
 ## Interesting reading
