@@ -57,10 +57,12 @@ and dependents will be notified immediately with that value.
 
 If you think some of that decisions are not good, there's a great family of different opinions. Check out at least theese great ones:
 [most.js](https://github.com/cujojs/most),
-[hareactive](https://github.com/funkia/hareactive),
+[bacon.js](https://github.com/baconjs/bacon.js),
 [flyd](https://github.com/paldepind/flyd),
+[hareactive](https://github.com/funkia/hareactive),
 [xstream](https://github.com/staltz/xstream),
 [graflow](https://github.com/pmros/graflow),
+[S.js](https://github.com/adamhaile/S),
 [RX](https://github.com/ReactiveX/rxjs),
 [pull-stream](https://github.com/pull-stream/pull-stream),
 [Highland](https://github.com/caolan/highland),
