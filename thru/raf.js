@@ -1,17 +1,13 @@
 
 var raf = requestAnimationFrame
 
-import tap from '../lib/tap'
+import transfer from '../lib/transfer'
 
 
 export default function defer (bud_source)
 {
-	return bud_source.constructor()
-	.thru(tap(bud_raf =>
+	return transfer(bud_source, (value, emit) =>
 	{
-		bud_source.on(value =>
-		{
-			raf(() => bud_raf.emit(value))
-		})
-	}))
+		raf(() => emit(value))
+	})
 }

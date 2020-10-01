@@ -1,22 +1,18 @@
 
-import tap from '../lib/tap'
+import transfer from '../lib/transfer'
 
 
 export default function delay (ms = 0)
 {
 	return (bud_source) =>
 	{
-		return bud_source.constructor()
-		.thru(tap(bud_delayed =>
+		return transfer(bud_source, (value, emit) =>
 		{
-			bud_source.on(value =>
+			setTimeout(() =>
 			{
-				setTimeout(() =>
-				{
-					bud_delayed.emit(value)
-				}
-				, ms)
-			})
-		}))
+				emit(value)
+			}
+			, ms)
+		})
 	}
 }
