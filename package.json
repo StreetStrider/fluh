@@ -1,6 +1,6 @@
 {
      "name": "fluh",
-  "version": "0.5.0",
+  "version": "1.0.0-rc1",
 
   "description": "simple functional reactive library with atomic push strategy",
 

@@ -5,7 +5,7 @@ import End from 'lib/End'
 import { when_data } from 'map/when'
 
 import filter from 'map/filter'
-import { filter_by } from 'map/filter'
+import filter_by from 'map/filter-by'
 
 
 describe('filter', () =>

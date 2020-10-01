@@ -1,3 +1,4 @@
+* **Breaking change**: `filter_by` is moved to its own module `map/filter-by`.
 * Added `raf`.
 * `resource` is now in index.
 
