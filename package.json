@@ -110,6 +110,9 @@
     "flyd":
       "0.2",
 
+    "rxjs":
+      "6",
+
 
     "dependency-cruiser":
       "9",
