@@ -9,6 +9,8 @@ import rxjs from './rxjs.perf'
 import most from './most.perf'
 
 
+xSuite()
+
 Suite('diamond',
 [
 	add('diamond (FLUH)', fluh.diamond),
@@ -35,9 +37,12 @@ Suite('triangle_triangle',
 
 Suite('special',
 [
+	add('deep linear', fluh.deep_linear),
 	add('deep linear many', fluh.deep_linear_many)
 ])
 
+
+function xSuite () {}
 
 function Suite (name, cases)
 {
