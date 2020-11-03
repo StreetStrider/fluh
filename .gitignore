@@ -2,6 +2,6 @@
 node_modules/
 release/
 coverage/
-perf.chart.html
+perf/chart/
 graph.dot
 graph.png

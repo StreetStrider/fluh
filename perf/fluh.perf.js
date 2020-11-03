@@ -1,14 +1,12 @@
 
-import { add } from 'benny'
-
 import Bud  from '../lib/Bud'
 import join from '../lib/join'
 import Many from '../lib/Many'
 
 
 export default
-[
-	add('diamond (FLUH)', () =>
+{
+	diamond ()
 	{
 		var n = 1
 
@@ -23,9 +21,9 @@ export default
 		{
 			A.emit(17)
 		}
-	}),
+	},
 
-	add('deep linear (FLUH)', () =>
+	deep_linear ()
 	{
 		var n = 1
 
@@ -43,9 +41,9 @@ export default
 		{
 			a.emit(17)
 		}
-	}),
+	},
 
-	add('deep linear Many', () =>
+	deep_linear_many ()
 	{
 		var n = 1
 
@@ -63,9 +61,9 @@ export default
 		{
 			a.emit(Many(17, 1917))
 		}
-	}),
+	},
 
-	add('triangle in triangle (FLUH)', () =>
+	triangle_triangle ()
 	{
 		var n = 1
 
@@ -83,5 +81,5 @@ export default
 		{
 			a.emit(17)
 		}
-	}),
-]
+	},
+}

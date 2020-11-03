@@ -1,14 +1,12 @@
 
-import { add } from 'benny'
-
 import { stream } from 'flyd'
 import { combine } from 'flyd'
 import { on } from 'flyd'
 
 
 export default
-[
-	add('diamond (flyd)', () =>
+{
+	diamond ()
 	{
 		var n = 1
 
@@ -23,9 +21,9 @@ export default
 		{
 			Af(17)
 		}
-	}),
+	},
 
-	add('deep linear (flyd)', () =>
+	deep_linear ()
 	{
 		var n = 1
 
@@ -43,5 +41,25 @@ export default
 		{
 			a(17)
 		}
-	}),
-]
+	},
+
+	triangle_triangle ()
+	{
+		var n = 1
+
+		var a = stream()
+
+		var b1 = combine(a => a + 1, [ a ])
+		var c1 = combine((a, b) => a + b + 1, [ a, b1 ])
+
+		var b2 = combine(b => b + 1, [ b1 ])
+		var c2 = combine((b, c) => b + c + 1, [ b2, c1 ])
+
+		on(() => n++, c2)
+
+		return () =>
+		{
+			a(17)
+		}
+	},
+}

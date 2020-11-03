@@ -1,6 +1,4 @@
 
-import { add } from 'benny'
-
 import { at } from '@most/core'
 import { map } from '@most/core'
 import { combine } from '@most/core'
@@ -11,8 +9,8 @@ import { newDefaultScheduler } from '@most/scheduler'
 
 
 export default
-[
-	add('diamond (most.js)', () =>
+{
+	diamond ()
 	{
 		var n = 1
 
@@ -28,9 +26,9 @@ export default
 		{
 			runEffects(run, newDefaultScheduler())
 		}
-	}),
+	},
 
-	add('deep linear (most.js)', () =>
+	deep_linear ()
 	{
 		var n = 1
 
@@ -48,9 +46,9 @@ export default
 		{
 			runEffects(run, newDefaultScheduler())
 		}
-	}),
+	},
 
-	add('triangle in triangle (most.js)', () =>
+	triangle_triangle ()
 	{
 		var n = 1
 
@@ -68,5 +66,5 @@ export default
 		{
 			runEffects(run, newDefaultScheduler())
 		}
-	}),
-]
+	},
+}

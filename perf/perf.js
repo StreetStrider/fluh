@@ -1,29 +1,57 @@
 
-import graph from './graph.perf'
-import flyd  from './flyd.perf'
-import rxjs  from './rxjs.perf'
-import most  from './mostjs.perf'
-
+import { add } from 'benny'
 import { suite } from 'benny'
 import { cycle, complete, save } from 'benny'
 
+import fluh from './fluh.perf'
+import flyd from './flyd.perf'
+import rxjs from './rxjs.perf'
+import most from './most.perf'
 
-suite(
-	'fluh',
 
-	...graph,
-	...flyd,
-	...rxjs,
-	...most,
+Suite('diamond',
+[
+	add('diamond (FLUH)', fluh.diamond),
+	add('diamond (flyd)', flyd.diamond),
+	add('diamond (rxjs)', rxjs.diamond),
+	add('diamond (most)', most.diamond),
+])
 
-	cycle(),
+Suite('deep_linear',
+[
+	add('deep linear (FLUH)', fluh.deep_linear),
+	add('deep linear (flyd)', flyd.deep_linear),
+	add('deep linear (rxjs)', rxjs.deep_linear),
+	add('deep linear (most)', most.deep_linear),
+])
 
-	complete(),
+Suite('triangle_triangle',
+[
+	add('triangle in triangle (FLUH)', fluh.triangle_triangle),
+	add('triangle in triangle (flyd)', flyd.triangle_triangle),
+	add('triangle in triangle (rxjs)', rxjs.triangle_triangle),
+	add('triangle in triangle (most)', most.triangle_triangle),
+])
 
-	save(
-	{
-		file: 'perf',
-		folder: '.',
-		format: 'chart.html',
-	}),
-)
+Suite('special',
+[
+	add('deep linear many', fluh.deep_linear_many)
+])
+
+
+function Suite (name, cases)
+{
+	return suite(
+		name,
+		...cases,
+
+		cycle(),
+		complete(),
+		save(
+		{
+			folder: 'perf/chart',
+			file:   name,
+			format: 'chart.html',
+		}),
+	)
+}

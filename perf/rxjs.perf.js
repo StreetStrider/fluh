@@ -1,14 +1,12 @@
 
-import { add } from 'benny'
-
 import { Observable } from 'rxjs'
 import { combineLatest } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 
 export default
-[
-	add('diamond (rxjs)', () =>
+{
+	diamond ()
 	{
 		var n = 1
 
@@ -25,9 +23,9 @@ export default
 		{
 			d.subscribe(() => n++)
 		}
-	}),
+	},
 
-	add('deep linear (rxjs)', () =>
+	deep_linear ()
 	{
 		var n = 1
 
@@ -46,9 +44,9 @@ export default
 		{
 			b.subscribe(() => n++)
 		}
-	}),
+	},
 
-	add('triangle in triangle (rxjs)', () =>
+	triangle_triangle ()
 	{
 		var n = 1
 
@@ -67,5 +65,5 @@ export default
 		{
 			c2.subscribe(() => n++)
 		}
-	}),
-]
+	},
+}
