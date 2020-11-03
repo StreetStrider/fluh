@@ -33,7 +33,7 @@
 
     "cover": "c8 -r text -r html --all -n lib/ -n map/ -n thru/ -n index.js npm run unit",
 
-    "perf": "node -r esm perf/perf",
+    "perf": "node --max-old-space-size=8192 -r esm perf/perf",
 
     "build": "gulp --final --to npm",
 
@@ -107,17 +107,23 @@
       "^3.6",
 
 
+    "dependency-cruiser":
+      "9",
+
+    "diagrams":
+      "0.11",
+
+
     "flyd":
       "0.2",
 
     "rxjs":
       "6",
 
+    "@most/core":
+      "1.6",
 
-    "dependency-cruiser":
-      "9",
-
-    "diagrams":
-      "0.11"
+    "@most/scheduler":
+      "1.3"
   }
 }

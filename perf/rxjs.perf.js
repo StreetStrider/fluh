@@ -29,12 +29,12 @@ export default
 
 	add('deep linear (rxjs)', () =>
 	{
+		var n = 1
+
 		var a = new Observable(sub =>
 		{
 			sub.next(17)
 		})
-
-		var n = 1
 
 		var b = a
 		for (let n = 0; n < 100; n++)
