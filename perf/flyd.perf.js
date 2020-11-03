@@ -3,6 +3,8 @@ import { stream } from 'flyd'
 import { combine } from 'flyd'
 import { on } from 'flyd'
 
+import filter from 'flyd/module/filter'
+
 
 export default
 {
@@ -56,6 +58,33 @@ export default
 		var c2 = combine((b, c) => b + c + 1, [ b2, c1 ])
 
 		on(() => n++, c2)
+
+		return () =>
+		{
+			a(17)
+		}
+	},
+
+	shortcut ()
+	{
+		var n = 1
+
+		var a = stream()
+
+		var b = a
+		for (let n = 0; n < 100; n++)
+		{
+			if (n === 10)
+			{
+				b = filter(() => false, b)
+			}
+			else
+			{
+				b = combine(b => b + 1, [ b ])
+			}
+		}
+
+		on(() => n++, b)
 
 		return () =>
 		{

@@ -35,6 +35,14 @@ Suite('triangle_triangle',
 	add('triangle in triangle (most)', most.triangle_triangle),
 ])
 
+Suite('shortcut',
+[
+	add('shortcut (FLUH)', fluh.shortcut),
+	add('shortcut (flyd)', flyd.shortcut),
+	add('shortcut (rxjs)', rxjs.shortcut),
+	add('shortcut (most)', most.shortcut),
+])
+
 Suite('special',
 [
 	add('deep linear', fluh.deep_linear),

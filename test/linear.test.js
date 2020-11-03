@@ -847,8 +847,8 @@ describe('linear', () =>
 
 		var b = join(a, a =>
 		{
-			if (a > 1) { return Nothing }
-			return a
+			if (a % 2) { return a }
+			return Nothing
 		})
 		var c = join(b, b => b * 10)
 
@@ -858,10 +858,15 @@ describe('linear', () =>
 		var cs = []
 		c.on(value => cs.push(value))
 
-		a.emit(1).emit(2).emit(3)
+		a
+		.emit(0)
+		.emit(1)
+		.emit(2)
+		.emit(3)
+		.emit(4)
 
-		expect(bs).deep.eq([ 1 ])
-		expect(cs).deep.eq([ 10 ])
+		expect(bs).deep.eq([ 1, 3 ])
+		expect(cs).deep.eq([ 10, 30 ])
 	})
 
 	it('A(End) → B → C', () =>

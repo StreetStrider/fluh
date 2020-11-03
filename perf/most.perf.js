@@ -1,6 +1,7 @@
 
 import { at } from '@most/core'
 import { map } from '@most/core'
+import { filter } from '@most/core'
 import { combine } from '@most/core'
 import { tap } from '@most/core'
 
@@ -61,6 +62,33 @@ export default
 		var c2 = combine((b, c) => b + c + 1, b2, c1)
 
 		var run = tap(() => n++, c2)
+
+		return () =>
+		{
+			runEffects(run, newDefaultScheduler())
+		}
+	},
+
+	shortcut ()
+	{
+		var n = 1
+
+		var a = at(1, 17)
+
+		var b = a
+		for (let n = 0; n < 100; n++)
+		{
+			if (n === 10)
+			{
+				b = filter(() => false, b)
+			}
+			else
+			{
+				b = map(b => b + 1, b)
+			}
+		}
+
+		var run = tap(() => n++, b)
 
 		return () =>
 		{

@@ -1,6 +1,7 @@
 
 import Bud  from '../lib/Bud'
 import join from '../lib/join'
+import Noop from '../lib/Noop'
 import Many from '../lib/Many'
 
 
@@ -76,6 +77,33 @@ export default
 		var c2 = join(b2, c1, (b, c) => b + c + 1)
 
 		c2.on(() => n++)
+
+		return () =>
+		{
+			a.emit(17)
+		}
+	},
+
+	shortcut ()
+	{
+		var n = 1
+
+		var a = Bud()
+
+		var b = a
+		for (let n = 0; n < 100; n++)
+		{
+			if (n === 10)
+			{
+				b = join(b, Noop)
+			}
+			else
+			{
+				b = join(b, b => b + 1)
+			}
+		}
+
+		b.on(() => n++)
 
 		return () =>
 		{

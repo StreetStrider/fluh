@@ -2,6 +2,7 @@
 import { Observable } from 'rxjs'
 import { combineLatest } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { filter } from 'rxjs/operators'
 
 
 export default
@@ -64,6 +65,34 @@ export default
 		return () =>
 		{
 			c2.subscribe(() => n++)
+		}
+	},
+
+	shortcut ()
+	{
+		var n = 1
+
+		var a = new Observable(sub =>
+		{
+			sub.next(17)
+		})
+
+		var b = a
+		for (let n = 0; n < 100; n++)
+		{
+			if (n === 10)
+			{
+				b = b.pipe(filter(() => false))
+			}
+			else
+			{
+				b = b.pipe(map(b => b + 1))
+			}
+		}
+
+		return () =>
+		{
+			b.subscribe(() => n++)
 		}
 	},
 }
