@@ -23,6 +23,7 @@
 When thinking of reactive stuff there're multiple spaces of decisions in which you have to make a choice.
 
 * Is it push or pull?
+* Is it unicast or multicast?
 * Is it always live or depends on subscribers' presense?
 * Does stream have value at any time?
 * Is it sync or async?
