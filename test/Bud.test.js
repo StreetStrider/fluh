@@ -3,7 +3,7 @@ import Bud from 'lib/Bud'
 import Nothing from 'lib/Nothing'
 import Many from 'lib/Many'
 
-import { deps_inv } from 'lib/realm'
+import domain from 'lib/domain'
 
 
 describe('Bud', () =>
@@ -198,6 +198,9 @@ export function state (bud, descr = {})
 	expect(bud.sample()).deep.eq(value)
 
 	expect(bud.deps, 'deps').deep.eq(deps)
-	expect(deps_inv.get(bud), 'deps_inv').deep.eq(inv)
+
+	var bud_inv = domain.bud_reverse.get(bud)
+	expect(bud_inv && bud_inv.deps_reverse, 'deps_reverse').deep.eq(inv)
+
 	expect(bud.order).deep.eq(order)
 }

@@ -5,13 +5,10 @@ import { spy } from 'sinon'
 import { polyfill as raf } from 'raf'
 raf(global)
 
-// import { log } from '../lib/realm'
 
 {
 	global.expect = expect
 	global.spy = spy
-
-//	global.log = log
 }
 
 {
