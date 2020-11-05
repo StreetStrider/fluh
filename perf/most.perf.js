@@ -36,7 +36,7 @@ export default
 		var a = at(1, 17)
 
 		var b = a
-		for (let n = 0; n < 100; n++)
+		for (var n = 0; n < 100; n++)
 		{
 			b = map(b => b + 1, b)
 		}
@@ -76,7 +76,7 @@ export default
 		var a = at(1, 17)
 
 		var b = a
-		for (let n = 0; n < 100; n++)
+		for (var n = 0; n < 100; n++)
 		{
 			if (n === 10)
 			{

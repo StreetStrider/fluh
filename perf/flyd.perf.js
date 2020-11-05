@@ -32,7 +32,7 @@ export default
 		var a = stream()
 
 		var b = a
-		for (let n = 0; n < 100; n++)
+		for (var n = 0; n < 100; n++)
 		{
 			b = combine(b => b + 1, [ b ])
 		}
@@ -72,7 +72,7 @@ export default
 		var a = stream()
 
 		var b = a
-		for (let n = 0; n < 100; n++)
+		for (var n = 0; n < 100; n++)
 		{
 			if (n === 10)
 			{

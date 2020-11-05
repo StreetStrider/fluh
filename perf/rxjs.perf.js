@@ -36,7 +36,7 @@ export default
 		})
 
 		var b = a
-		for (let n = 0; n < 100; n++)
+		for (var n = 0; n < 100; n++)
 		{
 			b = b.pipe(map(b => b + 1))
 		}
@@ -78,7 +78,7 @@ export default
 		})
 
 		var b = a
-		for (let n = 0; n < 100; n++)
+		for (var n = 0; n < 100; n++)
 		{
 			if (n === 10)
 			{
