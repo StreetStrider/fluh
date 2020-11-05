@@ -33,7 +33,7 @@ describe('triangle', () =>
 		state(b,
 		{
 			value: 10,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ c ],
 			order: [ c ],
 		})
@@ -41,7 +41,7 @@ describe('triangle', () =>
 		state(c,
 		{
 			value: 110,
-			inv: [ a, b ],
+			rev: [ a, b ],
 		})
 
 		expect(s.callCount).eq(1)
@@ -94,7 +94,7 @@ describe('triangle', () =>
 		state(b1,
 		{
 			value: 'A.B1',
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ c1, b2 ],
 			order: [ c1, b2, c2 ],
 		})
@@ -102,7 +102,7 @@ describe('triangle', () =>
 		state(c1,
 		{
 			value: 'A/A.B1.C1',
-			inv: [ a, b1 ],
+			rev: [ a, b1 ],
 			deps: [ c2 ],
 			order: [ c2 ],
 		})
@@ -110,7 +110,7 @@ describe('triangle', () =>
 		state(b2,
 		{
 			value: 'A.B1.B2',
-			inv: [ b1 ],
+			rev: [ b1 ],
 			deps: [ c2 ],
 			order: [ c2 ],
 		})
@@ -118,7 +118,7 @@ describe('triangle', () =>
 		state(c2,
 		{
 			value: 'A.B1.B2/A/A.B1.C1.C2',
-			inv: [ b2, c1 ],
+			rev: [ b2, c1 ],
 		})
 
 		expect(s.callCount).eq(1)
@@ -157,7 +157,7 @@ describe('triangle', () =>
 		state(b,
 		{
 			value: 1,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ c ],
 			order: [ c ],
 		})
@@ -165,7 +165,7 @@ describe('triangle', () =>
 		state(c,
 		{
 			value: 1,
-			inv: [ a, b ],
+			rev: [ a, b ],
 		})
 
 		expect(s.callCount).eq(1)
@@ -183,7 +183,7 @@ describe('triangle', () =>
 		state(b,
 		{
 			value: 2,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ c ],
 			order: [ c ],
 		})
@@ -191,7 +191,7 @@ describe('triangle', () =>
 		state(c,
 		{
 			value: 2,
-			inv: [ a, b ],
+			rev: [ a, b ],
 		})
 
 		expect(s.callCount).eq(2)
@@ -214,7 +214,7 @@ describe('triangle', () =>
 		state(c,
 		{
 			value: 3,
-			inv: [ a, b ],
+			rev: [ a, b ],
 		})
 
 		expect(s.callCount).eq(3)
@@ -237,7 +237,7 @@ describe('triangle', () =>
 		state(c,
 		{
 			value: 4,
-			inv: [ a, b ],
+			rev: [ a, b ],
 		})
 
 		expect(s.callCount).eq(4)

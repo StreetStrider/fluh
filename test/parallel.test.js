@@ -32,13 +32,13 @@ describe('parallel', () =>
 		state(b,
 		{
 			value: 10,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: 100,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as.callCount).eq(1)
@@ -68,7 +68,7 @@ describe('parallel', () =>
 		state(b,
 		{
 			value: 10,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ d ],
 			order: [ d ],
 		})
@@ -76,7 +76,7 @@ describe('parallel', () =>
 		state(c,
 		{
 			value: 100,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ d ],
 			order: [ d ],
 		})
@@ -84,7 +84,7 @@ describe('parallel', () =>
 		state(d,
 		{
 			value: 110,
-			inv: [ b, c ],
+			rev: [ b, c ],
 		})
 
 		expect(as.callCount).eq(1)
@@ -215,7 +215,7 @@ describe('parallel', () =>
 		state(b,
 		{
 			value: 10,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ d ],
 			order: [ d ],
 		})
@@ -223,7 +223,7 @@ describe('parallel', () =>
 		state(c,
 		{
 			value: 100,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ d ],
 			order: [ d ],
 		})
@@ -231,7 +231,7 @@ describe('parallel', () =>
 		state(d,
 		{
 			value: 100,
-			inv: [ b, c ],
+			rev: [ b, c ],
 		})
 
 		expect(as.callCount).eq(1)
@@ -249,7 +249,7 @@ describe('parallel', () =>
 		state(b,
 		{
 			value: 20,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ d ],
 			order: [ d ],
 		})
@@ -257,7 +257,7 @@ describe('parallel', () =>
 		state(c,
 		{
 			value: 200,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ d ],
 			order: [ d ],
 		})
@@ -265,7 +265,7 @@ describe('parallel', () =>
 		state(d,
 		{
 			value: 200,
-			inv: [ b, c ],
+			rev: [ b, c ],
 		})
 
 		expect(as.callCount).eq(2)
@@ -288,7 +288,7 @@ describe('parallel', () =>
 		state(c,
 		{
 			value: 300,
-			inv: [ a ],
+			rev: [ a ],
 			deps: [ d ],
 			order: [ d ],
 		})
@@ -296,7 +296,7 @@ describe('parallel', () =>
 		state(d,
 		{
 			value: 300,
-			inv: [ b, c ],
+			rev: [ b, c ],
 		})
 
 		expect(as.callCount).eq(3)

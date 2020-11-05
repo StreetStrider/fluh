@@ -27,7 +27,7 @@ describe('End', () =>
 		})
 		state(b,
 		{
-			inv: [ a ]
+			rev: [ a ]
 		})
 
 		a.emit(1)
@@ -43,7 +43,7 @@ describe('End', () =>
 		state(b,
 		{
 			value: 3,
-			inv: [ a ]
+			rev: [ a ]
 		})
 
 		a.emit(End)

@@ -191,13 +191,13 @@ export function state (bud, descr = {})
 	var { value = Nothing } = descr
 
 	var { deps = [] } = descr
-	var { inv  = void 0 } = descr
+	var { rev  = void 0 } = descr
 	var { order = [] } = descr
 
 	expect(bud.value).deep.eq(value)
 	expect(bud.sample()).deep.eq(value)
 
 	expect(domain.deps.direct.get(bud)).deep.eq(deps)
-	expect(domain.deps.reverse.get_test(bud)).deep.eq(inv)
+	expect(domain.deps.reverse.get_test(bud)).deep.eq(rev)
 	expect(bud.order).deep.eq(order)
 }

@@ -28,7 +28,7 @@ describe('linear', () =>
 
 		state(b,
 		{
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		var as1 = spy()
@@ -57,7 +57,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 2,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as2.callCount).eq(1)
@@ -85,7 +85,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 2,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		var as1 = spy()
@@ -109,7 +109,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 3,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as1.callCount).eq(2)
@@ -137,7 +137,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 2,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		var as1 = spy()
@@ -161,7 +161,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 3,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as1.callCount).eq(2)
@@ -252,7 +252,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 1917,
-			inv: [ a ],
+			rev: [ a ],
 		})
 	})
 
@@ -278,7 +278,7 @@ describe('linear', () =>
 
 		state(b,
 		{
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as1.called).false
@@ -297,7 +297,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 0,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as1.callCount).eq(1)
@@ -314,7 +314,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 0,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as1.callCount).eq(2)
@@ -331,7 +331,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 0,
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		expect(as1.callCount).eq(2)
@@ -412,12 +412,12 @@ describe('linear', () =>
 		{
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		a.emit(1)
@@ -434,13 +434,13 @@ describe('linear', () =>
 			value: 2,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: 200,
-			inv: [ b ],
+			rev: [ b ],
 		})
 	})
 
@@ -463,13 +463,13 @@ describe('linear', () =>
 			value: 2,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: 200,
-			inv: [ b ],
+			rev: [ b ],
 		})
 	})
 
@@ -492,13 +492,13 @@ describe('linear', () =>
 			value: 2,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: 200,
-			inv: [ b ],
+			rev: [ b ],
 		})
 	})
 
@@ -527,13 +527,13 @@ describe('linear', () =>
 			value: Nothing,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: Nothing,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		a.emit(1)
@@ -550,13 +550,13 @@ describe('linear', () =>
 			value: Nothing,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: Nothing,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		a.emit(2)
@@ -573,13 +573,13 @@ describe('linear', () =>
 			value: Nothing,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: Nothing,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		expect(bs.called).false
@@ -608,13 +608,13 @@ describe('linear', () =>
 			value: Nothing,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: Nothing,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		expect(cs.callCount).eq(0)
@@ -635,13 +635,13 @@ describe('linear', () =>
 			value: 4,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: 400,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		expect(cs.callCount).eq(3)
@@ -680,13 +680,13 @@ describe('linear', () =>
 			value: Nothing,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: Nothing,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		a.emit(5)
@@ -705,13 +705,13 @@ describe('linear', () =>
 			value: 70,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: 7000,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		expect(as).deep.eq([ 5, 6, 7 ])
@@ -896,13 +896,13 @@ describe('linear', () =>
 			value: Nothing,
 			deps:  [ c ],
 			order: [ c ],
-			inv: [ a ],
+			rev: [ a ],
 		})
 
 		state(c,
 		{
 			value: Nothing,
-			inv: [ b ],
+			rev: [ b ],
 		})
 
 		expect(as1.called).false
@@ -949,7 +949,7 @@ describe('linear', () =>
 		state(b,
 		{
 			value: 2,
-			inv: [ a ],
+			rev: [ a ],
 		})
 	})
 
