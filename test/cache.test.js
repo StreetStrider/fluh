@@ -5,6 +5,8 @@ import End from 'lib/End'
 
 import join from 'lib/join'
 
+import domain from 'lib/domain'
+
 
 describe('cache', () =>
 {
@@ -12,12 +14,12 @@ describe('cache', () =>
 	{
 		var a = Bud()
 
-		expect(a.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([])
 
 		var b = join(a, a => a)
 
-		expect(a.order).deep.eq([ b ])
-		expect(b.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([ b ])
+		expect(domain.order(b)).deep.eq([])
 
 		var bs = spy()
 		b.on(bs)
@@ -27,9 +29,9 @@ describe('cache', () =>
 
 		var c = join(b, b => b)
 
-		expect(a.order).deep.eq([ b, c ])
-		expect(b.order).deep.eq([ c ])
-		expect(c.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([ b, c ])
+		expect(domain.order(b)).deep.eq([ c ])
+		expect(domain.order(c)).deep.eq([])
 
 		var cs = spy()
 		c.on(cs)
@@ -41,10 +43,10 @@ describe('cache', () =>
 
 		var d = join(a, c, (a, c) => a + c)
 
-		expect(a.order).deep.eq([ b, c, d ])
-		expect(b.order).deep.eq([ c, d ])
-		expect(c.order).deep.eq([ d ])
-		expect(d.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([ b, c, d ])
+		expect(domain.order(b)).deep.eq([ c, d ])
+		expect(domain.order(c)).deep.eq([ d ])
+		expect(domain.order(d)).deep.eq([])
 
 		var ds = spy()
 		d.on(ds)
@@ -60,12 +62,12 @@ describe('cache', () =>
 	{
 		var a = Bud()
 
-		expect(a.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([])
 
 		var b = join(a, a => a)
 
-		expect(a.order).deep.eq([ b ])
-		expect(b.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([ b ])
+		expect(domain.order(b)).deep.eq([])
 
 		var bs = spy()
 		b.on(bs)
@@ -75,9 +77,9 @@ describe('cache', () =>
 
 		var c = join(b, b => b)
 
-		expect(a.order).deep.eq([ b, c ])
-		expect(b.order).deep.eq([ c ])
-		expect(c.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([ b, c ])
+		expect(domain.order(b)).deep.eq([ c ])
+		expect(domain.order(c)).deep.eq([])
 
 		var cs = spy()
 		c.on(cs)
@@ -92,8 +94,8 @@ describe('cache', () =>
 		expect(bs.callCount).eq(3)
 		expect(cs.callCount).eq(3)
 
-		expect(a.order).deep.eq([])
-		expect(b.order).deep.eq([])
-		expect(c.order).deep.eq([])
+		expect(domain.order(a)).deep.eq([])
+		expect(domain.order(b)).deep.eq([])
+		expect(domain.order(c)).deep.eq([])
 	})
 })
