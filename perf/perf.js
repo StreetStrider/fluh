@@ -11,6 +11,12 @@ import most from './most.perf'
 
 xSuite()
 
+Suite('special',
+[
+	add('deep linear', fluh.deep_linear),
+	add('deep linear many', fluh.deep_linear_many)
+])
+
 Suite('diamond',
 [
 	add('diamond (FLUH)', fluh.diamond),
@@ -41,12 +47,6 @@ Suite('shortcut',
 	add('shortcut (flyd)', flyd.shortcut),
 	add('shortcut (rxjs)', rxjs.shortcut),
 	add('shortcut (most)', most.shortcut),
-])
-
-Suite('special',
-[
-	add('deep linear', fluh.deep_linear),
-	add('deep linear many', fluh.deep_linear_many)
 ])
 
 
