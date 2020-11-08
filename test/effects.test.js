@@ -144,6 +144,36 @@ describe('effects', () =>
 		expect(s.callCount).eq(2)
 	})
 
+	it('once', () =>
+	{
+		var bud = Bud()
+
+		var rs1 = []
+		var ds1 = bud.on((value) =>
+		{
+			ds1()
+			rs1.push(value)
+		})
+
+		var rs2 = []
+		var ds2 = bud.on((value) =>
+		{
+			rs2.push(value)
+		})
+
+		bud.emit(17)
+		bud.emit(18)
+
+		expect(rs1).deep.eq([ 17 ])
+		expect(rs2).deep.eq([ 17, 18 ])
+
+		ds1()
+		ds2()
+
+		ds1()
+		ds2()
+	})
+
 	it('order', () =>
 	{
 		var rs = []
