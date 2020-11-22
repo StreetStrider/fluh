@@ -1,3 +1,4 @@
+* `transfer` is now in index.
 * Added `delta`.
 * Added `promise`: `every`, `last` and `buffered` strategies.
 * **Breaking change**: `filter_by` is moved to its own module `map/filter-by`.
