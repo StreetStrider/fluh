@@ -15,6 +15,7 @@
   - [`map` with Nothing and Many](#map-with-nothing-and-many)
   - [high-order transformations](#high-order-transformations)
   - [handling errors](#handling-errors)
+  - [handling promises](#handling-promises)
 - [License](#license)
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -286,6 +287,16 @@ import { when_data } from './map/when'
 /* only real data passed to target function */
 var c = b.map(when_data(b => b + 1))
 ```
+
+### handling promises
+fluh is sync by default. This decision makes whole graph predictable, allows to atomically update and opens a way for performance optimizations. Promise is just a regular value for fluh, so, in order to extract value from it, special high-order transformation is required. Such transformation will always resolve asynchronously, even if promise is already resolved.
+
+fluh supports three strategies for resolving promises:
+* `every` — every promise value passed to this transformation will instantly passthrough. In that case, no events lost and no additional memory is used, however, the order of resolved values may not be identical to the order of corresponding promises due to the race condition.
+* `last` — only last recieved promise value is passed through, if previous promise was not resolved, its value would be ignored. In that case, the resolution order is preserved, no additional memory is used, however, some promise values may be lost.
+* `buffered(N)` — store `N` recent promises and resolve them in order. If some promises was not resolved and they exceed `N` when new promises received, the older ones will be ignored. In that case, the resolution order is preserved, and up to `N` simultaneous racing promises are guaranteed to be passed through, however, if more simultaneous promises received, some of them still be lost.
+
+fluh promise transformations treats promise rejections as data values. So, the transformations will emit mixed data/error content. You'll need `when_data` to handle them.
 
 ## License
 ISC, © Strider, 2020.
