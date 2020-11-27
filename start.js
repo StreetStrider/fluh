@@ -1,42 +1,14 @@
 
-import { Bud }  from '.'
-// import { End }  from '.'
-
-import { tap }  from '.'
-// import { turnoff } from '.'
-
-// import { when_data } from './map/when'
+import { Bud } from '.'
+import { debug } from '.'
 
 var a = Bud()
-var ds = a.on(label('a'))
 
-console.log(ds)
+a.thru(debug({ depth: 0, label: 'x' }))
+a.thru(debug({ depth: 2 }))
+a.thru(debug('x', { depth: 2 }))
+a.thru(debug())
 
-/*
-var
-b = a.map(when_data(hundred))
-b.on(label('b'))
-
-turnoff(b, a)
-
-b
-.emit(100)
-.emit(End)
-
-a
-.emit(1)
-.emit(2)
-.emit(3)
-// .emit(End)
-
-
-function hundred (x)
-{
-	return (x + 100)
-}
-*/
-
-function label (label)
-{
-	return tap(v => console.log(label, v))
-}
+a.emit(1)
+a.emit({ x: 1 })
+a.emit([ 1, 2, 3 ])
