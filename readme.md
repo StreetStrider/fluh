@@ -248,6 +248,17 @@ var b = a.thru(defer)
 a.emit(2)
 ```
 
+fluh exposes special helper for easier implementation of high-order transformations, called `lib/trasfer`. In terms of `transfer` previous `defer` example may be implemented in such manner:
+```js
+function defer (bud)
+{
+	return transfer(bud, (value, emit) =>
+	{
+		setTimeout(() => emit(value), 0)
+	})
+}
+```
+
 ### handling errors
 fluh does not capture throws by default, but you can make any function to do that, by decorating it with `capture`:
 ```js
