@@ -1,3 +1,4 @@
+* Added `debug`.
 * `transfer` is now in index.
 * Added `delta`.
 * Added `promise`: `every`, `last` and `buffered` strategies.
