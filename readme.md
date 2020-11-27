@@ -136,7 +136,7 @@ var b = a.thru(delay(50))
 * Effects are fired in straight-by-attach order.
 * Effects on certain Bud run after propagating event to all dependents and before effects on that dependents.
 * In effect you can re-`emit` values on another Bud (or even that one), but taking care of order of emits and infinite loops are on your own.
-* Re-emitting will happen after current emit is done for the whole dependent subtree.
+* Re-emitting will happen only after current emit is done for the whole dependent subtree.
 * `bud.on(fn)` returns disposer function.
 
 ```js
@@ -207,7 +207,7 @@ To do this, fluh recursively collects all dependencies of any `A` and orders the
 See also [flyd's atomic updates](https://github.com/paldepind/flyd/tree/180e8f5b859ac9ae388a193d334e94f03e02feef#atomic-updates).
 
 ### `map` with Nothing and Many
-fluh's `bud.map(fn)` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to adress more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
+fluh's `bud.map(fn)` is basically a [functor protocol](https://github.com/fantasyland/fantasy-land#functor), however, with additional features. The thing with usual `map` is that it always returns single value, mapping functor from one value to another. If you need to skip values or add another values you need to use something like `filter` and `flatMap`. In some cases this is not enough and you need to address more complex tasks with the help of `reduce` or [transducers](https://github.com/cognitect-labs/transducers-js).
 
 fluh's `map` works in three ways:
 1. Ordinary map (return any values).
@@ -217,7 +217,7 @@ fluh's `map` works in three ways:
 So `map` covers all cases for `map`, `filter` and `flatMap` in a common manner.
 
 ### high-order transformations
-In practice `map` covers most of the cases, but there're may advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `var new_bud = transform(bud)`.
+In practice `map` covers most of the cases, but there're may be advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `var new_bud = transform(bud)`.
 
 In order to do this, fluh has `bud.thru(transform)` which accepts function from one Bud to another and returns result of invocation that function on this particular Bud.
 
