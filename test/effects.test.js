@@ -144,6 +144,40 @@ describe('effects', () =>
 		expect(s.callCount).eq(2)
 	})
 
+	it('allows dispose during emit', () =>
+	{
+		var bud = Bud()
+
+		var r1 = 0
+		var r2 = 0
+		var r3 = 0
+
+		var ds1 = bud.on((x) =>
+		{
+			r1 = (r1 + x)
+			ds1()
+			ds3()
+		})
+		bud.on((x) => { r2 = (r2 + x) })
+		var ds3 = bud.on((x) => { r3 = (r3 + x) })
+
+		expect(r1).eq(0)
+		expect(r2).eq(0)
+		expect(r3).eq(0)
+
+		bud.emit(1)
+
+		expect(r1).eq(1)
+		expect(r2).eq(1)
+		expect(r3).eq(1)
+
+		bud.emit(10)
+
+		expect(r1).eq(1)
+		expect(r2).eq(11)
+		expect(r3).eq(1)
+	})
+
 	it('once', () =>
 	{
 		var bud = Bud()
@@ -172,6 +206,30 @@ describe('effects', () =>
 
 		ds1()
 		ds2()
+	})
+
+	it('disposes single fn', () =>
+	{
+		var bud = Bud()
+
+		var r = 0
+		var f = (x) => { r = (r + x) }
+
+		var ds1 = bud.on(f)
+		var ds2 = bud.on(f)
+
+		bud.emit(2)
+		expect(r).eq(4)
+
+		ds1()
+
+		bud.emit(2)
+		expect(r).eq(6)
+
+		ds2()
+
+		bud.emit(2)
+		expect(r).eq(6)
 	})
 
 	it('order', () =>
