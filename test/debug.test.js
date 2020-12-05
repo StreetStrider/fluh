@@ -2,7 +2,6 @@
 import { inspect } from 'util'
 
 import Bud from 'lib/Bud'
-import debug from 'lib/debug'
 
 
 function as_inspect (value, options)
@@ -55,7 +54,7 @@ describe('Log', () =>
 	it('works', () =>
 	{
 		var a = Bud()
-		var ds = a.thru(debug())
+		var ds = a.debug()
 
 		expect(calls.length).eq(0)
 
@@ -77,7 +76,7 @@ describe('Log', () =>
 	it('label', () =>
 	{
 		var a = Bud()
-		var ds = a.thru(debug('label'))
+		var ds = a.debug('label')
 
 		expect(calls.length).eq(0)
 
@@ -99,7 +98,7 @@ describe('Log', () =>
 	it('options', () =>
 	{
 		var a = Bud()
-		var ds = a.thru(debug({ label: 'label', depth: 1 }))
+		var ds = a.debug({ label: 'label', depth: 1 })
 
 		expect(calls.length).eq(0)
 
@@ -121,7 +120,7 @@ describe('Log', () =>
 	it('options', () =>
 	{
 		var a = Bud()
-		var ds = a.thru(debug({ depth: 1 }))
+		var ds = a.debug({ depth: 1 })
 
 		expect(calls.length).eq(0)
 
@@ -143,7 +142,7 @@ describe('Log', () =>
 	it('options', () =>
 	{
 		var a = Bud()
-		var ds = a.thru(debug('label', { depth: 3 }))
+		var ds = a.debug('label', { depth: 3 })
 
 		expect(calls.length).eq(0)
 

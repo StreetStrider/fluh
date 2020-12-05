@@ -50,6 +50,11 @@
     "index.js"
   ],
 
+  "browser":
+  {
+    "./lib/inspect.js": "./lib/inspect.browser.js"
+  },
+
   "dependencies":
   {
     "def-prop":
