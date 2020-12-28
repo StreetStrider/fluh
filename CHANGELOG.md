@@ -1,14 +1,14 @@
+* **Breaking change**: `filter_by` is moved to its own module `map/filter-by`.
 * Added `debug`.
 * `transfer` is now in index.
 * Added `delta`.
 * Added `promise`: `every`, `last` and `buffered` strategies.
-* **Breaking change**: `filter_by` is moved to its own module `map/filter-by`.
 * Added `raf`.
 * `resource` is now in index.
 
 ## `0.5.0` — 2020-05-13
-* Added `uniq`.
 * **Breaking change**: `on` now returns disposer, not the bud itself.
+* Added `uniq`.
 
 ## `0.4.0` — 2020-02-08
 * Added `sample`.
