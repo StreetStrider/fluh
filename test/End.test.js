@@ -2,6 +2,7 @@
 import Bud from 'lib/Bud'
 import Many from 'lib/Many'
 import End from 'lib/End'
+import { when_data } from 'map/when'
 
 import { state } from './Bud.test'
 
@@ -112,5 +113,25 @@ describe('End', () =>
 
 		expect(rs).deep.eq([ End ])
 		expect(s.callCount).eq(1)
+	})
+
+	it('finalizes correctly if cache is flushed', () =>
+	{
+		var a1 = Bud()
+		var b1 = a1.map(when_data(x => x + 1))
+
+		var a2 = Bud()
+		var b2 = a2.map(when_data(x => x + 1))
+
+		a1.emit(1)
+		a2.emit(1)
+
+		a1.emit(End)
+		a2.emit(End)
+
+		state(a1, { value: End })
+		state(b1, { value: End })
+		state(a2, { value: End })
+		state(b2, { value: End })
 	})
 })
