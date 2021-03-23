@@ -197,7 +197,9 @@ export function state (bud, descr = {})
 	expect(bud.value).deep.eq(value)
 	expect(bud.sample()).deep.eq(value)
 
-	expect(domain.deps.direct.get(bud)).deep.eq(deps)
-	expect(domain.deps.reverse.get_test(bud)).deep.eq(rev)
-	expect(domain.order(bud)).deep.eq(order)
+	var st = domain.state(bud)
+
+	expect(st.direct).deep.eq(deps)
+	expect(st.reverse).deep.eq(rev)
+	expect(st.order).deep.eq(order)
 }
