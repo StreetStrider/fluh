@@ -34,6 +34,7 @@
     "cover": "c8 -r text -r html --all -n lib/ -n map/ -n thru/ -n index.js npm run unit",
 
     "perf": "node --max-old-space-size=8192 -r esm perf/perf",
+    "leak": "node --inspect-brk perf/leak",
 
     "build": "gulp --final --to npm",
 
@@ -77,7 +78,7 @@
       "2",
  
     "metalpipe":
-      "1",
+      "~/Projects/metalpipe",
 
 
     "eslint":

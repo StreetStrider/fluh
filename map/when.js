@@ -55,7 +55,7 @@ export function when_data_all (fn_true)
 }
 
 
-import End  from '../lib/End'
+import End from '../lib/End'
 
 function is_end (value)
 {
