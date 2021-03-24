@@ -1,4 +1,7 @@
 # fluh
+
+[![npm|fluh](http://img.shields.io/badge/npm-fluh-CB3837.svg?style=flat-square)](https://www.npmjs.org/package/fluh)
+
 > Simple functional reactive library with atomic push strategy.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
