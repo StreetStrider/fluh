@@ -1,4 +1,5 @@
 /* eslint-disable no-debugger */
+/* eslint-disable no-unused-vars */
 
 var { Bud } = require('../release/npm')
 var { join } = require('../release/npm')
@@ -36,8 +37,8 @@ for (let n = 1; (n <= iters); n++)
 	let ds = c2.on(when_data((x) => { t += x }))
 
 	a.emit(1)
-	a.emit(End)
-	ds()
+	// a.emit(End)
+	// ds()
 }
 
 console.log('total', t)
@@ -61,8 +62,8 @@ for (let n = 1; (n <= iters); n++)
 	let ds = c.on(when_data((x) => { t += x }))
 
 	a.emit(1)
-	a.emit(End)
-	ds()
+	// a.emit(End)
+	// ds()
 }
 
 console.log('total', t)
