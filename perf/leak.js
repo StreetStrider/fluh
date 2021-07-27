@@ -3,20 +3,6 @@
 
 collect()
 
-function stat ()
-{
-	/* var heap = v8.getHeapStatistics().used_heap_size */
-	var heap = process.memoryUsage().heapUsed
-	var heap_mb = (heap / 1000 / 1000)
-
-	console.log('memory', heap_mb.toFixed(2))
-
-	if (heap_mb > 20)
-	{
-		throw new Error('leak_detected')
-	}
-}
-
 var { Bud } = require('../release/npm')
 var { join } = require('../release/npm')
 var { End } = require('../release/npm')
@@ -97,6 +83,27 @@ collect()
 function collect ()
 {
 	gc()
+	wait()
 	stat()
 	// debugger
+}
+
+function wait ()
+{
+	var now = process.hrtime()[0]
+	while (process.hrtime()[0] - now < 2) {}
+}
+
+function stat ()
+{
+	/* var heap = v8.getHeapStatistics().used_heap_size */
+	var heap = process.memoryUsage().heapUsed
+	var heap_mb = (heap / 1000 / 1000)
+
+	console.log('memory', heap_mb.toFixed(2))
+
+	if (heap_mb > 20)
+	{
+		throw new Error('leak_detected')
+	}
 }
