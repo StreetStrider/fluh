@@ -10,6 +10,7 @@ export { default as Same } from './lib/Same'
 export { default as Fin }  from './lib/Fin'
 
 export { default as join } from './lib/join'
+export { default as merge } from './lib/merge'
 export { default as transfer } from './lib/transfer'
 export { default as turnoff } from './lib/turnoff'
 export { default as resource } from './lib/resource'

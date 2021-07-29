@@ -6,7 +6,7 @@ describe('index', () =>
 {
 	it('exports', () =>
 	{
-		expect(Object.keys(index).length).eq(16)
+		expect(Object.keys(index).length).eq(17)
 
 		expect(index.Bud).a('function')
 
@@ -19,6 +19,7 @@ describe('index', () =>
 		expect(index.Fin).a('function')
 
 		expect(index.join).a('function')
+		expect(index.merge).a('function')
 		expect(index.transfer).a('function')
 		expect(index.turnoff).a('function')
 		expect(index.resource).a('function')
