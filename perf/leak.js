@@ -5,6 +5,7 @@ collect()
 
 var { Bud } = require('../release/npm')
 var { join } = require('../release/npm')
+var { merge } = require('../release/npm')
 var { End } = require('../release/npm')
 
 var { when_data } = require('../release/npm/map/when')
@@ -46,7 +47,7 @@ for (let n = 1; (n <= iters); n++)
 	// leak_holder.push(ds)
 }
 
-console.log('total', total)
+console.log('total #1', total)
 
 collect()
 
@@ -72,13 +73,43 @@ for (let n = 1; (n <= iters); n++)
 	// leak_holder.push(ds)
 }
 
-console.log('total', total)
+console.log('total #2', total)
+
+collect()
+
+var total = 0
+
+for (let n = 1; (n <= iters); n++)
+{
+	let inputs = []
+
+	for (let n = 1; (n <= 15); n++)
+	{
+		inputs.push(Bud())
+	}
+
+	let c = merge(...inputs)
+
+	let ds = c.on(when_data((x) => { total += x }))
+
+	for (let a of inputs)
+	{
+		a.emit(1)
+	}
+	// inputs[0].emit(End)
+	// ds()
+	// leak_holder.push(ds)
+}
+
+console.log('total #3', total)
 
 collect()
 
 leak_holder = null
 
 collect()
+
+// END
 
 function collect ()
 {
