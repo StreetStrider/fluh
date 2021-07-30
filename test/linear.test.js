@@ -61,7 +61,7 @@ describe('linear', () =>
 		})
 
 		expect(as2.callCount).eq(1)
-		expect(as2.callCount).eq(1)
+		expect(bs2.callCount).eq(1)
 	})
 
 	it('A(v) → B', () =>
