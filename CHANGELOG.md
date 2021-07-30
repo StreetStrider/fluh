@@ -1,4 +1,5 @@
 * **Breaking change**: `filter_by` is moved to its own module `map/filter-by`.
+* Added `merge`.
 * Added `debug`.
 * `transfer` is now in index.
 * Added `delta`.
