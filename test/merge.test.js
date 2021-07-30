@@ -457,8 +457,8 @@ describe('merge', () =>
 		a.emit(1)
 
 		expect(as.callCount).eq(1)
-		expect(ds.callCount).eq(1)
-		expect(rs).deep.eq([ 10 ])
+		expect(ds.callCount).eq(2)
+		expect(rs).deep.eq([ 10, 100 ])
 
 		state(a,
 		{
@@ -485,15 +485,15 @@ describe('merge', () =>
 
 		state(d,
 		{
-			value: 10,
+			value: 100,
 			rev: [ b, c ],
 		})
 
 		a.emit(2)
 
 		expect(as.callCount).eq(2)
-		expect(ds.callCount).eq(2)
-		expect(rs).deep.eq([ 10, 20 ])
+		expect(ds.callCount).eq(4)
+		expect(rs).deep.eq([ 10, 100, 20, 200 ])
 
 		state(a,
 		{
@@ -520,7 +520,7 @@ describe('merge', () =>
 
 		state(d,
 		{
-			value: 20,
+			value: 200,
 			rev: [ b, c ],
 		})
 	})
