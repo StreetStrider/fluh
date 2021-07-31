@@ -31,7 +31,7 @@
     "unit": "mocha -r esm -r console-ultimate -r test/globals test/*.test.js",
     "test": "npm run st && npm run unit",
 
-    "cover": "c8 -r text -r html --all -n lib/ -n map/ -n thru/ -n index.js npm run unit",
+    "cover": "c8 npm run unit",
 
     "perf": "node --max-old-space-size=8192 -r esm perf/perf",
     "leak": "node --inspect --expose-gc perf/leak",

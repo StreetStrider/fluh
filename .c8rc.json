@@ -1,0 +1,15 @@
+{
+  "reporter": [ "text", "html" ],
+  "all": true,
+  "exclude":
+  [
+    "lib/inspect.browser.js",
+    "test/",
+    "perf/",
+    "coverage/",
+    "release/",
+    ".eslintrc.js",
+    "gulpfile.js",
+    "start.js"
+  ]
+}
