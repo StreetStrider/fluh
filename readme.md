@@ -10,6 +10,7 @@
 - [API](#api)
   - [Bud](#bud)
   - [derivatives](#derivatives)
+  - [merging](#merging)
   - [high-order](#high-order)
   - [effects](#effects)
   - [resources](#resources)
@@ -120,6 +121,27 @@ var n = join(a, (a) => Many(a, a + 'x'))
 
 /* derive from single Bud `a` */
 var b = a.map((a) => a + 'b')
+```
+
+### merging
+
+* As an alternative to `join` where you join several streams by function of corresponding arity it is possible to just merge values of several streams into a single stream.
+* This is another way to create derivatives and it shares all the basic properties: sync, atomic, side effects run after all propagations.
+* The difference is that you can't use a joiner function and you must take care of `End` by your own, since any `End` will end the merged stream.
+* In case of multiple simultaneous inputs all of them would be passed down merged stream in the order of inputs from left to right. The resulting value would be the most right one.
+
+```js
+var a = Bud()
+var b = Bud()
+
+/* merge all from `a` and `b` */
+var c = merge(a, b)
+
+/* diamond is also possible */
+var a = Bud()
+var b = join(a, (a) => a + 'b')
+var c = join(a, (a) => a + 'c')
+var d = merge(b, c)
 ```
 
 ### high-order
