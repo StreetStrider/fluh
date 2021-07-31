@@ -293,16 +293,16 @@ describe('merge', () =>
 			rev: [ a, b, c ],
 		})
 
-		a.emit(1)
+		b.emit(1)
 
 		state(a,
 		{
-			value: 1,
 			deps:  [ d ],
 			order: [ d ],
 		})
 		state(b,
 		{
+			value: 1,
 			deps:  [ d ],
 			order: [ d ],
 		})
@@ -317,17 +317,17 @@ describe('merge', () =>
 			rev: [ a, b, c ],
 		})
 
-		b.emit(2)
+		a.emit(2)
 
 		state(a,
 		{
-			value: 1,
+			value: 2,
 			deps:  [ d ],
 			order: [ d ],
 		})
 		state(b,
 		{
-			value: 2,
+			value: 1,
 			deps:  [ d ],
 			order: [ d ],
 		})
@@ -386,6 +386,60 @@ describe('merge', () =>
 			value: 2,
 			rev: [ a, b ],
 		})
+	})
+
+	it('A(v),B(v) ↣ C', () =>
+	{
+		var a = Bud(1)
+		var b = Bud(2)
+
+		var c = merge(a, b)
+
+		var rs = []
+		c.on(value => rs.push(value))
+
+		state(a,
+		{
+			value: 1,
+			deps:  [ c ],
+			order: [ c ],
+		})
+		state(b,
+		{
+			value: 2,
+			deps:  [ c ],
+			order: [ c ],
+		})
+		state(c,
+		{
+			value: 2,
+			rev: [ a, b ],
+		})
+
+		expect(rs).deep.eq([ 2 ])
+
+		b.emit(3)
+		a.emit(4)
+
+		state(a,
+		{
+			value: 4,
+			deps:  [ c ],
+			order: [ c ],
+		})
+		state(b,
+		{
+			value: 3,
+			deps:  [ c ],
+			order: [ c ],
+		})
+		state(c,
+		{
+			value: 4,
+			rev: [ a, b ],
+		})
+
+		expect(rs).deep.eq([ 2, 3, 4 ])
 	})
 
 	it('A(End),B ↣ C', () =>
