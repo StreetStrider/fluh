@@ -302,4 +302,4 @@ fluh supports three strategies for resolving promises:
 fluh promise transformations treats promise rejections as data values. So, the transformations will emit mixed data/error content. You'll need `when_data` to handle them.
 
 ## License
-ISC, © Strider, 2020.
+ISC, © Strider, 2021.
