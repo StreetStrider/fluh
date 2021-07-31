@@ -1,8 +1,10 @@
 
 import Bud  from '../lib/Bud'
-import join from '../lib/join'
 import Noop from '../lib/Noop'
 import Many from '../lib/Many'
+
+import join  from '../lib/join'
+import merge from '../lib/merge'
 
 
 export default
@@ -21,6 +23,23 @@ export default
 		return () =>
 		{
 			A.emit(17)
+		}
+	},
+
+	merge ()
+	{
+		var n = 1
+
+		var a = Bud()
+		var b = Bud()
+		var c = merge(a, b)
+
+		c.on(() => n++)
+
+		return () =>
+		{
+			b.emit(17)
+			a.emit(-1)
 		}
 	},
 

@@ -1,6 +1,7 @@
 
 import { stream } from 'flyd'
 import { combine } from 'flyd'
+import { merge } from 'flyd'
 import { on } from 'flyd'
 
 import filter from 'flyd/module/filter'
@@ -22,6 +23,23 @@ export default
 		return () =>
 		{
 			Af(17)
+		}
+	},
+
+	merge ()
+	{
+		var n = 1
+
+		var a = stream()
+		var b = stream()
+		var c = merge(a, b)
+
+		on(() => n++, c)
+
+		return () =>
+		{
+			b(17)
+			a(-1)
 		}
 	},
 

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs'
 import { combineLatest } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { filter } from 'rxjs/operators'
+import { merge } from 'rxjs/operators'
 
 
 export default
@@ -23,6 +24,26 @@ export default
 		return () =>
 		{
 			d.subscribe(() => n++)
+		}
+	},
+
+	merge ()
+	{
+		var n = 1
+
+		var a = new Observable(sub =>
+		{
+			sub.next(-1)
+		})
+		var b = new Observable(sub =>
+		{
+			sub.next(17)
+		})
+		var c = a.pipe(merge(b))
+
+		return () =>
+		{
+			c.subscribe(() => n++)
 		}
 	},
 

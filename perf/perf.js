@@ -25,6 +25,14 @@ Suite('diamond',
 	add('diamond (most)', most.diamond),
 ])
 
+Suite('merge',
+[
+	add('merge (FLUH)', fluh.merge),
+	add('merge (flyd)', flyd.merge),
+	add('merge (rxjs)', rxjs.merge),
+	add('merge (most)', most.merge),
+])
+
 Suite('deep_linear',
 [
 	add('deep linear (FLUH)', fluh.deep_linear),

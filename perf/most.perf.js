@@ -3,6 +3,7 @@ import { at } from '@most/core'
 import { map } from '@most/core'
 import { filter } from '@most/core'
 import { combine } from '@most/core'
+import { merge } from '@most/core'
 import { tap } from '@most/core'
 
 import { runEffects } from '@most/core'
@@ -22,6 +23,22 @@ export default
 		var d = combine((a, c) => a + c + 1, A, c)
 
 		var run = tap(() => n++, d)
+
+		return () =>
+		{
+			runEffects(run, newDefaultScheduler())
+		}
+	},
+
+	merge ()
+	{
+		var n = 1
+
+		var a = at(2, -1)
+		var b = at(1, 17)
+		var c = merge(a, b)
+
+		var run = tap(() => n++, c)
 
 		return () =>
 		{
