@@ -11,7 +11,20 @@ import most from './most.perf'
 
 xSuite()
 
-Suite('special',
+Suite('zero',
+[
+	add('zero', () =>
+	{
+		var n = 1
+		var emit = (m) => { n = (n * m) }
+		return () =>
+		{
+			emit(-1)
+		}
+	}),
+])
+
+xSuite('special',
 [
 	add('deep linear', fluh.deep_linear),
 	add('deep linear many', fluh.deep_linear_many)
