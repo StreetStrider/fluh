@@ -14,12 +14,12 @@ describe('cache', () =>
 	{
 		var a = Bud()
 
-		expect(domain.order(a)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([])
 
 		var b = join(a, a => a)
 
-		expect(domain.order(a)).deep.eq([ b ])
-		expect(domain.order(b)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([ b ])
+		expect(domain.comp(b).order).deep.eq([])
 
 		var bs = spy()
 		b.on(bs)
@@ -29,9 +29,9 @@ describe('cache', () =>
 
 		var c = join(b, b => b)
 
-		expect(domain.order(a)).deep.eq([ b, c ])
-		expect(domain.order(b)).deep.eq([ c ])
-		expect(domain.order(c)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([ b, c ])
+		expect(domain.comp(b).order).deep.eq([ c ])
+		expect(domain.comp(c).order).deep.eq([])
 
 		var cs = spy()
 		c.on(cs)
@@ -43,10 +43,10 @@ describe('cache', () =>
 
 		var d = join(a, c, (a, c) => a + c)
 
-		expect(domain.order(a)).deep.eq([ b, c, d ])
-		expect(domain.order(b)).deep.eq([ c, d ])
-		expect(domain.order(c)).deep.eq([ d ])
-		expect(domain.order(d)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([ b, c, d ])
+		expect(domain.comp(b).order).deep.eq([ c, d ])
+		expect(domain.comp(c).order).deep.eq([ d ])
+		expect(domain.comp(d).order).deep.eq([])
 
 		var ds = spy()
 		d.on(ds)
@@ -62,12 +62,12 @@ describe('cache', () =>
 	{
 		var a = Bud()
 
-		expect(domain.order(a)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([])
 
 		var b = join(a, a => a)
 
-		expect(domain.order(a)).deep.eq([ b ])
-		expect(domain.order(b)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([ b ])
+		expect(domain.comp(b).order).deep.eq([])
 
 		var bs = spy()
 		b.on(bs)
@@ -77,9 +77,9 @@ describe('cache', () =>
 
 		var c = join(b, b => b)
 
-		expect(domain.order(a)).deep.eq([ b, c ])
-		expect(domain.order(b)).deep.eq([ c ])
-		expect(domain.order(c)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([ b, c ])
+		expect(domain.comp(b).order).deep.eq([ c ])
+		expect(domain.comp(c).order).deep.eq([])
 
 		var cs = spy()
 		c.on(cs)
@@ -94,8 +94,8 @@ describe('cache', () =>
 		expect(bs.callCount).eq(3)
 		expect(cs.callCount).eq(3)
 
-		expect(domain.order(a)).deep.eq([])
-		expect(domain.order(b)).deep.eq([])
-		expect(domain.order(c)).deep.eq([])
+		expect(domain.comp(a).order).deep.eq([])
+		expect(domain.comp(b).order).deep.eq([])
+		expect(domain.comp(c).order).deep.eq([])
 	})
 })
