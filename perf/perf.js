@@ -1,7 +1,7 @@
 
 import { add } from 'benny'
 import { suite } from 'benny'
-import { cycle, complete, save } from 'benny'
+import { cycle, complete } from 'benny'
 
 import fluh from './fluh.perf'
 import flyd from './flyd.perf'
@@ -81,11 +81,11 @@ function Suite (name, cases)
 
 		cycle(),
 		complete(),
-		save(
+		/*save(
 		{
 			folder: 'perf/chart',
 			file:   name,
 			format: 'chart.html',
-		}),
+		}),*/
 	)
 }
