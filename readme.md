@@ -2,7 +2,13 @@
 
 [![npm|fluh](http://img.shields.io/badge/npm-fluh-CB3837.svg?style=flat-square)](https://www.npmjs.org/package/fluh)
 
-> Simple functional reactive library with atomic push strategy.
+> Functional reactive library with atomic push strategy
+
+This library is designed to be easy to learn and simple to use. It may be meant as an opposite to other more complex systems which demand a lot from you even when solving simplest tasks.
+
+fluh is a sync-by-default, event-graph library with push-only strategy. This whole design is easy to reason about. Most of the time it will work as you expect it to work: reactive nodes pass values to dependents and fires effects after. All of this is in deterministic order.
+
+The API is designed in a composable way, which means that it is really easy to create new transformations and utilities without tapping into the core. The API borrows heavily from functional paradigm, but without becoming it a burden. You still can use impure and stateful code; there is chainable API and you don't need to use data-last functions.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -57,7 +63,8 @@ so you are free to emit `null` or `undefined` if you really want to.
 * When Bud acquire value it propagates it to *effects* and *dependents*. If Bud already has value, newly created effects
 and dependents will be notified immediately with that value.
 * Effects run after all dependents had been updated, so, from effects' perspective the graph's all current values change atomically and are always in a consistent state.
-* All schema is sync by default, but you are free to use async operators (defer, delay, raf) or create your own (like throttle, debounce, nextTick…).
+* Data graph is sync by default, but you are free to use async operators (defer, delay, raf) or create your own (like throttle, debounce, nextTick…).
+* Data graph is multicast — multiple dependencies does not create copies of the source and are just subscribed to that single source. It also solves [diamond problem](#atomic-updates) for you.
 * Data graph is optimized for static usage, however, you can create new streams dynamically. Streams' disposal triggered by emitting `End` on a stream. If `End` is received, ordering is cleaned from terminated stream as well as certain streams' cross-references, which opens a way for a garbage collection. Streams that are both terminated and non-referenced by user become able to be garbage collected. In static graph memory consumption would remain on a stable level.
 * Can be pure or impure, depending on the usage.
 
