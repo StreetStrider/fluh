@@ -4,11 +4,11 @@
 
 > Functional reactive library with atomic push strategy
 
-This library is designed to be easy to learn and simple to use. It may be meant as an opposite to other more complex systems which demand a lot from you even when solving simplest tasks.
+This library is designed to be easy to learn and simple to use. It may be meant as an answer to more complex systems which demand a lot from you even while solving simplest tasks.
 
-fluh is a sync-by-default, event-graph library with push-only strategy. This whole design is easy to reason about. Most of the time it will work as you expect it to work: reactive nodes pass values to dependents and fires effects after. All of this is in deterministic order.
+fluh is sync-by-default event-graph library with only push strategy. This particular design is easy to reason about. Most of the time it will work just as you expect it to work: reactive nodes pass values to dependents and fires effects after that. The order of firing is deterministic and straighforward.
 
-The API is designed in a composable way, which means that it is really easy to create new transformations and utilities without tapping into the core. The API borrows heavily from functional paradigm, but without becoming it a burden. You still can use impure and stateful code; there is chainable API and you don't need to use data-last functions.
+The API is designed in a composable way, which means that it is really easy to create new transformations and utilities without tapping into the core. The API borrows heavily from functional paradigm, but without becoming it a burden. You still can use impure and stateful code, if you need. You can write code from left to right: there is chainable API and you don't need to use data-last functions if you don't want to.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
