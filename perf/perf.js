@@ -34,11 +34,11 @@ Suite('diamond',
 [
 	add('diamond (FLUH)', fluh.diamond),
 	add('diamond (flyd)', flyd.diamond),
-	add('diamond (rxjs)', rxjs.diamond),
+	// add('diamond (rxjs)', rxjs.diamond),
 	add('diamond (most)', most.diamond),
 ])
 
-Suite('merge',
+xSuite('merge',
 [
 	add('merge (FLUH)', fluh.merge),
 	add('merge (flyd)', flyd.merge),
@@ -46,7 +46,7 @@ Suite('merge',
 	add('merge (most)', most.merge),
 ])
 
-Suite('deep_linear',
+xSuite('deep_linear',
 [
 	add('deep linear (FLUH)', fluh.deep_linear),
 	add('deep linear (flyd)', flyd.deep_linear),
@@ -54,7 +54,7 @@ Suite('deep_linear',
 	add('deep linear (most)', most.deep_linear),
 ])
 
-Suite('triangle_triangle',
+xSuite('triangle_triangle',
 [
 	add('triangle in triangle (FLUH)', fluh.triangle_triangle),
 	add('triangle in triangle (flyd)', flyd.triangle_triangle),
@@ -62,7 +62,7 @@ Suite('triangle_triangle',
 	add('triangle in triangle (most)', most.triangle_triangle),
 ])
 
-Suite('shortcut',
+xSuite('shortcut',
 [
 	add('shortcut (FLUH)', fluh.shortcut),
 	add('shortcut (flyd)', flyd.shortcut),

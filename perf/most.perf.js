@@ -9,24 +9,38 @@ import { tap } from '@most/core'
 import { runEffects } from '@most/core'
 import { newDefaultScheduler } from '@most/scheduler'
 
+import { createAdapter } from '@most/adapter'
 
 export default
 {
 	diamond ()
 	{
+		var rs
+
 		var n = 1
 
-		var A = at(1, 17)
+		// var A = at(1, 17)
+		var [ emit, A ] = createAdapter()
 
 		var b = map(a => a + 1, A)
 		var c = map(b => b + 1, b)
 		var d = combine((a, c) => a + c + 1, A, c)
 
-		var run = tap(() => n++, d)
+		// var run = tap(() => n++, d)
+		// /*
+		var run = tap(() => { n = n + 1; rs() }, d)
+		runEffects(run, newDefaultScheduler())
+		//*/
 
 		return () =>
 		{
-			runEffects(run, newDefaultScheduler())
+			// return runEffects(run, newDefaultScheduler())
+
+			// /*
+			var p = new Promise(rs_new => { rs = rs_new })
+			emit(17)
+			return p
+			//*/
 		}
 	},
 
