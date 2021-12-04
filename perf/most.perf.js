@@ -1,5 +1,5 @@
+/* eslint-disable max-statements-per-line */
 
-import { at } from '@most/core'
 import { map } from '@most/core'
 import { filter } from '@most/core'
 import { combine } from '@most/core'
@@ -11,36 +11,46 @@ import { newDefaultScheduler } from '@most/scheduler'
 
 import { createAdapter } from '@most/adapter'
 
+function Handle ()
+{
+	var [ emit, source ] = createAdapter()
+	var handle =
+	{
+		rs: null,
+		source,
+		next
+	}
+
+	function next (value)
+	{
+		var p = new Promise(rs => { handle.rs = rs })
+		emit(value)
+		return p
+	}
+
+	return handle
+}
+
+
 export default
 {
 	diamond ()
 	{
-		var rs
-
 		var n = 1
 
-		// var A = at(1, 17)
-		var [ emit, A ] = createAdapter()
+		var handle = Handle()
+		var A = handle.source
 
 		var b = map(a => a + 1, A)
 		var c = map(b => b + 1, b)
 		var d = combine((a, c) => a + c + 1, A, c)
 
-		// var run = tap(() => n++, d)
-		// /*
-		var run = tap(() => { n = n + 1; rs() }, d)
+		var run = tap(() => { n = (n + 1); handle.rs() }, d)
 		runEffects(run, newDefaultScheduler())
-		//*/
 
 		return () =>
 		{
-			// return runEffects(run, newDefaultScheduler())
-
-			// /*
-			var p = new Promise(rs_new => { rs = rs_new })
-			emit(17)
-			return p
-			//*/
+			return handle.next(17)
 		}
 	},
 
@@ -48,15 +58,20 @@ export default
 	{
 		var n = 1
 
-		var a = at(2, -1)
-		var b = at(1, 17)
+		var h1 = Handle()
+		var a = h1.source
+
+		var h2 = Handle()
+		var b = h2.source
+
 		var c = merge(a, b)
 
-		var run = tap(() => n++, c)
+		var run = tap(() => { n = (n + 1); (h1.rs || h2.rs)() }, c)
+		runEffects(run, newDefaultScheduler())
 
 		return () =>
 		{
-			runEffects(run, newDefaultScheduler())
+			return h1.next(2), h2.next(17)
 		}
 	},
 
@@ -64,19 +79,21 @@ export default
 	{
 		var n = 1
 
-		var a = at(1, 17)
+		var handle = Handle()
+		var a = handle.source
 
 		var b = a
-		for (var n = 0; n < 100; n++)
+		for (var N = 0; N < 100; N++)
 		{
 			b = map(b => b + 1, b)
 		}
 
-		var run = tap(() => n++, b)
+		var run = tap(() => { n = (n + 1); handle.rs() }, b)
+		runEffects(run, newDefaultScheduler())
 
 		return () =>
 		{
-			runEffects(run, newDefaultScheduler())
+			return handle.next(17)
 		}
 	},
 
@@ -84,7 +101,8 @@ export default
 	{
 		var n = 1
 
-		var a = at(1, 17)
+		var handle = Handle()
+		var a = handle.source
 
 		var b1 = map(a => a + 1, a)
 		var c1 = combine((a, b) => a + b + 1, a, b1)
@@ -92,11 +110,12 @@ export default
 		var b2 = map(b => b + 1, b1)
 		var c2 = combine((b, c) => b + c + 1, b2, c1)
 
-		var run = tap(() => n++, c2)
+		var run = tap(() => { n = (n + 1); handle.rs() }, c2)
+		runEffects(run, newDefaultScheduler())
 
 		return () =>
 		{
-			runEffects(run, newDefaultScheduler())
+			return handle.next(17)
 		}
 	},
 
@@ -104,12 +123,13 @@ export default
 	{
 		var n = 1
 
-		var a = at(1, 17)
+		var handle = Handle()
+		var a = handle.source
 
 		var b = a
-		for (var n = 0; n < 100; n++)
+		for (var N = 0; N < 100; N++)
 		{
-			if (n === 10)
+			if (N === 10)
 			{
 				b = filter(() => false, b)
 			}
@@ -119,11 +139,12 @@ export default
 			}
 		}
 
-		var run = tap(() => n++, b)
+		var run = tap(() => { n = (n + 1); handle.rs() }, b)
+		runEffects(run, newDefaultScheduler())
 
 		return () =>
 		{
-			runEffects(run, newDefaultScheduler())
+			return handle.next(17)
 		}
 	},
 }
