@@ -1,8 +1,10 @@
 {
-     "name": "fluh",
-  "version": "1.0.0-rc1",
+  "private": true,
 
-  "description": "simple functional reactive library with atomic push strategy",
+     "name": "fluh",
+  "version": "0.6.0",
+
+  "description": "simple and easy functional reactive library with atomic push strategy",
 
   "author":  "Strider <strange.transistor@gmail.com>",
   "license": "ISC",
@@ -78,6 +80,9 @@
       "2",
  
     "metalpipe":
+      "https://github.com/StrangeTransistor/metalpipe.git#bccfd822c84892bca6aa3ac9c489dd9f1db0dea1",
+
+    "metalpipe":
       "~/Projects/metalpipe",
 
 
@@ -110,7 +115,7 @@
 
 
     "benny":
-      "^3.6",
+      "^3.7",
 
 
     "dependency-cruiser":
