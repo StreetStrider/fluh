@@ -1,6 +1,6 @@
 
-import Bud  from '../lib/Bud'
-import Noop from '../lib/Noop'
+import Bud from '../lib/Bud'
+import Nothing from '../lib/Nothing'
 import Many from '../lib/Many'
 
 import join  from '../lib/join'
@@ -114,7 +114,7 @@ export default
 		{
 			if (n === 10)
 			{
-				b = join(b, Noop)
+				b = join(b, b => ((b % 2) && (b + 1) || Nothing))
 			}
 			else
 			{
@@ -126,6 +126,7 @@ export default
 
 		return () =>
 		{
+			a.emit(18)
 			a.emit(17)
 		}
 	},

@@ -66,12 +66,13 @@ export default
 
 		var c = merge(a, b)
 
-		var run = tap(() => { n = (n + 1); (h1.rs || h2.rs)() }, c)
+		var run = tap(x => { n = (n + 1); if (x % 2) h1.rs(); else h2.rs() }, c)
 		runEffects(run, newDefaultScheduler())
 
-		return () =>
+		return async () =>
 		{
-			return h1.next(2), h2.next(17)
+			await h1.next(17)
+			await h2.next(18)
 		}
 	},
 
@@ -124,14 +125,14 @@ export default
 		var n = 1
 
 		var handle = Handle()
-		var a = handle.source
 
-		var b = a
+		var b = handle.source
 		for (var N = 0; N < 100; N++)
 		{
 			if (N === 10)
 			{
-				b = filter(() => false, b)
+				var run1 = tap(b => ((b % 2) || handle.rs()), b)
+				b = filter(b => Boolean(b % 2), b)
 			}
 			else
 			{
@@ -139,12 +140,15 @@ export default
 			}
 		}
 
-		var run = tap(() => { n = (n + 1); handle.rs() }, b)
-		runEffects(run, newDefaultScheduler())
+		var run2 = tap(() => { n = (n + 1); handle.rs() }, b)
 
-		return () =>
+		runEffects(run1, newDefaultScheduler())
+		runEffects(run2, newDefaultScheduler())
+
+		return async () =>
 		{
-			return handle.next(17)
+			await handle.next(18)
+			await handle.next(17)
 		}
 	},
 }

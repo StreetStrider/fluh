@@ -94,7 +94,7 @@ export default
 		{
 			if (n === 10)
 			{
-				b = filter(() => false, b)
+				b = filter(b => Boolean(b % 2), b)
 			}
 			else
 			{
@@ -106,6 +106,7 @@ export default
 
 		return () =>
 		{
+			a(18)
 			a(17)
 		}
 	},
