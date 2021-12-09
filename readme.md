@@ -82,10 +82,10 @@ Bud is a main FRP unit.
 
 ```js
 /* empty Bud (Nothing) */
-var bud = Bud()
+const bud = Bud()
 
 /* Bud with value */
-var bud = Bud('value')
+const bud = Bud('value')
 
 /* emit new values */
 bud.emit('value 1').emit('value 2')
@@ -93,7 +93,7 @@ bud.emit('value 1').emit('value 2')
 
 ### derivatives
 
-* Create derived streams by using `var new_bud = join(...buds, (...bud_values) => new_value)`.
+* Create derived streams by using `const new_bud = join(...buds, (...bud_values) => new_value)`.
 * `emit`'s are propagated through the dependents.
 * By using `join` we guarantee that every dependency changes at most once for single `emit`. See [atomic updates](#atomic-updates).
 * `join(bud, fn)` is a `map`.
@@ -106,22 +106,22 @@ it's better to do it as an effect (`on`).
 * `bud.map(fn)` is a shortcut for `join` deriving from a single Bud.
 
 ```js
-var a = Bud()
+const a = Bud()
 
 /* derive from `a` (map) */
-var b = join(a, (a) => a + 'b')
+const b = join(a, (a) => a + 'b')
 
 /* derive from both `a` and `b` */
-var c = join(a, b, (a, b) => a + b + 'c')
+const c = join(a, b, (a, b) => a + b + 'c')
 
 /* skip (filter out, reject) values */
-var n = join(a, (a) => Nothing)
+const n = join(a, (a) => Nothing)
 
 /* return two values for each input (like transducer) */
-var n = join(a, (a) => Many(a, a + 'x'))
+const n = join(a, (a) => Many(a, a + 'x'))
 
 /* derive from single Bud `a` */
-var b = a.map((a) => a + 'b')
+const b = a.map((a) => a + 'b')
 ```
 
 ### merging
@@ -132,17 +132,17 @@ var b = a.map((a) => a + 'b')
 * In case of multiple simultaneous inputs all of them would be passed down merged stream in the order of inputs from left to right. The resulting value would be the most right one.
 
 ```js
-var a = Bud()
-var b = Bud()
+const a = Bud()
+const b = Bud()
 
 /* merge all from `a` and `b` */
-var c = merge(a, b)
+const c = merge(a, b)
 
 /* diamond is also possible */
-var a = Bud()
-var b = join(a, (a) => a + 'b')
-var c = join(a, (a) => a + 'c')
-var d = merge(b, c)
+const a = Bud()
+const b = join(a, (a) => a + 'b')
+const c = join(a, (a) => a + 'c')
+const d = merge(b, c)
 ```
 
 ### high-order
@@ -151,10 +151,10 @@ var d = merge(b, c)
 * high-order `thru` transformers good when you can't express transformation in terms of `map`.
 
 ```js
-var a = Bud()
+const a = Bud()
 
 /* delay must return function from Bud to Bud */
-var b = a.thru(delay(50))
+const b = a.thru(delay(50))
 ```
 
 ### effects
@@ -167,13 +167,13 @@ var b = a.thru(delay(50))
 * `bud.on(fn)` returns disposer function.
 
 ```js
-var a = Bud()
+const a = Bud()
 
 /* subscribe to changes */
-var ds = a.on((value) => console.log('a:', value))
+const disposer = a.on((value) => console.log('a:', value))
 
 /* disposing of the effect */
-ds()
+disposer()
 ```
 
 ### resources
@@ -184,14 +184,11 @@ ds()
 
 ```js
 /* create Bud from DOM Event */
-function dom_event (element, eventname)
-{
-	return resource(emit =>
-	{
+function dom_event (element, eventname) {
+	return resource((emit) => {
 		element.addEventListener(eventname, emit)
 
-		return function disposer ()
-		{
+		return function disposer () {
 			if (! element) return
 
 			element.removeEventListener(eventname, emit)
@@ -204,14 +201,11 @@ function dom_event (element, eventname)
 }
 
 /* create Bud from interval timer */
-function interval (ms)
-{
-	return resource(emit =>
-	{
-		var t = setInterval(emit, ms)
+function interval (ms) {
+	return resource((emit) => {
+		let t = setInterval(emit, ms)
 
-		return function disposer ()
-		{
+		return function disposer () {
 			if (! t) return
 
 			clearInterval(t)
@@ -244,21 +238,18 @@ fluh's `map` works in three ways:
 So `map` covers all cases for `map`, `filter` and `flatMap` in a common manner.
 
 ### high-order transformations
-In practice, `map` covers most of the cases, but there're may be advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `var new_bud = transform(bud)`.
+In practice, `map` covers most of the cases, but there're may be advanced tasks when you need to take a Bud, transform it (for instance, involving state) and return modified Bud: `const new_bud = transform(bud)`.
 
 In order to do this, fluh has `bud.thru(transform)` which accepts function from one Bud to another and returns result of invocation that function on this particular Bud.
 
 Here's the example of how it can be used to make Bud async by default (by creating new dependent Bud which receives updates asynchronously):
 
 ```js
-function defer (bud)
-{
-	var deferred = bud.constructor()
+function defer (bud) {
+	const deferred = bud.constructor()
 
-	bud.on(value =>
-	{
-		setTimeout(() =>
-		{
+	bud.on((value) => {
+		setTimeout(() => {
 			deferred.emit(value)
 		}
 		, 0)
@@ -270,17 +261,15 @@ function defer (bud)
 
 Then use it via `thru`:
 ```js
-var a = Bud(1)
-var b = a.thru(defer)
+const a = Bud(1)
+const b = a.thru(defer)
 a.emit(2)
 ```
 
 fluh exposes special helper for easier implementation of high-order transformations, called `lib/trasfer`. In terms of `transfer` previous `defer` example may be implemented in such manner:
 ```js
-function defer (bud)
-{
-	return transfer(bud, (value, emit) =>
-	{
+function defer (bud) {
+	return transfer(bud, (value, emit) => {
 		setTimeout(() => emit(value), 0)
 	})
 }
@@ -289,12 +278,11 @@ function defer (bud)
 ### handling errors
 fluh does not capture throws by default, but you can make any function to do that, by decorating it with `capture`:
 ```js
-var a = Bud()
+const a = Bud()
 
 import { capture } from 'fluh'
 
-var b = a.map(capture(x =>
-{
+const b = a.map(capture((x) => {
 	/* throws in this function will be captured: */
 	/* … throw e … */
 
@@ -311,7 +299,7 @@ import { when_data } from './map/when'
 /* `when_data` allows to work with data in pure manner, */
 /* passing past any `Error` instances and `End` */
 /* only real data passed to target function */
-var c = b.map(when_data(b => b + 1))
+const c = b.map(when_data((b) => b + 1))
 ```
 
 There's no special error channel, use mixed content in combine with helper above if you need to handle errors. If you want a more pure approach, bring your own `Either`/`Result` container.
