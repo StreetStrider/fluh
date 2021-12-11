@@ -35,7 +35,7 @@
 
     "cover": "c8 npm run unit",
 
-    "perf": "node --max-old-space-size=8192 -r esm perf/perf",
+    "perf": "node -r esm perf/perf",
     "leak": "node --inspect --expose-gc perf/leak",
 
     "build": "gulp --final --to npm",
