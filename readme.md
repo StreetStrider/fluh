@@ -26,6 +26,7 @@ The API is designed in a composable way, which means that it is really easy to c
   - [high-order transformations](#high-order-transformations)
   - [handling errors](#handling-errors)
   - [handling promises](#handling-promises)
+- [examples](#examples)
 - [License](#license)
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -313,6 +314,9 @@ fluh supports three strategies for resolving promises:
 * `buffered(N)` — store `N` recent promises and resolve them in order. If some promises was not resolved and they exceed `N` when new promises received, the older ones will be ignored. In that case, the resolution order is preserved, and up to `N` simultaneous racing promises are guaranteed to be passed through, however, if more simultaneous promises received, some of them still be lost.
 
 fluh promise transformations treats promise rejections as data values. So, the transformations will emit mixed data/error content. You'll need `when_data` to handle them.
+
+## examples
+Learn by [examples](examples/). You can run `set-interval` example via `npm run example set-interval`.
 
 ## License
 ISC, © Strider, 2021.
