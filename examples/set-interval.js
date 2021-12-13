@@ -30,7 +30,7 @@ const source = interval(50)
 
 source
 .map(when_data((x) => x * x - 1))
-.on((x) => console.info('+', x))
+.on(console.log)
 
 source
 .on((x) => { if (x == 5) source.emit(End) })

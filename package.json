@@ -40,7 +40,7 @@
 
     "build": "gulp --final --to npm",
 
-    "example": "cd examples; node -r esm",
+    "example": "cd examples; node -r esm -r console-ultimate",
 
     "depcruise": "depcruise --exclude '^(node_modules|release|test|perf|coverage|start.js|.eslint|gulp)' --output-type dot . > graph.dot",
     "diagrams":  "diagrams dot graph.dot graph.png",

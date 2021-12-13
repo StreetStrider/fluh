@@ -28,7 +28,7 @@ const emitter = new EventEmitter
 const source = fromEvent(emitter, 'click')
 
 source
-.on((x) => console.info('+', x))
+.on(console.log)
 
 source
 .on(when_data((e) => { if (e.x == 5) source.emit(End) }))
@@ -39,4 +39,4 @@ emitter.emit('click', { x: 3 })
 emitter.emit('click', { x: 4 })
 emitter.emit('click', { x: 5 })
 
-console.log('listeners:', emitter.listeners('click'))
+console.info('listeners:', emitter.listeners('click'))
