@@ -4,6 +4,23 @@ import { resource } from 'fluh'
 import { when_data } from 'fluh/map/when'
 import { End } from 'fluh'
 
+const emitter = new EventEmitter
+const source = fromEvent(emitter, 'click') /* source from EventEmitter */
+
+source
+.on(console.log)
+
+source
+.on(when_data((e) => { if (e.x == 5) source.emit(End) }))
+
+emitter.emit('click', { x: 1 })
+emitter.emit('click', { x: 2 })
+emitter.emit('click', { x: 3 })
+emitter.emit('click', { x: 4 })
+emitter.emit('click', { x: 5 })
+
+console.info('listeners:', emitter.listeners('click'))
+
 function fromEvent (emitter, eventName) {
 	return resource((emit) => {
 		console.info('resource initialized')
@@ -22,21 +39,3 @@ function fromEvent (emitter, eventName) {
 		}
 	})
 }
-
-
-const emitter = new EventEmitter
-const source = fromEvent(emitter, 'click')
-
-source
-.on(console.log)
-
-source
-.on(when_data((e) => { if (e.x == 5) source.emit(End) }))
-
-emitter.emit('click', { x: 1 })
-emitter.emit('click', { x: 2 })
-emitter.emit('click', { x: 3 })
-emitter.emit('click', { x: 4 })
-emitter.emit('click', { x: 5 })
-
-console.info('listeners:', emitter.listeners('click'))
