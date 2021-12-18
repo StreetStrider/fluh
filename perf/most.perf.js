@@ -18,7 +18,7 @@ function Handle ()
 	{
 		rs: null,
 		source,
-		next
+		next,
 	}
 
 	function next (value)
