@@ -27,7 +27,7 @@ await Suite('zero',
 	}),
 ])
 
-await Suite('special',
+await xSuite('special',
 [
 	add('deep linear', fluh.deep_linear),
 	add('deep linear many', fluh.deep_linear_many),
@@ -38,7 +38,7 @@ await Suite('diamond',
 	add('diamond (FLUH)', fluh.diamond),
 	add('diamond (flyd)', flyd.diamond),
 	add('diamond (most)', most.diamond),
-	// add('diamond (rxjs)', rxjs.diamond),
+	add('diamond (rxjs)', rxjs.diamond),
 ])
 
 await Suite('merge',
@@ -62,7 +62,7 @@ await Suite('triangle_triangle',
 	add('triangle in triangle (FLUH)', fluh.triangle_triangle),
 	add('triangle in triangle (flyd)', flyd.triangle_triangle),
 	add('triangle in triangle (most)', most.triangle_triangle),
-	// add('triangle in triangle (rxjs)', rxjs.triangle_triangle),
+	add('triangle in triangle (rxjs)', rxjs.triangle_triangle),
 ])
 
 await Suite('shortcut',
@@ -70,7 +70,7 @@ await Suite('shortcut',
 	add('shortcut (FLUH)', fluh.shortcut),
 	add('shortcut (flyd)', flyd.shortcut),
 	add('shortcut (most)', most.shortcut),
-	// add('shortcut (rxjs)', rxjs.shortcut),
+	add('shortcut (rxjs)', rxjs.shortcut),
 ])
 
 }

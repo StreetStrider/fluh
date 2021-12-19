@@ -8,10 +8,12 @@ import { merge } from 'rxjs/operators'
 
 function Handle ()
 {
-	var emit
+	var emits = new Set
 	var source = new Observable(sub =>
 	{
-		emit = (v) => sub.next(v)
+		var emit = (v) => sub.next(v)
+		emits.add(emit)
+		return () => emits.delete(emit)
 	})
 
 	var handle =
@@ -24,7 +26,7 @@ function Handle ()
 	function next (value)
 	{
 		var p = new Promise(rs => { handle.rs = rs })
-		emit(value)
+		emits.forEach(emit => emit(value))
 		return p
 	}
 
@@ -43,7 +45,6 @@ export default
 
 		var b = A.pipe(map(a => a + 1))
 		var c = b.pipe(map(b => b + 1))
-		// cannot handle this:
 		var d = combineLatest(A, c).pipe(map(([A, c]) => A + c + 1))
 
 		d.subscribe(() => { n = (n + 1); handle.rs() })
@@ -103,7 +104,6 @@ export default
 		var a = handle.source
 
 		var b1 = a.pipe(map(a => a + 1))
-		// cannot handle this:
 		var c1 = combineLatest(a, b1).pipe(map(([a, b]) => a + b + 1))
 
 		var b2 = b1.pipe(map(b => b + 1))
@@ -129,7 +129,6 @@ export default
 			if (N === 10)
 			{
 				b.subscribe(b => ((b % 2) || handle.rs()))
-				// cannot handle this:
 				b = b.pipe(filter(b => Boolean(b % 2)))
 			}
 			else
