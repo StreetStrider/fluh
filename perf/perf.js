@@ -27,7 +27,7 @@ await Suite('zero',
 	}),
 ])
 
-await xSuite('special',
+await Suite('special',
 [
 	add('deep linear', fluh.deep_linear),
 	add('deep linear many', fluh.deep_linear_many),
@@ -46,7 +46,7 @@ await Suite('merge',
 	add('merge (FLUH)', fluh.merge),
 	add('merge (flyd)', flyd.merge),
 	add('merge (most)', most.merge),
-	// add('merge (rxjs)', rxjs.merge),
+	add('merge (rxjs)', rxjs.merge),
 ])
 
 await Suite('deep_linear',
