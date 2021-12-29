@@ -12,6 +12,9 @@ export type OptionsDebug = InspectOptions &
 	label: string,
 }
 
+export type Product <T> = (T | Many<T> | Nothing)
+export type Producer <T, R = T> = (value: T) => Product<R>
+
 export type Bud <T, T_Init = T> =
 {
 	id: string,
@@ -20,9 +23,9 @@ export type Bud <T, T_Init = T> =
 
 	constructor: typeof Bud,
 
-	emit (value: (T | Many<T> | Nothing)): Bud<T>,
+	emit (value: Product<T>): Bud<T>,
 	on (fn: (value: T) => void): Disposer,
-	map <R> (fn: (value: T) => (R | Many<R> | Nothing)): Bud<R>,
+	map <R> (fn: Producer<T, R>): Bud<R>,
 	thru <R> (fn: (bud: Bud<T>) => Bud<R>): Bud<R>,
 
 	debug (label: string, options?: InspectOptions): Disposer,

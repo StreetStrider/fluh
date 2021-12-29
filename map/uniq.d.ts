@@ -1,4 +1,4 @@
 
-import { Nothing } from '../lib/Nothing'
+import { Producer } from '../lib/Bud'
 
-export default function <T> (): (value: T) => (T | Nothing)
+export default function <T> (): Producer<T>

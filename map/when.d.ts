@@ -1,5 +1,4 @@
 
-import { Nothing } from '../lib/Nothing'
 import { End } from '../lib/End'
 
 export type Predicate <Args extends any[]> = (...args: Args) => boolean

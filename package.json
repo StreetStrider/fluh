@@ -31,9 +31,9 @@
 
     "st":   "eslint .",
     "unit": "mocha -r esm -r console-ultimate -r test/globals test/*.test.js",
-    "ts":   "tsc",
+    "ts":   "tsc && npm run dts",
     "dts":  "dtslint --expectOnly --localTs ./node_modules/typescript/lib test/type",
-    "test": "npm run st && npm run ts && npm run dts && npm run unit",
+    "test": "npm run st && npm run ts && npm run unit",
 
     "cover": "c8 npm run unit",
 
