@@ -1,3 +1,5 @@
+console.info('example: event-emitter')
+
 import { EventEmitter } from 'events'
 
 import { resource } from 'fluh'

@@ -1,3 +1,5 @@
+console.info('example: set-interval')
+
 import { resource } from 'fluh'
 import { when_data } from 'fluh/map/when'
 import { End } from 'fluh'

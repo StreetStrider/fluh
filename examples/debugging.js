@@ -1,3 +1,5 @@
+console.info('example: debugging')
+
 import { Bud } from 'fluh'
 import { join } from 'fluh'
 import { when_data_all } from 'fluh/map/when'

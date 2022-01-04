@@ -1,3 +1,5 @@
+console.info('example: delay')
+
 import { transfer } from 'fluh'
 import { Bud } from 'fluh'
 import { End } from 'fluh'

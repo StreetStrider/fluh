@@ -1,3 +1,5 @@
+console.info('example: reduce')
+
 import { when_data } from 'fluh/map/when'
 import reduce from 'fluh/map/reduce'
 import { Bud } from 'fluh'
