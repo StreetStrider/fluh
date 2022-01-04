@@ -1,12 +1,12 @@
 
 var noop = () => void 0
 
-import resource from 'lib/resource'
+import resource from 'fluh/lib/resource'
 
-import End from 'lib/End'
-import concat from 'lib/concat'
-import { when_data } from 'map/when'
-import turnoff from 'lib/turnoff'
+import End from 'fluh/lib/End'
+import concat from 'fluh/lib/concat'
+import { when_data } from 'fluh/map/when'
+import turnoff from 'fluh/lib/turnoff'
 
 import { expect_bud } from './Bud.test'
 

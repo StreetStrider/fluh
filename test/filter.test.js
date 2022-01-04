@@ -1,11 +1,11 @@
 
-import Bud from 'lib/Bud'
-import End from 'lib/End'
+import Bud from 'fluh/lib/Bud'
+import End from 'fluh/lib/End'
 
-import { when_data } from 'map/when'
+import { when_data } from 'fluh/map/when'
 
-import filter from 'map/filter'
-import filter_by from 'map/filter-by'
+import filter from 'fluh/map/filter'
+import filter_by from 'fluh/map/filter-by'
 
 
 describe('filter', () =>

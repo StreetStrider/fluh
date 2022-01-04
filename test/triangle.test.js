@@ -1,12 +1,12 @@
 /* eslint-disable template-curly-spacing */
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
-import Nothing from 'lib/Nothing'
-import Many from 'lib/Many'
-import End from 'lib/End'
+import Nothing from 'fluh/lib/Nothing'
+import Many from 'fluh/lib/Many'
+import End from 'fluh/lib/End'
 
-import join from 'lib/join'
+import join from 'fluh/lib/join'
 
 import { state } from './Bud.test'
 

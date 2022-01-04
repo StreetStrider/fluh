@@ -1,5 +1,5 @@
 
-import tap from 'lib/tap'
+import tap from 'fluh/lib/tap'
 
 
 describe('tap', () =>

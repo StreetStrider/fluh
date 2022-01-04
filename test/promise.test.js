@@ -1,10 +1,10 @@
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
-import * as promise from 'thru/promise'
+import * as promise from 'fluh/thru/promise'
 
-import End from 'lib/End'
-import concat from 'lib/concat'
+import End from 'fluh/lib/End'
+import concat from 'fluh/lib/concat'
 
 
 describe('promise', () =>

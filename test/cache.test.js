@@ -1,11 +1,11 @@
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
-import End from 'lib/End'
+import End from 'fluh/lib/End'
 
-import join from 'lib/join'
+import join from 'fluh/lib/join'
 
-import domain from 'lib/domain'
+import domain from 'fluh/lib/domain'
 
 
 describe('cache', () =>

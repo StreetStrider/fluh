@@ -1,9 +1,9 @@
 
-import Bud from 'lib/Bud'
-import Nothing from 'lib/Nothing'
-import Many from 'lib/Many'
+import Bud from 'fluh/lib/Bud'
+import Nothing from 'fluh/lib/Nothing'
+import Many from 'fluh/lib/Many'
 
-import domain from 'lib/domain'
+import domain from 'fluh/lib/domain'
 
 
 describe('Bud', () =>

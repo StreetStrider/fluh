@@ -1,7 +1,7 @@
 
 import { inspect } from 'util'
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
 
 function as_inspect (value, options)

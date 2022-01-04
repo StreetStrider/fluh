@@ -1,10 +1,10 @@
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
-import Nothing from 'lib/Nothing'
-import End from 'lib/End'
+import Nothing from 'fluh/lib/Nothing'
+import End from 'fluh/lib/End'
 
-import join from 'lib/join'
+import join from 'fluh/lib/join'
 
 
 describe('effects', () =>

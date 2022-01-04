@@ -1,10 +1,10 @@
 
-import Bud from 'lib/Bud'
-import End from 'lib/End'
+import Bud from 'fluh/lib/Bud'
+import End from 'fluh/lib/End'
 
-import { when_data } from 'map/when'
+import { when_data } from 'fluh/map/when'
 
-import reduce from 'map/reduce'
+import reduce from 'fluh/map/reduce'
 
 
 describe('reduce', () =>

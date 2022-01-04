@@ -1,5 +1,5 @@
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
 
 describe('thru', () =>

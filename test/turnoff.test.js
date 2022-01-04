@@ -1,10 +1,10 @@
 
-import End from 'lib/End'
+import End from 'fluh/lib/End'
 
-import Bud from 'lib/Bud'
-import turnoff from 'lib/turnoff'
+import Bud from 'fluh/lib/Bud'
+import turnoff from 'fluh/lib/turnoff'
 
-import { when_data } from 'map/when'
+import { when_data } from 'fluh/map/when'
 
 import { state } from './Bud.test'
 

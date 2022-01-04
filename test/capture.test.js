@@ -1,11 +1,11 @@
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
-import End from 'lib/End'
-import concat from 'lib/concat'
-import asap from 'lib/asap'
+import End from 'fluh/lib/End'
+import concat from 'fluh/lib/concat'
+import asap from 'fluh/lib/asap'
 
-import capture from 'lib/capture'
+import capture from 'fluh/lib/capture'
 
 
 describe('capture', () =>

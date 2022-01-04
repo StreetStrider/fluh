@@ -1,5 +1,5 @@
 
-import Many from 'lib/Many'
+import Many from 'fluh/lib/Many'
 
 
 describe('Many', () =>

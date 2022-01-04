@@ -1,15 +1,15 @@
 
-import Nothing from 'lib/Nothing'
-import End from 'lib/End'
+import Nothing from 'fluh/lib/Nothing'
+import End from 'fluh/lib/End'
 
-import Noop from 'lib/Noop'
-import Fin from 'lib/Fin'
+import Noop from 'fluh/lib/Noop'
+import Fin from 'fluh/lib/Fin'
 
-import { When } from 'map/when'
-import { when_data } from 'map/when'
-import { when_end } from 'map/when'
-import { when_error } from 'map/when'
-import { when_data_all } from 'map/when'
+import { When } from 'fluh/map/when'
+import { when_data } from 'fluh/map/when'
+import { when_end } from 'fluh/map/when'
+import { when_error } from 'fluh/map/when'
+import { when_data_all } from 'fluh/map/when'
 
 
 describe('when', () =>

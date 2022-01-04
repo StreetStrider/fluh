@@ -1,12 +1,12 @@
 
-import Bud from 'lib/Bud'
+import Bud from 'fluh/lib/Bud'
 
-import delay from 'thru/delay'
-import defer from 'thru/defer'
-import raf   from 'thru/raf'
+import delay from 'fluh/thru/delay'
+import defer from 'fluh/thru/defer'
+import raf   from 'fluh/thru/raf'
 
-import End from 'lib/End'
-import concat from 'lib/concat'
+import End from 'fluh/lib/End'
+import concat from 'fluh/lib/concat'
 
 
 describe('delay / defer / raf', () =>

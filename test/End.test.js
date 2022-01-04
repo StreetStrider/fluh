@@ -1,8 +1,8 @@
 
-import Bud from 'lib/Bud'
-import Many from 'lib/Many'
-import End from 'lib/End'
-import { when_data } from 'map/when'
+import Bud from 'fluh/lib/Bud'
+import Many from 'fluh/lib/Many'
+import End from 'fluh/lib/End'
+import { when_data } from 'fluh/map/when'
 
 import { state } from './Bud.test'
 

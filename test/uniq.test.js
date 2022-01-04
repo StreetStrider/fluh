@@ -1,10 +1,10 @@
 
-import Bud from 'lib/Bud'
-import End from 'lib/End'
+import Bud from 'fluh/lib/Bud'
+import End from 'fluh/lib/End'
 
-import concat from 'lib/concat'
+import concat from 'fluh/lib/concat'
 
-import uniq from 'map/uniq'
+import uniq from 'fluh/map/uniq'
 
 
 describe('uniq', () =>
