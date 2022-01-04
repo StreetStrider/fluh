@@ -27,24 +27,27 @@ export function When <Args extends any[], True, False>
 
 export type NoData = (Error | End)
 
-export function when_data <T, R> (fn_true: (value: Exclude<T, NoData>) => R)
+export function when_data <Out, T extends Exclude<Out, NoData>, R> (fn_true: (value: T) => R)
 :
-	(value: T) => (Extract<T, NoData> | R)
+	(value: Out) => (Extract<Out, NoData> | R)
 
 export function when_end <T, R> (fn_true: (value: End) => R)
 :
-	(value: T) => (Extract<T, End> | R)
+	(value: T) => (Exclude<T, End> | R)
 
 export function when_error <T, R> (fn_true: (value: Error) => R)
 :
-	(value: T) => (Extract<T, Error> | R)
+	(value: T) => (Exclude<T, Error> | R)
 
 
 type Union <T extends any[]> = T[number]
 
-export function when_data_all <Inputs extends any[], R>
-(
-	fn_true: (value: { [ Key in keyof Inputs ]: Exclude<Inputs[Key], NoData> }) => R
-)
+export function when_data_all
+<
+	Outs extends any[],
+	Ins extends { [ Key in keyof Outs ]: Exclude<Outs[Key], NoData> },
+	R
+>
+(fn_true: (...args: Ins) => R)
 :
-	(...values: Inputs) => (Extract<Union<Inputs>, NoData> | R)
+	(...values: Outs) => (Extract<Union<Outs>, NoData> | R)

@@ -59,3 +59,27 @@ function WhenData ()
 
 	input.emit(1).emit(2).emit(3).emit(End)
 }
+
+function WhenDataRedundant ()
+{
+	const input = Bud<number>()
+	const output = input.map(when_data(x => x * 2))
+
+	output.on(x => console.log(x + 1))
+	output.on(when_data(x => console.log(x + 1)))
+
+	input.emit(1).emit(2).emit(3)
+}
+
+function WhenDataError ()
+{
+	const input = Bud<number | Error | typeof End>()
+
+	input.map(x => x * 2) // $ExpectError
+	const output = input.map(when_data(x => x * 2))
+
+	output.on(x => console.log(x + 1)) // $ExpectError
+	output.on(when_data(x => console.log(x + 1)))
+
+	input.emit(1).emit(2).emit(3).emit(new Error).emit(End)
+}

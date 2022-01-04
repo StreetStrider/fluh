@@ -21,28 +21,34 @@ function Sum ()
 	a
 	.emit(1)
 	.emit(2)
-	.emit(3)
 	.emit(4)
 }
 
-/*
-function SumEnd ()
+function SumRedundant ()
 {
-	const a = Bud<number | typeof End>()
-	const b = a.map(
-	when_data<number | typeof End, number>(
-		//reduce(100, sum)
-		(x: number) => x + 1
-	))
+	const a = Bud<number>()
+	const b = a.map(when_data(reduce(100, sum)))
 
-	// const rsb = []
-	// b.on(v => rsb.push(v))
+	const rsb = []
+	b.on(v => rsb.push(v))
 
 	a
 	.emit(1)
 	.emit(2)
 	.emit(3)
-	.emit(4)
+}
+
+function SumEnd ()
+{
+	const a = Bud<number | typeof End>()
+	const b = a.map(when_data(reduce(100, sum)))
+
+	const rsb = []
+	b.on(v => rsb.push(v))
+
+	a
+	.emit(1)
+	.emit(2)
+	.emit(3)
 	.emit(End)
 }
-*/
