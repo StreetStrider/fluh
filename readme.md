@@ -319,4 +319,4 @@ fluh promise transformations treats promise rejections as data values. So, the t
 Learn by [examples](examples/). You can run `set-interval` example via `npm run example set-interval`.
 
 ## License
-ISC, © Strider, 2021.
+ISC, © Strider, 2022.

@@ -54,7 +54,8 @@
     "lib/",
     "map/",
     "thru/",
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
 
   "browser":

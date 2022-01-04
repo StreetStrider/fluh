@@ -11,9 +11,9 @@ export * from './lib/Fin'
 
 // export * from './lib/join'
 // export * from './lib/merge'
-// export * from './lib/transfer'
-// export * from './lib/turnoff'
-// export * from './lib/resource'
+export { default as transfer } from './lib/transfer'
+export { default as turnoff } from './lib/turnoff'
+export { default as resource } from './lib/resource'
 
 export * from './lib/asap'
 export * from './lib/capture'

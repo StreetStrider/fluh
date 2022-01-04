@@ -1,4 +1,4 @@
-Copyright © 2021, Strider.
+Copyright © 2022, Strider.
 https://github.com/StreetStrider
 
 Permission to use, copy, modify, and/or distribute this software for any
