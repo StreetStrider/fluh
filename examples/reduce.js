@@ -1,4 +1,5 @@
 import { when_data } from 'fluh/map/when'
+import reduce from 'fluh/map/reduce'
 import { Bud } from 'fluh'
 import { End } from 'fluh'
 
@@ -9,7 +10,7 @@ source
 .on(console.log)
 
 source
-.map(reduce((a, b) => a + b, 0)) /* explicit reduce */
+.map(when_data(reduce(0, (a, b) => a + b))) /* explicit reduce */
 .on((x) => console.log(x, '\n'))
 
 source
@@ -28,9 +29,3 @@ function sum () {
 	})
 }
 
-function reduce (fn, total) {
-	return when_data((next) => {
-		total = fn(total, next)
-		return total
-	})
-}

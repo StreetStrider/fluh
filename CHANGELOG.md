@@ -1,4 +1,5 @@
 * Added TypeScript definitions.
+* Added `reduce`.
 
 ## `0.6.0` — 2021-12-10
 * **Breaking change**: `filter_by` is moved to its own module `map/filter-by`.
