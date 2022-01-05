@@ -1,6 +1,7 @@
 # fluh
 
 [![npm|fluh](http://img.shields.io/badge/npm-fluh-CB3837.svg?style=flat-square)](https://www.npmjs.org/package/fluh)
+[![typescript](http://img.shields.io/badge/type-script-0074C1.svg?style=flat-square)](#typescript)
 
 > Functional reactive library with atomic push strategy
 
@@ -26,7 +27,8 @@ The API is designed in a composable way, which means that it is really easy to c
   - [high-order transformations](#high-order-transformations)
   - [handling errors](#handling-errors)
   - [handling promises](#handling-promises)
-- [examples](#examples)
+- [TypeScript](#typescript)
+- [Examples](#examples)
 - [License](#license)
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -315,8 +317,11 @@ fluh supports three strategies for resolving promises:
 
 fluh promise transformations treats promise rejections as data values. So, the transformations will emit mixed data/error content. You'll need `when_data` to handle them.
 
-## examples
-Learn by [examples](examples/). You can run `set-interval` example via `npm run example set-interval`.
+## TypeScript
+This package has TypeScript definitions built in. The code is still vanilla JavaScript for the sake of speed and control.
+
+## Examples
+Learn by [examples](examples/). You can run `examples/set-interval.js` example via `npm run example set-interval`. Run all examples by `npm run examples`.
 
 ## License
 ISC, © Strider, 2022.
