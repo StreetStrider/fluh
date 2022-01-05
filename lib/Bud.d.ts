@@ -13,8 +13,8 @@ export type OptionsDebug = InspectOptions &
 }
 
 export type Product <T> = (T | Many<T> | Nothing)
-export type Producer <T, R = T> = (value: T) => Product<R>
-export type Transformer <T, R = T> = (bud: Bud<T>) => Bud<R>
+export type Producer <T, R> = (value: T) => Product<R>
+export type Transformer <T, R> = (bud: Bud<T>) => Bud<R>
 
 export type Bud <T, T_Init = T> =
 {

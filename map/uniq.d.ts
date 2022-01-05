@@ -1,4 +1,4 @@
 
 import { Producer } from '../lib/Bud'
 
-export default function <T> (): Producer<T>
+export default function <T> (): Producer<T, T>

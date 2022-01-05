@@ -24,6 +24,10 @@ function Filter ()
 	const strs = input.map(filter(isString))
 	const othr = input.map(filter(x => Boolean(String(x).match(/^\d+$/))))
 
+	nums // $ExpectType Bud<number, number>
+	strs // $ExpectType Bud<string, string>
+	othr // $ExpectType Bud<string | number, string | number>
+
 	nums.on(x => console.log(x + 1))
 	strs.on(x => x.toUpperCase())
 	othr.on(x => console.log(x))
@@ -42,6 +46,9 @@ function FilterBy ()
 	const signal = input.map(v => (v > 2))
 	const output = input.map(filter_by(signal))
 
+	signal // $ExpectType Bud<boolean, boolean>
+	output // $ExpectType Bud<number, number>
+
 	output.on(x => console.log(x + 1))
 
 	input.emit(1).emit(2).emit(3)
@@ -54,6 +61,8 @@ function WhenData ()
 	input.map(x => x * 2) // $ExpectError
 	const output = input.map(when_data(x => x * 2))
 
+	output // $ExpectType Bud<number | typeof End, number | typeof End>
+
 	output.on(x => console.log(x + 1)) // $ExpectError
 	output.on(when_data(x => console.log(x + 1)))
 
@@ -64,6 +73,8 @@ function WhenDataRedundant ()
 {
 	const input = Bud<number>()
 	const output = input.map(when_data(x => x * 2))
+
+	output // $ExpectType Bud<number, number>
 
 	output.on(x => console.log(x + 1))
 	output.on(when_data(x => console.log(x + 1)))
@@ -77,6 +88,8 @@ function WhenDataError ()
 
 	input.map(x => x * 2) // $ExpectError
 	const output = input.map(when_data(x => x * 2))
+
+	output // $ExpectType Bud<number | typeof End | Error, number | typeof End | Error>
 
 	output.on(x => console.log(x + 1)) // $ExpectError
 	output.on(when_data(x => console.log(x + 1)))
