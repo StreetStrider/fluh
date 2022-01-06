@@ -1,6 +1,6 @@
 
 import transfer from '../lib/transfer'
-import Counter  from '../lib/Counter'
+import Counter  from '../lib/_/Counter'
 
 
 export function every (bud_source)
