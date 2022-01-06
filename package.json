@@ -37,7 +37,7 @@
 
     "cover": "c8 npm run unit",
 
-    "perf": "node -r esm perf/perf",
+    "perf": "gulp --final --to perf && node release/perf/perf/perf",
     "leak": "node --inspect --expose-gc perf/leak",
 
     "build": "gulp --final --to npm",
