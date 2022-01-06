@@ -5,7 +5,7 @@ import End from 'fluh/lib/End'
 
 import join from 'fluh/lib/join'
 
-import domain from 'fluh/lib/domain'
+import domain from 'fluh/lib/_/domain'
 
 
 describe('cache', () =>

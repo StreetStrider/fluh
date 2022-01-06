@@ -4,7 +4,7 @@ import { Bud } from '.'
 // import { End } from '.'
 import { merge } from '.'
 
-import domain from './lib/domain'
+import domain from './lib/_/domain'
 
 function state (bud)
 {

@@ -3,7 +3,7 @@ import Bud from 'fluh/lib/Bud'
 import Nothing from 'fluh/lib/Nothing'
 import Many from 'fluh/lib/Many'
 
-import domain from 'fluh/lib/domain'
+import domain from 'fluh/lib/_/domain'
 
 
 describe('Bud', () =>
