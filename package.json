@@ -61,7 +61,7 @@
 
   "browser":
   {
-    "./lib/inspect.js": "./lib/inspect.browser.js"
+    "./lib/_/Bud/inspect.js": "./lib/_/Bud/inspect.browser.js"
   },
 
   "dependencies":
