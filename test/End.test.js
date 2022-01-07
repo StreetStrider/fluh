@@ -60,6 +60,61 @@ describe('End', () =>
 		expect(s.callCount).eq(4)
 	})
 
+	it('End in map', () =>
+	{
+		var a = Bud()
+		var b = a.map(v => (v > 3) && End || v)
+
+		var rs = []
+		b.on(value => rs.push(value))
+
+		state(a,
+		{
+			deps:  [ b ],
+			order: [ b ],
+		})
+		state(b,
+		{
+			rev: [ a ]
+		})
+
+		a.emit(1)
+		a.emit(2)
+		a.emit(3)
+
+		state(a,
+		{
+			value: 3,
+			deps:  [ b ],
+			order: [ b ],
+		})
+		state(b,
+		{
+			value: 3,
+			rev: [ a ]
+		})
+
+		a.emit(4)
+
+		state(a,
+		{
+			value: 4,
+			deps:  [],
+			order: [],
+		})
+		state(b, { value: End })
+
+		a.emit(5)
+
+		state(a,
+		{
+			value: 5,
+			deps:  [],
+			order: [],
+		})
+		state(b, { value: End })
+	})
+
 	it('End work in the middle of Many', () =>
 	{
 		var a = Bud()
@@ -73,10 +128,9 @@ describe('End', () =>
 		b.on(s)
 
 		a.emit(1)
-		a.emit(Many(2, 3, End))
-		a.emit(4)
-		a.emit(End)
-		a.emit(Many(5, 6))
+		a.emit(Many(2, 3, End, 4))
+		a.emit(5)
+		a.emit(Many(6, 7))
 
 		state(a, { value: End })
 		state(b, { value: End })

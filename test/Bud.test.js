@@ -1,7 +1,9 @@
 
 import Bud from 'fluh/lib/Bud'
+
 import Nothing from 'fluh/lib/Nothing'
 import Many from 'fluh/lib/Many'
+import End from 'fluh/lib/End'
 
 import domain from 'fluh/lib/_/domain'
 
@@ -53,8 +55,37 @@ describe('Bud', () =>
 	it('Bud(Many)', () =>
 	{
 		var bud = Bud(Many(17, 1917))
-
 		state(bud, { value: 1917 })
+	})
+
+	it('Bud(Many with Nothing)', () =>
+	{
+		var bud = Bud(Many(Nothing, Nothing, Nothing))
+		state(bud)
+
+		var bud = Bud(Many(17, Nothing, 1917))
+		state(bud, { value: 1917 })
+
+		var bud = Bud(Many(Nothing, 17, 1917))
+		state(bud, { value: 1917 })
+
+		var bud = Bud(Many(17, 1917, Nothing))
+		state(bud, { value: 1917 })
+	})
+
+	it('Bud(Many with End)', () =>
+	{
+		var bud = Bud(Many(End, End, End))
+		state(bud, { value: End })
+
+		var bud = Bud(Many(17, End, 1917))
+		state(bud, { value: End })
+
+		var bud = Bud(Many(End, 17, 1917))
+		state(bud, { value: End })
+
+		var bud = Bud(Many(17, 1917, End))
+		state(bud, { value: End })
 	})
 
 	it('emit', () =>
