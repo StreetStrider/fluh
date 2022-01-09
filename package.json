@@ -45,8 +45,8 @@
     "example":  "cd examples; node -r esm -r console-ultimate",
     "examples": "node -r esm -r console-ultimate examples/",
 
-    "depcruise": "depcruise --exclude '^(node_modules|release|test|perf|coverage|start.js|.eslint|gulp)' --output-type dot . > graph.dot",
-    "diagrams":  "diagrams dot graph.dot graph.png",
+    "depcruise": "depcruise --exclude '^(node_modules|release|test|perf|coverage|examples|.*\\.d\\.ts|\\.eslint|gulp)' --output-type dot . > test/graph.dot",
+    "diagrams":  "diagrams dot test/graph.dot test/graph.png",
     "graph": "npm run depcruise && npm run diagrams ##### < http://viz-js.com/ >"
   },
 

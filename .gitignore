@@ -2,5 +2,5 @@
 node_modules/
 release/
 coverage/
-graph.dot
-graph.png
+test/graph.dot
+test/graph.png
