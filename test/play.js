@@ -1,10 +1,10 @@
 
-import { Bud } from '.'
-// import { when_data } from './map/when'
-// import { End } from '.'
-import { merge } from '.'
+import { Bud } from '..'
+// import { when_data } from '../map/when'
+// import { End } from '..'
+import { merge } from '..'
 
-import domain from './lib/_/domain'
+import domain from '../lib/_/domain'
 
 function state (bud)
 {
