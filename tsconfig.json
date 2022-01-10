@@ -6,7 +6,8 @@
 	"exclude":
 	[
 		"release/",
-		"test/"
+		"test/",
+		"examples"
 	],
 	"compilerOptions":
 	{

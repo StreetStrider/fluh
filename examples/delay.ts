@@ -4,6 +4,8 @@ import { transfer } from 'fluh'
 import { Bud } from 'fluh'
 import { End } from 'fluh'
 
+import { Bud as T_Bud } from 'fluh/lib/Bud'
+
 const source = Bud()
 
 source
@@ -21,8 +23,8 @@ source
 .emit(5)
 .emit(End)
 
-function delay (ms = 0) {
-	return (bud_source) => {
+function delay <T> (ms = 0) {
+	return (bud_source: T_Bud<T>) => {
 		return transfer(bud_source, (value, emit) => {
 			setTimeout(() => {
 				console.info(`bring ${ms}ms delay; graph becomes async`)

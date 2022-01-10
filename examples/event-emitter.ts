@@ -7,7 +7,7 @@ import { when_data } from 'fluh/map/when'
 import { End } from 'fluh'
 
 const emitter = new EventEmitter
-const source = fromEvent(emitter, 'click') /* source from EventEmitter */
+const source = fromEvent<{ x: number }>(emitter, 'click') /* source from EventEmitter */
 
 source
 .on(console.log)
@@ -23,8 +23,8 @@ emitter.emit('click', { x: 5 })
 
 console.info('listeners:', emitter.listeners('click'))
 
-function fromEvent (emitter, eventName) {
-	return resource((emit) => {
+function fromEvent <Event> (emitter: EventEmitter, eventName: string) {
+	return resource<Event>((emit) => {
 		console.info('resource initialized')
 
 		emitter.addListener(eventName, emit)
@@ -34,7 +34,9 @@ function fromEvent (emitter, eventName) {
 
 			emitter.removeListener(eventName, emit)
 
+			// @ts-ignore
 			emitter = null
+			// @ts-ignore
 			emit = null
 
 			console.info('resource received End and got disposed')

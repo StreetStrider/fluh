@@ -5,7 +5,7 @@ import { join } from 'fluh'
 import { when_data_all } from 'fluh/map/when'
 import { End } from 'fluh'
 
-function identity (x) {
+function identity <T> (x: T) {
 	return x
 }
 

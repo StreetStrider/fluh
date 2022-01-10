@@ -13,8 +13,8 @@ source
 source
 .on((x) => { if (x == 5) source.emit(End) })
 
-function interval (ms) {
-	return resource((emit) => {
+function interval (ms: number) {
+	return resource<number>((emit) => {
 		console.info('resource initialized')
 
 		let next = 0
@@ -28,7 +28,9 @@ function interval (ms) {
 
 			clearInterval(t)
 
+			// @ts-ignore
 			t = null
+			// @ts-ignore
 			emit = null
 
 			console.info('resource received End and got disposed')

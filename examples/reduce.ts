@@ -5,14 +5,14 @@ import reduce from 'fluh/map/reduce'
 import { Bud } from 'fluh'
 import { End } from 'fluh'
 
-const source = Bud()
+const source = Bud<number | typeof End>()
 
 source
 .map(sum()) /* essentially works like a reduce */
 .on(console.log)
 
 source
-.map(when_data(reduce(0, (a, b) => a + b))) /* explicit reduce */
+.map(when_data(reduce(0, (a: number, b: number) => a + b))) /* explicit reduce */
 .on((x) => console.log(x, '\n'))
 
 source
@@ -25,7 +25,7 @@ source
 
 function sum () {
 	let total = 0
-	return when_data((next) => {
+	return when_data((next: number) => {
 		total += next
 		return total
 	})

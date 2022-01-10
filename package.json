@@ -31,7 +31,7 @@
 
     "st":   "eslint .",
     "unit": "mocha -r esm -r console-ultimate -r test/globals test/*.test.js",
-    "ts":   "tsc && npm run dts",
+    "ts":   "tsc && npm run dts && tsc -p examples/tsconfig.json",
     "dts":  "dtslint --expectOnly --localTs ./node_modules/typescript/lib test/type",
     "test": "npm run st && npm run ts && npm run unit",
 
@@ -42,8 +42,8 @@
 
     "build": "gulp --final --to npm",
 
-    "example":  "cd examples; node -r esm -r console-ultimate",
-    "examples": "node -r esm -r console-ultimate examples/",
+    "example":  "cd examples; ts-node -r esm -r console-ultimate",
+    "examples": "cd examples; ts-node -r esm -r console-ultimate ./",
 
     "depcruise": "depcruise --exclude '^(node_modules|release|test|perf|coverage|examples|.*\\.d\\.ts|\\.eslint|gulp)' --output-type dot . > test/graph.dot",
     "diagrams":  "diagrams dot test/graph.dot test/graph.png",
@@ -114,6 +114,9 @@
 
     "dtslint":
       "4",
+
+    "ts-node":
+      "10",
 
 
     "mocha":
