@@ -29,6 +29,7 @@ The API is designed in a composable way, which means that it is really easy to c
   - [handling promises](#handling-promises)
 - [TypeScript](#typescript)
 - [Examples](#examples)
+- [To Users and Contributors](#to-users-and-contributors)
 - [License](#license)
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -322,6 +323,13 @@ This package has TypeScript definitions built in. The code is still vanilla Java
 
 ## Examples
 Learn by [examples](examples/). You can run `examples/set-interval.js` example via `npm run example set-interval`. Run all examples by `npm run examples`.
+
+## To Users and Contributors
+This is a project of mine to prove that simplified approach to FRP is viable. I develop and use this in private projects for a while (in fact, there're at least two years of various development activities behind). It works quite fine, it's very well tested and there're no strange and unexpected behaviors I've struggled with. The performance is good as well.
+
+However, it lacks testing in battle conditions. There may be absence of operators you may deem to be must-have. Type definitions most likely to be not precise enough or even be incorrect. If you want to try this project you're welcome to try. Creating new transformations is easy in terms of `map` and `thru`. I would accept fixes, of course (for instance, better typings).
+
+I also would accept new operators in most of the cases. The rule of thumb is that they must be generic enough (anything underscore-like or rxjs-like) and they must not have dependencies on their own. It is OK to have them in the base package, because it is not a burden for a consumer in server-side (HDD) nor in client-side (tree-shaking). If the new operator does depend on something (like `throttle`) it is better to create standalone package (like `fluh-throttle` or `fluh-ratelimit` for `throttle`/`debounce`/etc… in one package). Such package should have direct dependency on `throttle`/etc… and peer dependency on `fluh`.
 
 ## License
 ISC, © Strider, 2022.
