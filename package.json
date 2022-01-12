@@ -2,7 +2,7 @@
   "private": true,
 
      "name": "fluh",
-  "version": "0.6.0",
+  "version": "1.0.0",
 
   "description": "simple and easy functional reactive library with atomic push strategy",
 
