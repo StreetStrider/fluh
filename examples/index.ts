@@ -1,4 +1,5 @@
 
+import './cycle'
 import './debugging'
 import './delay'
 import './event-emitter'
