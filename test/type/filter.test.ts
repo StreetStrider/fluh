@@ -89,7 +89,7 @@ function WhenDataError ()
 	input.map(x => x * 2) // $ExpectError
 	const output = input.map(when_data(x => x * 2))
 
-	output // $ExpectType Bud<number | typeof End | Error, number | typeof End | Error>
+	output // $ExpectType Bud<number | Error | typeof End, number | Error | typeof End>
 
 	output.on(x => console.log(x + 1)) // $ExpectError
 	output.on(when_data(x => console.log(x + 1)))

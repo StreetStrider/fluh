@@ -74,7 +74,7 @@ function Concat ()
 	// const b = a.map<number[] | typeof End>(when_data(concat()))
 	// const b = a.map(when_data(concat<number>()))
 
-	b // $ExpectType Bud<typeof End | number[], typeof End | number[]>
+	b // $ExpectType Bud<number[] | typeof End, number[] | typeof End>
 
 	const rsb = []
 	b.on(v => rsb.push(v))

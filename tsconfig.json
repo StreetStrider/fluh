@@ -16,6 +16,8 @@
 
 		"strict": true,
 		"target": "ES6",
-		"lib":  [ "ES6" ]
+		"lib":  [ "ES6" ],
+
+		"moduleResolution": "node"
 	}
 }

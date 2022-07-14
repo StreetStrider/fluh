@@ -110,13 +110,16 @@
 
 
     "typescript":
-      "4.5.4",
+      "4.7.4",
 
     "dtslint":
       "4",
 
     "ts-node":
       "10",
+
+    "@types/node":
+      "18",
 
 
     "mocha":
