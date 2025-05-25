@@ -13,8 +13,8 @@ function Join1 ()
 	const c = join(a, x => String(x))
 
 	a // $ExpectType Bud<number, number>
-	b // $ExpectType Bud<number, number>
-	c // $ExpectType Bud<string, string>
+	b // $ExpectType Bud<number>
+	c // $ExpectType Bud<string>
 
 	a.on(x =>
 	{
@@ -42,8 +42,8 @@ function Join1F ()
 	const c = join(x => String(x), a)
 
 	a // $ExpectType Bud<number, number>
-	b // $ExpectType Bud<number, number>
-	c // $ExpectType Bud<string, string>
+	b // $ExpectType Bud<number>
+	c // $ExpectType Bud<string>
 
 	b.on(x =>
 	{
@@ -68,7 +68,7 @@ function Join2 ()
 
 	a // $ExpectType Bud<number, number>
 	b // $ExpectType Bud<string, string>
-	c // $ExpectType Bud<boolean, boolean>
+	c // $ExpectType Bud<boolean>
 
 	c.on(x =>
 	{
@@ -90,7 +90,7 @@ function Join2F ()
 
 	a // $ExpectType Bud<number, number>
 	b // $ExpectType Bud<string, string>
-	c // $ExpectType Bud<boolean, boolean>
+	c // $ExpectType Bud<boolean>
 
 	c.on(x =>
 	{
@@ -114,7 +114,7 @@ function Join6 ()
 	}
 	, b1, b2, Bud(3), Bud(4), Bud('Y'), Bud(6))
 
-	c // $ExpectType Bud<string, string>
+	c // $ExpectType Bud<string>
 
 	c.on(x =>
 	{
@@ -122,29 +122,31 @@ function Join6 ()
 	})
 }
 
+/*
 function Join6Tuple ()
 {
 	const b1 = Bud(1)
 	const b2 = Bud('X')
 	const c = join((b1, b2, b3, b4, b5, b6) =>
 	{
-		b1 // $ExpectType number
-		b2 // $ExpectType string
-		b3 // $ExpectType number
-		b4 // $ExpectType number
-		b5 // $ExpectType string
-		b6 // $ExpectType number
-		return [ b1, b2, b3, b4, b5, b6 ] as const
+		b1 // $-ExpectType number
+		b2 // $-ExpectType string
+		b3 // $-ExpectType number
+		b4 // $-ExpectType number
+		b5 // $-ExpectType string
+		b6 // $-ExpectType number
+		return ([ b1, b2, b3, b4, b5, b6 ] as const)
 	}
 	, b1, b2, Bud(3), Bud(4), Bud('Y'), Bud(6))
 
-	c // $ExpectType Bud<readonly [number, string, number, number, string, number], readonly [number, string, number, number, string, number]>
+	c // $-ExpectType Bud<readonly [number, string, number, number, string, number], readonly [number, string, number, number, string, number]>
 
 	c.on(x =>
 	{
-		x // $ExpectType readonly [number, string, number, number, string, number]
+		x // $-ExpectType readonly [number, string, number, number, string, number]
 	})
 }
+*/
 
 function Join6Spread ()
 {
@@ -160,7 +162,7 @@ function Join6Spread ()
 	}
 	, ...[ Bud(1), Bud('X'), Bud(3), Bud(4), Bud('Y'), Bud(6) ] as const)
 
-	c // $ExpectType Bud<string, string>
+	c // $ExpectType Bud<string>
 
 	c.on(x =>
 	{

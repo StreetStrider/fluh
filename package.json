@@ -103,14 +103,14 @@
       "8",
 
     "js-outlander":
-      "StrangeTransistor/js-outlander#2.11.0",
+      "StrangeTransistor/outlander#2.11.0",
 
     "eslint-plugin-node":
       "11",
 
 
     "typescript":
-      "4.7.4",
+      "5.8.3",
 
     "dtslint":
       "4",
@@ -119,7 +119,10 @@
       "10",
 
     "@types/node":
-      "18",
+      "22.15.21",
+
+    "undici-types":
+      "6.21.0",
 
 
     "mocha":
@@ -161,5 +164,13 @@
 
     "@most/adapter":
       "1"
+  },
+
+  "pnpm":
+  { 
+    "overrides":
+    {
+      "@definitelytyped/utils": "0.1.4"
+    }
   }
 }

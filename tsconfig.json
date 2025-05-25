@@ -18,6 +18,14 @@
 		"target": "ES6",
 		"lib":  [ "ES6" ],
 
-		"moduleResolution": "node"
+		"moduleResolution": "node",
+
+		"paths":
+		{
+			"undici-types":
+			[
+				"./node_modules/undici-types/index.d.ts"
+			],
+		}
 	}
 }

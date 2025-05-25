@@ -9,7 +9,7 @@ function Merge ()
 
 	const c = merge(a, b)
 
-	c // $ExpectType Bud<string | number, string | number>
+	c // $ExpectType Bud<string | number>
 
 	c.on(x =>
 	{
