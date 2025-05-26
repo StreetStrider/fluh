@@ -3,7 +3,7 @@ import { InspectOptions } from 'util'
 
 import { Nothing } from './Nothing'
 import { Many } from './Many'
-import { End } from './End'
+
 
 export type Disposer = () => void
 

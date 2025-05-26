@@ -1,5 +1,5 @@
 
-var outlander = require('outlander/node')
+var outlander = require('outlander/typescript')
 var globals = require('outlander/globals')
 
 
@@ -22,7 +22,7 @@ module.exports =
 		},
 	},
 	{
-		files: [ '**/*.js' ],
+		files: [ '**/*.js', '**/*.ts' ],
 	},
 	{
 		ignores:

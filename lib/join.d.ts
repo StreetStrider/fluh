@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable max-params */
 
 import { Bud } from './Bud'
 import { Product } from './Bud'
