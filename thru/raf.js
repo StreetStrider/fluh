@@ -1,3 +1,4 @@
+/* global requestAnimationFrame */
 
 var raf = requestAnimationFrame
 

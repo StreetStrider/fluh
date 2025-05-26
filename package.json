@@ -29,7 +29,7 @@
   {
     "start": "node -r esm -r console-ultimate test/play",
 
-    "st":   "eslint .",
+    "st":   "eslint",
     "unit": "mocha -r esm -r console-ultimate -r test/globals test/*.test.js",
     "ts":   "tsc && npm run dts && tsc -p examples/tsconfig.json",
     "dts":  "dtslint --expectOnly --localTs ./node_modules/typescript/lib test/type",
@@ -100,10 +100,10 @@
 
 
     "eslint":
-      "8",
+      "9",
 
-    "js-outlander":
-      "StrangeTransistor/outlander#2.11.0",
+    "outlander":
+      "StrangeTransistor/outlander#3.0.0",
 
     "eslint-plugin-node":
       "11",
