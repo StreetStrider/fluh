@@ -170,7 +170,8 @@
   { 
     "overrides":
     {
-      "@definitelytyped/utils": "0.1.4"
+      "@definitelytyped/utils": "0.1.4",
+      "@sinonjs/fake-timers": "7.1.2"
     }
   }
 }
