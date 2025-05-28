@@ -47,7 +47,9 @@
 
     "depcruise": "depcruise --exclude '^(node_modules|release|test|perf|coverage|examples|.*\\.d\\.ts|\\.eslint|gulp)' --output-type dot . > test/graph.dot",
     "diagrams":  "graphviz -Tsvg -otest/graph.svg test/graph.dot",
-    "graph": "npm run depcruise && npm run diagrams && open-cli test/graph.svg ##### < http://viz-js.com/ >"
+    "graph": "npm run depcruise && npm run diagrams && open-cli test/graph.svg ##### < http://viz-js.com/ >",
+
+    "skott": "skott -m webapp -n -t -ig '@(release|test|perf|coverage|examples)/**/*' -ig '*eslint*' -ig '*gulp*'"
   },
 
   "files":
@@ -159,6 +161,9 @@
 
     "open-cli":
       "8",
+
+    "skott":
+      "0.35",
 
 
     "flyd":
