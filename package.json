@@ -46,8 +46,8 @@
     "examples": "cd examples; ts-node -r esm -r console-ultimate ./",
 
     "depcruise": "depcruise --exclude '^(node_modules|release|test|perf|coverage|examples|.*\\.d\\.ts|\\.eslint|gulp)' --output-type dot . > test/graph.dot",
-    "diagrams":  "diagrams dot test/graph.dot test/graph.png",
-    "graph": "npm run depcruise && npm run diagrams ##### < http://viz-js.com/ >"
+    "diagrams":  "graphviz -Tsvg -otest/graph.svg test/graph.dot",
+    "graph": "npm run depcruise && npm run diagrams && open-cli test/graph.svg ##### < http://viz-js.com/ >"
   },
 
   "files":
@@ -153,6 +153,12 @@
 
     "diagrams":
       "0.11",
+
+    "graphviz-cli":
+      "2",
+
+    "open-cli":
+      "8",
 
 
     "flyd":

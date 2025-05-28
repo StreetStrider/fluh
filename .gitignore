@@ -3,4 +3,4 @@ node_modules/
 release/
 coverage/
 test/graph.dot
-test/graph.png
+test/graph.svg
