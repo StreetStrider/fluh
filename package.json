@@ -40,7 +40,7 @@
     "perf": "gulp --final --to perf && node release/perf/perf/perf",
     "leak": "node --inspect --expose-gc perf/leak",
 
-    "build": "gulp --final --to npm",
+    "final": "gulp --final --to npm",
 
     "example":  "cd examples; ts-node -r esm -r console-ultimate",
     "examples": "cd examples; ts-node -r esm -r console-ultimate ./",
@@ -92,10 +92,10 @@
       "4",
  
     "rollup":
-      "2",
- 
+      "3.29.5",
+
     "metalpipe":
-      "https://github.com/StrangeTransistor/metalpipe.git#bccfd822c84892bca6aa3ac9c489dd9f1db0dea1",
+      "https://github.com/StrangeTransistor/metalpipe.git#6ea7e3221c465fab3724d88eac5207479d591145",
 
     "metalpipe":
       "~/Projects/metalpipe",
